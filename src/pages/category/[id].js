@@ -1,40 +1,34 @@
 import React from "react";
 import { useRouter } from "next/router";
-import useFetch from "@/hooks/useFetch";
 import { useQuery, gql } from "@apollo/client";
+import { SINGLE_CATEGORY } from "@/graphql/queries";
 
-const CATEGORY = gql`
-  query getSingleCategory($id: ID!) {
-    category(id: $id) {
-      data {
-        id
-        attributes {
-          Name
-        }
-      }
-    }
-  }
-`;
 
 export default function Category() {
+
   const router = useRouter();
   const { id } = router.query;
 
-  // const { data, error, loading } = useFetch(
-  //   `http://localhost:1337/api/reviews/${id}`
-  // );
-
-  const { data, error, loading } = useQuery(CATEGORY, {
+  const { data, error, loading } = useQuery(SINGLE_CATEGORY, {
     variables: { id: id },
   });
 
   if (loading) return <p>loading....</p>;
   if (error) return <p>{error.message}</p>;
 
+  console.log(data)
   return (
     <div>
-      <div>{data.category.data.attributes.Name}</div>
       
+      {data.category.data.attributes.reviews.data.map(review => (
+          <div key={review.id}>
+            {review.attributes.categories.data.map(category => (category.attributes.Name))}
+            <div>{review.attributes.rating}</div>
+            <div>{review.attributes.title}</div>
+            <p>{review.attributes.body}</p>
+          </div>
+          
+        ))}
     </div>
   );
 }

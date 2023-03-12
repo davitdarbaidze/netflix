@@ -1,42 +1,19 @@
 import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import styles from "@/styles/Home.module.css";
-import SiteHeader from "@/components/SiteHeader";
-import Category from "./categories";
-import useFetch from "@/hooks/useFetch";
 import { useQuery, gql } from "@apollo/client";
+import { REVIEWS } from "@/graphql/queries";
 
-const REVIEWS = gql`
-  query {
-    reviews {
-      data {
-        id
-        attributes {
-          
-          title
-          rating
-          body
-        }
-      }
-    }
-  }
-`;
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  // const some = useFetch("http://localhost:1337/api/reviews")
-
-  // const { data, error, loading } = useFetch("http://localhost:1337/api/reviews");
   const { data, error, loading } = useQuery(REVIEWS);
-  console.log(useQuery(REVIEWS))
+  const [userdata, setUserData] = useState({identifier: '', password: ''})
+
 
   if (loading) return <p>loading....</p>;
   if (error) return <p>error</p>;
 
-  // console.log(data);
-  
+  const handleCHange = (e) => {
+    setUserData({...data, [e.target.name]: e.target.value})
+  }
 
   return (
     <>

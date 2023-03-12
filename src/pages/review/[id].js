@@ -2,31 +2,14 @@ import React from "react";
 import { useRouter } from "next/router";
 import useFetch from "@/hooks/useFetch";
 import { useQuery, gql } from "@apollo/client";
+import { SINGLE_REVIEW } from "@/graphql/queries";
 
-const REVIEW = gql`
-  query getSingle($id: ID!) {
-    review(id: $id) {
-      data {
-        id
-        attributes {
-          title
-          rating
-          body
-        }
-      }
-    }
-  }
-`;
 
 export default function Review() {
   const router = useRouter();
   const { id } = router.query;
 
-  // const { data, error, loading } = useFetch(
-  //   `http://localhost:1337/api/reviews/${id}`
-  // );
-
-  const { data, error, loading } = useQuery(REVIEW, {
+  const { data, error, loading } = useQuery(SINGLE_REVIEW, {
     variables: { id: id },
   });
 

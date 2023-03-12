@@ -2,23 +2,11 @@ import React from "react";
 import Link from "next/link";
 
 import { useQuery, gql } from "@apollo/client";
-import Category from "@/pages/category/[id]";
+import {ALL_CATEGORIES} from "@/graphql/queries";
 
-const CATEGORIES = gql`
-  query getCategories {
-    categories {
-      data {
-        id
-        attributes {
-          Name
-        }
-      }
-    }
-  }
-`;
 
 export default function SiteHeader() {
-  const { data, error, loading } = useQuery(CATEGORIES);
+  const { data, error, loading } = useQuery(ALL_CATEGORIES);
 
   if (loading) return <p>loading....</p>;
   if (error) return <p>{error.message}</p>;

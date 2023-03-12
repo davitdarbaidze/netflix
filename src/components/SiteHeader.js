@@ -2,10 +2,7 @@ import React from "react";
 import Link from "next/link";
 
 import { useQuery, gql } from "@apollo/client";
-<<<<<<< HEAD
 import Category from "@/pages/category/[id]";
-=======
->>>>>>> 20960e917ad2faf9d6d95c2a6a8ee9a64971305e
 
 const CATEGORIES = gql`
   query getCategories {
@@ -35,11 +32,7 @@ export default function SiteHeader() {
         <span>Filter by category: </span>
         {data.categories.data.map((item) => (
           
-<<<<<<< HEAD
             <Link key={item.id} href={`/category/${item.id}`}>{item.attributes.Name}</Link>
-=======
-            <Link href={`/category/${item.id}`}>{item.attributes.Name}</Link>
->>>>>>> 20960e917ad2faf9d6d95c2a6a8ee9a64971305e
           
         ))}
       </nav>

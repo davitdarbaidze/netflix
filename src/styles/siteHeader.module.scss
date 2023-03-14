@@ -1,0 +1,146 @@
+.siteHeader {
+    width: 100vw;
+}
+
+.container {
+    // width: 100%;
+    background-color: rgba(0, 0, 0, 0.541);
+    //rgba(0, 0, 0, 0.541);
+    display: flex;
+    justify-content: space-between;
+
+    z-index: 0;
+    padding: 1rem;
+    height: 50vh;
+
+    @include breakpoint(md) {
+        padding: 1rem 2rem;
+    }
+
+    @include breakpoint(lg) {
+        padding: 1rem 3rem;
+    }
+
+    @include breakpoint(xl) {
+        padding: 1rem 7.5rem;
+    }
+
+    @include breakpoint(xxl) {
+        padding: 1rem 5rem;
+    }
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    // width: 100vw;
+
+}
+
+.navTitle {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    // align-items: flex-end;
+}
+
+.navigationContainer {
+    width: 100%;
+
+}
+
+.customSelect {
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    padding: 0.5rem;
+    // border-radius: 5px;
+    font-size: 0.8rem;
+    font-weight: 400;
+    border: none;
+    // border-color: #fff;
+}
+
+.languageSelect {
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.541);
+    // z-index: 0;
+
+}
+
+.languageSelect div {
+    border: 1px solid white;
+    border-color: #817e7e;
+    // background-color: aliceblue;
+    border-radius: 5px;
+    @include center-content();
+
+
+}
+.languageSelect label{
+    color:aliceblue;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events:none;
+    position: absolute;
+
+}
+
+.languageSelect div img {
+    filter: invert(100%);
+    padding-left: 0.5rem;
+
+}
+
+.languageSelect div select{
+    appearance: none;
+    // display: none;
+    @include breakpoint(lg) {
+        display: inherit;
+    }
+
+    @include breakpoint(xl) {
+        // padding: 1rem 7.5rem;
+    }
+
+    @include breakpoint(xxl) {
+        // padding: 1rem 5rem;
+    }
+}
+
+.sign {
+    margin-left: 1rem;
+}
+.getStartedContainer{
+    display: flex;
+    flex-direction: column;
+    font-size: large;
+    gap: 1rem;
+    
+    // flex-direction: column;
+    @include center-content();
+    @include breakpoint(md) {
+        display: flex;
+        flex-direction: row;
+        border-radius: 5px;
+    }
+    // .getStartedContainer input{
+    //     height: 2rem;
+    // }
+    & > input{
+        height: 3rem;
+        border: 1px solid;
+        border-color: #817e7e;
+        background-color: rgba(0, 0, 0, 0.541);
+        // background-color: aliceblue;
+        border-radius: 5px;
+        padding-right: 6rem;
+    }
+    & > button{
+        font-weight: 700;
+        font-size: larger;
+        height: 3rem;
+        padding: 0 1rem 0 1rem;
+        
+    }
+}

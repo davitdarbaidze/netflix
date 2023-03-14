@@ -1,0 +1,87 @@
+$base-color: rgb(229, 9, 20);
+$base-gray: rgb(39, 36, 36);
+
+$breakpoints: (
+    sm: (
+        min: 576px,
+        max: 575.98px,
+    ),
+    md: (
+        min: 768px,
+        max: 767.98px
+    ),
+    lg: (
+        min: 992px,
+        max: 991.98px
+    ),
+    xl: (
+        min: 1200px,
+        max: 1199.98px
+    ),
+    xxl: (
+      min: 1400px,
+      max: 1399.98px,
+    )
+);
+
+
+@mixin center-content() {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+@mixin position-center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+
+@mixin overlay {
+	position: absolute;    
+	top: 40%;
+	left: 0;
+	right: 0;
+	bottom: 0;
+    
+}
+
+  @mixin breakpoint($breakpoint, $direction: min) {
+    
+    
+    @if map-has-key($breakpoints, $breakpoint) { 
+        $breakpoint-values: map-get($breakpoints, $breakpoint);
+        $breakpoint-min: map-get($breakpoint-values, min);
+        $breakpoint-max: map-get($breakpoint-values, max);
+
+        
+        @if $direction == min {
+            @media (min-width: $breakpoint-min) {
+                @content;
+            }
+        }
+
+        @else {
+            @media (max-width: $breakpoint-max) {
+                @content;
+            }
+        }
+    
+    
+    } @else {
+        
+        @if $direction == min {
+            @media (min-width: $breakpoint) {
+                @content;
+            }
+        }
+
+        @else {
+            @media (max-width: $breakpoint) {
+                @content;
+            }
+        }
+    }
+}

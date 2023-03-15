@@ -8,6 +8,7 @@ import { useUser, useFetchUser } from "@/lib/authContext";
 import styles from "../styles/siteHeader.module.scss";
 import FrequentQuestions from "@/components/frequentQuestions";
 import Image from "next/image";
+import SiteHeader from "@/components/SiteHeader";
 
 export default function Home() {
   const { data, error, loading } = useQuery(REVIEWS);
@@ -52,6 +53,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head> */}
+      <SiteHeader/>
 
       {!userLoading &&
         (user ? (

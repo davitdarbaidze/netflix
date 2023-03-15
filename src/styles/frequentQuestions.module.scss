@@ -1,0 +1,41 @@
+.questionContainer {
+    color: white;
+    @include center-content();
+    text-align: center;
+    flex-direction: column;
+    background-color: #2c2c2c;
+    padding: 1rem;
+    
+
+    &:hover {
+        background-color: #3c3c3c;
+    }
+    & > div > p{
+        white-space: pre-line
+    }
+}
+
+.collapsible {
+    background-color: #2c2c2c;
+    text-align: start;
+    font-size: larger;
+    width: 80vw;
+    
+
+}
+
+.questionContainer:hover .collapsible {
+    background-color: #3c3c3c;
+ }
+.content{
+    text-align: start;
+    
+}
+.something{
+    display: flex;
+    flex-direction: column;
+    font-size: larger;
+
+
+}
+

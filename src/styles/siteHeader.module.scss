@@ -43,6 +43,10 @@
     flex-direction: column;
     justify-content: flex-end;
     // align-items: flex-end;
+    @include breakpoint(md) {
+        font-size: x-large;
+        
+    }
 }
 
 .navigationContainer {
@@ -77,11 +81,12 @@
 
 
 }
-.languageSelect label{
-    color:aliceblue;
+
+.languageSelect label {
+    color: aliceblue;
     z-index: 1;
     overflow: hidden;
-    pointer-events:none;
+    pointer-events: none;
     position: absolute;
 
 }
@@ -92,8 +97,9 @@
 
 }
 
-.languageSelect div select{
+.languageSelect div select {
     appearance: none;
+
     // display: none;
     @include breakpoint(lg) {
         display: inherit;
@@ -111,36 +117,84 @@
 .sign {
     margin-left: 1rem;
 }
-.getStartedContainer{
+
+.getStartedContainer {
     display: flex;
     flex-direction: column;
     font-size: large;
     gap: 1rem;
-    
+
     // flex-direction: column;
     @include center-content();
+
     @include breakpoint(md) {
         display: flex;
         flex-direction: row;
         border-radius: 5px;
     }
+
     // .getStartedContainer input{
     //     height: 2rem;
     // }
-    & > input{
+    &>input {
         height: 3rem;
         border: 1px solid;
+        color: white;
         border-color: #817e7e;
         background-color: rgba(0, 0, 0, 0.541);
         // background-color: aliceblue;
         border-radius: 5px;
         padding-right: 6rem;
+        padding-left: 0.5rem;
     }
-    & > button{
+
+    &>button {
         font-weight: 700;
         font-size: larger;
         height: 3rem;
         padding: 0 1rem 0 1rem;
-        
+
     }
+}
+
+.divider {
+    height: 0.5rem;
+    width: 100vw;
+    background-color: #2c2c2c;
+}
+
+.moreOptions {
+    height: 50vh;
+    padding: 2rem;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    @include center-content();
+    color: white;
+    
+
+    .lgViewImage {
+        display: none;
+    }
+
+    @include breakpoint(md) {
+        font-size: larger;
+        display: flex;
+        flex-direction: row;
+
+        .lgViewImage {
+            display: block;
+        }
+
+        .mobileViewImage {
+            display: none;
+        }
+    }
+
+}
+.questions{
+    height: auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
 }

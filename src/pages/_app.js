@@ -12,7 +12,7 @@ export default function App({ user, userLoading = false, Component, pageProps })
   return (
     <ApolloProvider client={client}>
       <UserProvider value={{user, userLoading}}>
-      <SiteHeader/>
+      {/* <SiteHeader/> */}
       <Component {...pageProps} />
       </UserProvider>
     </ApolloProvider>

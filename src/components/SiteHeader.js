@@ -90,6 +90,7 @@ export default function SiteHeader() {
       </nav> */}
         <nav className={styles.navigationContainer}>
           <div className={styles.navigation}>
+            
             <Link href="/">
               <Image src="/netflix.png" width={80} height={45}></Image>
             </Link>
@@ -112,7 +113,7 @@ export default function SiteHeader() {
                 ""
               ))}
             {!userLoading && !user ? (
-              <span>
+              <span className={styles.spanTitle}>
                 {/* <form onSubmit={handleSubmit}>
             <input
               type="text"
@@ -150,7 +151,9 @@ export default function SiteHeader() {
                       ))}
                     </select>
                   </div>
-                  <button className={styles.sign}> Sign in </button>
+                  <Link href="/login">
+                    <button className={styles.sign}> Sign in </button>
+                  </Link>
                 </div>
               </span>
             ) : (

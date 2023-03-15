@@ -7,6 +7,7 @@ import { useFetchUser } from "@/lib/authContext";
 import { setToken, unsetToken } from "@/lib/auth";
 import { cancel } from "@/svgs/allsvgs";
 import Image from "next/image";
+import FrequentQuestions from "./frequentQuestions";
 
 export default function SiteHeader() {
   // const { data, error, loading } = useQuery(ALL_CATEGORIES);
@@ -19,12 +20,29 @@ export default function SiteHeader() {
     password: "",
     email: "",
   });
+
   const { user, userLoading } = useFetchUser();
   const languages = ["English", "Spanish", "French", "German"];
 
   //Single handleChange function which works with all the inputs
   const handleCHange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
+  };
+
+  const getStarted = () => {
+    return (
+      <div className={styles.getStartedContainer}>
+        <input
+          className={styles.inputEmail}
+          type="email"
+          name="email"
+          placeholder="Email address"
+          onChange={handleCHange}
+          // value={userData.email}
+        ></input>
+        <button className={styles.getStarted}>Get Started</button>
+      </div>
+    );
   };
 
   const handleSubmit = async (e) => {
@@ -49,6 +67,7 @@ export default function SiteHeader() {
   const logout = () => {
     unsetToken();
   };
+
   const handleClick = () => {
     console.log("clicked");
   };
@@ -160,11 +179,12 @@ export default function SiteHeader() {
               <div className={styles.navTitle}>
                 <h1>Unlimited movies, TV shows, and more.</h1>
                 <h3>Watch anywhere. Cancel anytime.</h3>
-                <h3>
+                <h3 style={{ paddingBottom: "1rem" }}>
+                  <br />
                   Ready to watch? Enter your email to create or restart your
                   membership
                 </h3>
-                <div className={styles.getStartedContainer}>
+                {/* <div className={styles.getStartedContainer}>
                   <input
                     className={styles.inputEmail}
                     type="email"
@@ -174,7 +194,8 @@ export default function SiteHeader() {
                     value={userData.email}
                   ></input>
                   <button className={styles.getStarted}>Get Started</button>
-                </div>
+                </div> */}
+                {getStarted()}
               </div>
             ))}
         </nav>

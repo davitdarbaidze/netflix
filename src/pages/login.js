@@ -6,7 +6,7 @@ import { useState } from "react";
 import Languages from "@/components/languages";
 import Link from "next/link";
 
-export default function login() {
+export default function Login() {
   const [userData, setUserData] = useState({
     identifier: "",
     password: "",

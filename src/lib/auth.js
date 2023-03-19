@@ -13,7 +13,7 @@ export const setToken = (data) =>{
 
 
     if(Cookies.get('username')){
-        Router.reload('/')
+        Router.push('/')
     }
 }
 

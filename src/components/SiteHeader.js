@@ -8,6 +8,7 @@ import { setToken, unsetToken } from "@/lib/auth";
 import { cancel } from "@/svgs/allsvgs";
 import Image from "next/image";
 import FrequentQuestions from "./frequentQuestions";
+import Languages from "./languages";
 
 export default function SiteHeader() {
   // const { data, error, loading } = useQuery(ALL_CATEGORIES);
@@ -45,25 +46,7 @@ export default function SiteHeader() {
     );
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}api/auth/local`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          identifier: userData.identifier,
-          password: userData.password,
-        }),
-      }
-    );
-    const responseData = await response.json();
-    setToken(responseData);
-  };
-
+  
   const logout = () => {
     unsetToken();
   };
@@ -114,43 +97,8 @@ export default function SiteHeader() {
               ))}
             {!userLoading && !user ? (
               <span className={styles.spanTitle}>
-                {/* <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              name="identifier"
-              onChange={handleCHange}
-              placeholder="Username"
-              required
-            ></input>
-            <input
-              type="password"
-              name="password"
-              onChange={handleCHange}
-              placeholder="Password"
-              required
-            ></input>
-
-            <button type="submit">
-              <a>Login</a>
-            </button>
-          </form> */}
                 <div className={styles.languageSelect} onClick={handleClick}>
-                  <div>
-                    <Image
-                      src="/globe-outline.svg"
-                      width={22}
-                      height={22}
-                      alt="Globe icon"
-                      id="globe"
-                    />
-                    <select className={styles.customSelect}>
-                      {languages.map((language) => (
-                        <option key={language} value={language}>
-                          {language}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                  <Languages/>
                   <Link href="/login">
                     <button className={styles.sign}> Sign in </button>
                   </Link>

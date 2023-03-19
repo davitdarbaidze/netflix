@@ -75,7 +75,7 @@ export default function SiteHeader() {
           <div className={styles.navigation}>
             
             <Link href="/">
-              <Image src="/netflix.png" width={80} height={45}></Image>
+              <Image src="/netflix.png" width={80} height={45} alt="Netflix logo"></Image>
             </Link>
             {!userLoading &&
               (user ? (
@@ -98,9 +98,9 @@ export default function SiteHeader() {
             {!userLoading && !user ? (
               <span className={styles.spanTitle}>
                 <div className={styles.languageSelect} onClick={handleClick}>
-                  <Languages/>
+                  <Languages className={styles.some}/>
                   <Link href="/login">
-                    <button className={styles.sign}> Sign in </button>
+                    <button > Sign in </button>
                   </Link>
                 </div>
               </span>

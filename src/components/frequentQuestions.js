@@ -61,6 +61,7 @@ export default function FrequentQuestions() {
               width={24}
               height={24}
               style={{ filter: "invert(100%)" }}
+              alt="plus-sign"
             ></Image>
           </div>
 

@@ -9,6 +9,7 @@ import styles from "../styles/siteHeader.module.scss";
 import FrequentQuestions from "@/components/frequentQuestions";
 import Image from "next/image";
 import SiteHeader from "@/components/SiteHeader";
+import Divider from "@/components/divider";
 
 export default function Home() {
   const { data, error, loading } = useQuery(REVIEWS);
@@ -16,10 +17,6 @@ export default function Home() {
   // if (qerror) return <p>error</p>;
 
   const { user, userLoading } = useFetchUser();
-
-  const divider = () => {
-    return <div className={styles.divider}></div>;
-  };
 
   const [userData, setUserData] = useState({
     email: "",
@@ -75,7 +72,7 @@ export default function Home() {
         ) : (
           
           <div>
-            {divider()}
+            <Divider className={styles.divider} />
             
             <div className={styles.moreOptions}>
             
@@ -84,15 +81,16 @@ export default function Home() {
                 <h3>Watch on Smart TVs, Playstation, Xbox, Chromecast,</h3>
                 <h3>Apple TV, Blu-ray players, and more.</h3>
               </div>
-              <Image src="/tv.png" width={364} height={224}></Image>
+              <Image src="/tv.png" width={364} height={224} alt='tv-image'></Image>
             </div>
-            {divider()}
+            <Divider className={styles.divider} />
             <div className={styles.moreOptions}>
               <Image
                 src="/mobile.jpg"
                 width={320}
                 height={256}
                 className={styles.lgViewImage}
+                alt='mobile-image'
               ></Image>
               <div>
                 <h1>Download your shows to watch offline.</h1>
@@ -105,9 +103,10 @@ export default function Home() {
                 width={320}
                 height={240}
                 className={styles.mobileViewImage}
+                alt='mobile-image'
               ></Image>
             </div>
-            {divider()}
+            <Divider className={styles.divider} />
             <div className={styles.moreOptions}>
               <div>
                 <h1>Watch everywhere.</h1>
@@ -119,21 +118,24 @@ export default function Home() {
                 width={320}
                 height={256}
                 className={styles.lgViewImage}
+                alt='device-pile-image'
               ></Image>
               <Image
                 src="/device-pile.png"
                 width={320}
                 height={240}
                 className={styles.mobileViewImage}
+                alt='device-pile-image'
               ></Image>
             </div>
-            {divider()}
+            <Divider className={styles.divider} />
             <div className={styles.moreOptions}>
               <Image
                 src="/kids.png"
                 width={320}
                 height={256}
                 className={styles.lgViewImage}
+                alt='kids-image'
               ></Image>
               <div>
                 <h1>Create profiles for kids.</h1>
@@ -147,9 +149,10 @@ export default function Home() {
                 width={320}
                 height={240}
                 className={styles.mobileViewImage}
+                alt='kids-image'
               ></Image>
             </div>
-            {divider()}
+            <Divider className={styles.divider} />
             <div className={`${styles.moreOptions} ${styles.questions}`}>          
               
               <FrequentQuestions/>

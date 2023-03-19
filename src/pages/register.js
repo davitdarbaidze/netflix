@@ -1,38 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-import styles from "../styles/login.module.scss";
+import styles from "../styles/register.module.scss";
 import { setToken } from "@/lib/auth";
-import { useState } from "react";
 import Languages from "@/components/languages";
-import Divider from "@/components/divider";
 import Link from "next/link";
+import Divider from "@/components/divider";
 
-export default function Login() {
+export default function Register() {
   const [userData, setUserData] = useState({
-    identifier: "",
+    username: "",
     password: "",
+    repeatPassword: "",
     email: "",
   });
+  console.log(userData)
+
   const handleCHange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
-  };
-  const divider = () => {
-    return <div className={styles.divider}></div>;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}api/auth/local`,
+      `${process.env.NEXT_PUBLIC_API_URL}api/auth/local/register`,
       {
-        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          identifier: userData.identifier,
+          email: userData.email,
           password: userData.password,
+          username: userData.username,
         }),
+        method: "POST",
       }
     );
     const responseData = await response.json();
@@ -59,13 +59,20 @@ export default function Login() {
             </div>
             <div className={styles.middleContainer}>
               <div className={styles.middle}>
-                <h1 style={{ alignSelf: "flex-start" }}>Sign in</h1>
+                <h1 style={{ alignSelf: "flex-start" }}>Register</h1>
                 <form onSubmit={handleSubmit} className={styles.form}>
                   <input
                     type="text"
-                    name="identifier"
+                    name="username"
                     onChange={handleCHange}
-                    placeholder="Username or Email"
+                    placeholder="Username"
+                    required
+                  ></input>
+                  <input
+                    type="text"
+                    name="email"
+                    onChange={handleCHange}
+                    placeholder="Email"
                     required
                   ></input>
                   <input
@@ -75,25 +82,30 @@ export default function Login() {
                     placeholder="Password"
                     required
                   ></input>
+                  <input
+                    type="password"
+                    name="repeatPassword"
+                    onChange={handleCHange}
+                    placeholder="Repeat Password"
+                    required
+                  ></input>
 
                   <button type="submit">
-                    <a>Sign in</a>
+                    <a>Register</a>
                   </button>
                 </form>
                 <div className={styles.helpContainer}>
-                  <div>
-                    <input type="checkbox" defaultChecked="checked"></input>
-                    <label className={styles.checkmark}>Remember me</label>
-                  </div>
-                  <label>Need help?</label>
+                  <Link href="/help">
+                    <label>Need help?</label>
+                  </Link>
                 </div>
 
-                <p className={styles.signUp}>
+                {/* <p className={styles.signUp}>
                   New to Netflix?{" "}
                   <Link href="/register">
                     <button>Sign up Now</button>
                   </Link>
-                </p>
+                </p> */}
               </div>
             </div>
           </div>

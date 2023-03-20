@@ -10,6 +10,7 @@ import FrequentQuestions from "@/components/frequentQuestions";
 import Image from "next/image";
 import SiteHeader from "@/components/SiteHeader";
 import Divider from "@/components/divider";
+import MoviesCarousel from "../components/carousel.js";
 
 export default function Home() {
   const { data, error, loading } = useQuery(REVIEWS);
@@ -51,7 +52,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head> */}
       <SiteHeader/>
-
+      <MoviesCarousel/>
       {!userLoading &&
         (user ? (
           <div>

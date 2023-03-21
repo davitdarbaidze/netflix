@@ -65,7 +65,7 @@
     
 //     <div className={styles.movies_carousel}>
 //       <div className={styles.movies_carousel__container}>
-//         {MOVIES.slice(startIndex, endIndex).map((movie, index) => (
+//         {MOVIES.map((movie, index) => (
 //           <div
 //             key={index}
 //             className={`${styles.movies_carousel__movie} ${

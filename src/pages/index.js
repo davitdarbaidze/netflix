@@ -17,6 +17,7 @@ import Divider from "@/components/divider";
 
 export default function Home() {
   // console.log(window.screen.availWidth)
+  
 
   //a function to get size of the screen and return the appropriate component
   // const { width } = useWindowDimensions();

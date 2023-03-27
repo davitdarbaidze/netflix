@@ -47,6 +47,8 @@ import { Carousel } from "react-responsive-carousel";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import styles from "../styles/test.module.scss";
+
+
 export default function ResponsiveCarousel() {
   //   const { responsive } = ITEMS;
 
@@ -62,8 +64,8 @@ export default function ResponsiveCarousel() {
       >
         {ITEMS.items.responsive.map((item) => (
           <div key={item.id} className={styles.swipItem}>
-            {ITEMS.items.responsive.map((item) => (
-              <div>
+            {ITEMS.items.responsive.map((item,index) => (
+              <div key={index}>
                 <div className={styles.imgBox}>
                   <img src={item.imageUrl} alt="slides" />
                 </div>

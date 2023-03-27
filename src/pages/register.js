@@ -13,7 +13,7 @@ export default function Register() {
     repeatPassword: "",
     email: "",
   });
-  console.log(userData)
+
 
   const handleCHange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
@@ -99,13 +99,6 @@ export default function Register() {
                     <label>Need help?</label>
                   </Link>
                 </div>
-
-                {/* <p className={styles.signUp}>
-                  New to Netflix?{" "}
-                  <Link href="/register">
-                    <button>Sign up Now</button>
-                  </Link>
-                </p> */}
               </div>
             </div>
           </div>

@@ -60,8 +60,10 @@ export default function FrequentQuestions() {
               src="/plus.svg"
               width={24}
               height={24}
-              style={{ filter: "invert(100%)" }}
+              style={{ filter: "invert(100%)"}}
               alt="plus-sign"
+              name={`question${index}`}
+              onClick={(e) => handleCHangeQuestions(e)}
             ></Image>
           </div>
 

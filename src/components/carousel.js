@@ -1,6 +1,7 @@
 import React from "react";
 import MovieCard from "@/components/movieCard";
 import styles from "@/styles/carousel.module.scss"
+import Link from "next/link";
 
 const MOVIES = [
   {
@@ -31,11 +32,16 @@ const MOVIES = [
 ];
 
 export default function Test() {
+
+  const handleClick = (e) => {
+    // e.preventDefault();
+
+  }
   return (
     <div className={styles.movieContainer}>
       {/* {Array.from(MOVIES, x => <MovieCard index={x.id} movie={x.title} imageUrl={x.imageUrl} />)} */}
 
-      <div class={styles.wrapper}>
+      <div className={styles.wrapper}>
         <section id="section1">
           <a href="#section1" class={styles.arrow_btn}>
             ‹
@@ -43,31 +49,31 @@ export default function Test() {
           {Array.from(MOVIES, (x, index) => (
             <MovieCard key={index} index={x.id} movie={x.title} imageUrl={x.imageUrl} />
           ))}
-          <a href="#section2" class={styles.arrow_btn}>
+          <Link href="#section2" className={styles.arrow_btn} onClick={handleClick}>
             ›
-          </a>
+          </Link>
         </section>
 
         <section id="section2">
-          <a href="#section1" class={styles.arrow_btn}>
+          <a href="#section1" className={styles.arrow_btn}>
             ‹
           </a>
           {Array.from(MOVIES, (x, index) => (
             <MovieCard key={index} index={x.id} movie={x.title} imageUrl={x.imageUrl} />
           ))}
-          <a href="#section3" class={styles.arrow_btn}>
+          <a href="#section3" className={styles.arrow_btn}>
             ›
           </a>
         </section>
 
         <section id="section3">
-          <a href="#section2" class={styles.arrow_btn}>
+          <a href="#section2" className={styles.arrow_btn}>
             ‹
           </a>
           {Array.from(MOVIES, (x, index) => (
             <MovieCard key={index} index={x.id} movie={x.title} imageUrl={x.imageUrl} />
           ))}
-          <a href="#section1" class={styles.arrow_btn}>
+          <a href="#section1" className={styles.arrow_btn}>
             ›
           </a>
         </section>

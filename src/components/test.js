@@ -1,53 +1,81 @@
-// import React, {useState, useRef} from "react";
-// import styles from "../styles/carousel.module.scss";
+//public/Items.json
+const ITEMS = {
+  items: {
+    bootstrap: [],
+    elastic: [],
+    responsive: [
+      {
+        id: 1,
+        title: "Swiper Carousel Example",
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste quos mollitia sed quod consectetur at quam dolore praesentium neque eos assumenda iusto nam laborum laboriosam odio blanditiis possimus accusantium recusandae porro exercitationem itaque",
+        imageUrl:
+          "https://res.cloudinary.com/kizmelvin/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1597364662/kizmelvin/ussama-azam-hlg-ltdCoI0-unsplash_ttfjib.jpg",
+      },
+      {
+        id: 2,
+        title: "Swiper Carousel Example",
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste quos mollitia sed quod consectetur at quam dolore praesentium neque eos assumenda iusto nam laborum laboriosam odio blanditiis possimus accusantium recusandae porro exercitationem itaque",
+        imageUrl:
+          "https://res.cloudinary.com/kizmelvin/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1645530199/kizmelvin/Carousel%20assets/slim-emcee-jzdOX0XkXr8-unsplash_zocsdq.jpg",
+      },
+      {
+        id: 3,
+        title: "Swiper Carousel Example",
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste quos mollitia sed quod consectetur at quam dolore praesentium neque eos assumenda iusto nam laborum laboriosam odio blanditiis possimus accusantium recusandae porro exercitationem itaque",
+        imageUrl:
+          "https://res.cloudinary.com/kizmelvin/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1645534321/kizmelvin/Carousel%20assets/luwadlin-bosman-J1oObe7WWjk-unsplash_f56oh3.jpg",
+      },
+      {
+        id: 3,
+        title: "Swiper Carousel Example",
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste quos mollitia sed quod consectetur at quam dolore praesentium neque eos assumenda iusto nam laborum laboriosam odio blanditiis possimus accusantium recusandae porro exercitationem itaque",
+        imageUrl:
+          "https://res.cloudinary.com/kizmelvin/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1645534321/kizmelvin/Carousel%20assets/luwadlin-bosman-J1oObe7WWjk-unsplash_f56oh3.jpg",
+      },
+      {
+        id: 3,
+        title: "Swiper Carousel Example",
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste quos mollitia sed quod consectetur at quam dolore praesentium neque eos assumenda iusto nam laborum laboriosam odio blanditiis possimus accusantium recusandae porro exercitationem itaque",
+        imageUrl:
+          "https://res.cloudinary.com/kizmelvin/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1645534321/kizmelvin/Carousel%20assets/luwadlin-bosman-J1oObe7WWjk-unsplash_f56oh3.jpg",
+      },
+    ],
+  },
+};
+//carousels/Responsive.js
+import { Carousel } from "react-responsive-carousel";
 
-// const MOVIES = [
-//   { id: 1, title: 'Movie 1', imageUrl: 'https://placeimg.com/640/480/animals?v=22' },
-//   { id: 2, title: 'Movie 2', imageUrl: 'https://placeimg.com/640/480/animals?v=23' },
-//   { id: 3, title: 'Movie 3', imageUrl: 'https://placeimg.com/640/480/animals?v=24' },
-//   { id: 4, title: 'Movie 4', imageUrl: 'https://placeimg.com/640/480/animals?v=25' },
-//   { id: 5, title: 'Movie 5', imageUrl: 'https://placeimg.com/640/480/animals?v=26' },
-//   { id: 5, title: 'Movie 5', imageUrl: 'https://placeimg.com/640/480/animals?v=27' },
-//   { id: 5, title: 'Movie 5', imageUrl: 'https://placeimg.com/640/480/animals?v=28' },
-// ];
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import styles from "../styles/test.module.scss";
+export default function ResponsiveCarousel() {
+  //   const { responsive } = ITEMS;
 
-// const MoviesCarousel = () => {
-//   const [activeIndex, setActiveIndex] = useState(0);
-//   const containerRef = useRef(null);
 
-//   const handlePrevClick = () => {
-//     setActiveIndex(activeIndex === 0 ? MOVIES.length - 1 : activeIndex - 1);
-//   };
-
-//   const handleNextClick = () => {
-//     setActiveIndex(activeIndex === MOVIES.length - 1 ? 0 : activeIndex + 1);
-//   };
-
-//   return (
-//     <div className={styles.movies_carousel}>
-//       <div className={styles.movies_carousel__container} ref={containerRef}>
-//         {MOVIES.map((movie, index) => (
-//           <div
-//             key={movie.id}
-//             className={`${styles.movies_carousel__movie} ${
-//               index === activeIndex ? `${styles.active}` : ''
-//             }`}
-//             style={{ backgroundImage: `url(${movie.imageUrl})` }}
-//           >
-//             <div className={styles.movies_carousel__movie_title}>{movie.title}</div>
-//           </div>
-//         ))}
-//       </div>
-//       <button className={styles.movies_carousel__prev} onClick={handlePrevClick}>
-//         &lt;
-//       </button>
-//       <button className={styles.movies_carousel__next} onClick={handleNextClick}>
-//         &gt;
-//       </button>
-      
-//     </div>
-    
-//   );
-// };
-
-// export default MoviesCarousel;
+  return (
+    <div className={styles.container}>
+      <Carousel
+        showArrows={true}
+        showIndicators={false}
+        infiniteLoop={true}
+        dynamicHeight={false}
+        className={styles.mySwiper}
+      >
+        {ITEMS.items.responsive.map((item) => (
+          <div key={item.id} className={styles.swipItem}>
+            {ITEMS.items.responsive.map((item) => (
+              <div>
+                <div className={styles.imgBox}>
+                  <img src={item.imageUrl} alt="slides" />
+                </div>
+                <div className={styles.detail}>
+                  <h2>{item.title}</h2>
+                  {/* <p>{item.text}</p> */}
+                </div>
+              </div>
+            ))}
+          </div>
+        ))}
+      </Carousel>
+    </div>
+  );
+}

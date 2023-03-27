@@ -1,13 +1,13 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, } from "react";
 import Link from "next/link";
 import { useQuery, gql } from "@apollo/client";
 import { ALL_CATEGORIES } from "@/graphql/queries";
 import styles from "../styles/siteHeader.module.scss";
 import { useFetchUser } from "@/lib/authContext";
-import { setToken, unsetToken } from "@/lib/auth";
-import { cancel } from "@/svgs/allsvgs";
+import { unsetToken } from "@/lib/auth";
+
 import Image from "next/image";
-import FrequentQuestions from "./frequentQuestions";
+
 import Languages from "./languages";
 
 export default function SiteHeader() {

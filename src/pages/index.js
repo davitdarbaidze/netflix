@@ -16,14 +16,6 @@ import MoviesCarousel from "../components/carousel.js";
 
 
 export default function Home() {
-  // console.log(window.screen.availWidth)
-  
-
-  //a function to get size of the screen and return the appropriate component
-  // const { width } = useWindowDimensions();
-  // console.log(width);
-  // const [isMobile, setIsMobile] = useState(false);
-  // useEffect(() => {
 
 
   const { data, error, loading } = useQuery(REVIEWS);

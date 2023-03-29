@@ -11,6 +11,7 @@ import Image from "next/image";
 import SiteHeader from "@/components/SiteHeader";
 import Divider from "@/components/divider";
 import MoviesCarousel from "../components/carousel.js";
+import MyCarousel from "@/components/test2";
 
 
 
@@ -58,6 +59,9 @@ export default function Home() {
       </Head> */}
       <SiteHeader/>
       <MoviesCarousel/>
+
+      {/* <MyCarousel></MyCarousel> */}
+      {/* <MyCarousel></MyCarousel> */}
       {!userLoading &&
         (user ? (
           <div>

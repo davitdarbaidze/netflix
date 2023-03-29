@@ -129,7 +129,7 @@ const MOVIES = [
 ];
 
 
-const MoviesCarousel = ({ movies }) => {
+const MoviesCarouselMobile = ({ movies }) => {
   const { width } = useWindowDimensions();
   const [currentPage, setCurrentPage] = useState(1);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -157,24 +157,24 @@ const MoviesCarousel = ({ movies }) => {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   return (
-    <div className={styles.movies_carousel}>
-      <div className={styles.movies_carousel__container}>
-        {MOVIES.slice(startIndex, endIndex).map((movie, index) => (
+    <div className={styles.mobile_movies_carousel}>
+      <div className={styles.mobile_movies_carousel__container}>
+        {MOVIES.slice(startIndex, MOVIES.length).map((movie, index) => (
           <div
             key={index}
-            className={`${styles.movies_carousel__movie} ${
+            className={`${styles.mobile_movies_carousel__movie} ${
               index === activeIndex ? `${styles.active}` : ""
             }`}
             style={{ backgroundImage: `url(${movie.imageUrl})` }}
           >
-            <div className={styles.movies_carousel__movie_title}>
+            <div className={styles.mobile_movies_carousel__movie_title}>
               {movie.title}
             </div>
           </div>
         ))}
       </div>
       <button
-        className={styles.movies_carousel__prev}
+        className={styles.mobile_movies_carousel__prev}
         onClick={handleClickPrev}
         disabled={currentPage === 1}
       >
@@ -182,7 +182,7 @@ const MoviesCarousel = ({ movies }) => {
         ‹
       </button>
       <button
-        className={styles.movies_carousel__next}
+        className={styles.mobile_movies_carousel__next}
         onClick={handleClickNext}
         disabled={currentPage === totalPages}
       >
@@ -193,4 +193,4 @@ const MoviesCarousel = ({ movies }) => {
     </div>
   );
 };
-export default MoviesCarousel;
+export default MoviesCarouselMobile;

@@ -9,7 +9,7 @@ export default function MovieCard(props) {
   return (
 
 
-      <div class={styles.item}>
+      <div className={styles.item}>
         <div
           className={styles.cardImage}
           style={{ backgroundImage: `url(${props.imageUrl})` }}

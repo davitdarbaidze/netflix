@@ -1,0 +1,246 @@
+$itemGrow: 1.2;
+$duration: 250ms;
+
+// .container{
+//     display: grid;
+//     grid-template-columns: repeat(3, 100%);
+//     overflow-x: scroll;
+//     scroll-behavior: smooth;
+
+// }
+
+// .main{
+
+// }
+
+// .containerItem{
+
+//     width: 200px;
+//     height: 100px;
+//     margin: 1rem 0;
+//     padding: 0 2px;
+//     transition: $duration all;
+//     &:hover {
+//         margin: 0 40px;
+//         transform: scale(1.2);
+//     }
+// }
+// .cardImage{
+//     width: 100%;
+//     height: 100%;
+// }
+
+
+.movies_carousel {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    // overflow: hidden;
+    // overflow-x: visible;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    background-color: black;
+
+    &__container {
+        display: flex;
+        //   grid-template-columns: repeat(2, 1fr);
+        //   overflow: scroll;
+        height: 100%;
+        padding: 0 2rem 0 2rem;
+        transition: transform 0.3s ease-in-out;
+        scroll-behavior: smooth;
+        gap: 0.5rem;
+
+        @include breakpoint(md) {
+            // padding: 0 3rem 0 3rem;
+            scroll-behavior: smooth;
+        }
+    }
+
+    &__movie {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        opacity: 0.8;
+        border-radius: 2px;
+        //   transition: opacity 0.3s ease-in-out;
+        transition: $duration all;
+
+        &:hover {
+            opacity: 1;
+            z-index: 1;
+            transform: scale(1.2);
+        }
+
+        // &.active {
+        //   opacity: 1;
+        // }
+
+        &_title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 10px;
+            font-size: 18px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            text-align: center;
+            border-radius: 5px;
+        }
+    }
+
+    &__prev,
+    &__next {
+
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        transform: translateY(-50%);
+        border: none;
+        outline: none;
+        cursor: pointer;
+        color: #ffffff96;
+        text-decoration: none;
+        font-size: 4rem;
+        background: rgba(0, 0, 0, 0);
+        font-weight: 200;
+
+        @include breakpoint(md) {
+            font-size: 6rem;
+            color: white;
+        }
+    }
+
+    &__prev {
+        // visibility: hidden;
+        left: 0px;
+        
+
+        @include breakpoint(md) {
+            visibility: visible;
+            left: -10px;
+        }
+    }
+
+    &__next {
+        // visibility: hidden;
+        // display: none;
+        right: 0px;
+
+        @include breakpoint(md) {
+            visibility: visible;
+            right: -10px;
+        }
+    }
+}
+
+
+
+.mobile_movies_carousel {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    // overflow: hidden;
+    // overflow-x: visible;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    background-color: black;
+
+    &__container {
+        display: grid;
+          grid-template-columns: repeat(2, 100%);
+        //   overflow: scroll;
+        height: 100%;
+        padding: 0 2rem 0 2rem;
+        transition: transform 0.3s ease-in-out;
+        scroll-behavior: smooth;
+        gap: 0.5rem;
+
+        @include breakpoint(md) {
+            // padding: 0 3rem 0 3rem;
+            scroll-behavior: smooth;
+        }
+    }
+
+    &__movie {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        opacity: 0.8;
+        border-radius: 2px;
+        //   transition: opacity 0.3s ease-in-out;
+        transition: $duration all;
+
+        &:hover {
+            opacity: 1;
+            z-index: 1;
+            transform: scale(1.2);
+        }
+
+        // &.active {
+        //   opacity: 1;
+        // }
+
+        &_title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 10px;
+            font-size: 18px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            text-align: center;
+            border-radius: 5px;
+        }
+    }
+
+    &__prev,
+    &__next {
+
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        transform: translateY(-50%);
+        border: none;
+        outline: none;
+        cursor: pointer;
+        color: #ffffff96;
+        text-decoration: none;
+        font-size: 4rem;
+        background: rgba(0, 0, 0, 0);
+        font-weight: 200;
+
+        @include breakpoint(md) {
+            font-size: 6rem;
+            color: white;
+        }
+    }
+
+    &__prev {
+        // visibility: hidden;
+        left: 0px;
+        
+
+        @include breakpoint(md) {
+            visibility: visible;
+            left: -10px;
+        }
+    }
+
+    &__next {
+        // visibility: hidden;
+        // display: none;
+        right: 0px;
+
+        @include breakpoint(md) {
+            visibility: visible;
+            right: -10px;
+        }
+    }
+}

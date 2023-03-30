@@ -5,6 +5,7 @@ import { ALL_CATEGORIES } from "@/graphql/queries";
 import styles from "../styles/siteHeader.module.scss";
 import { useFetchUser } from "@/lib/authContext";
 import { unsetToken } from "@/lib/auth";
+import HeadingVideo from "./headingVideo";
 
 import Image from "next/image";
 
@@ -60,9 +61,12 @@ export default function SiteHeader() {
   return (
     <div
       className={styles.siteHeader}
-      style={{ backgroundImage: "url(/bg.jpg)" }}
+      style={{ backgroundImage: "url(/bg.jpg)" ,}}
+      
     >
+      
       <div className={styles.container}>
+      
         {/* <nav className="categories">
         <span>Filter by category: </span>
         {data.categories.data.map((item) => (
@@ -72,8 +76,9 @@ export default function SiteHeader() {
         ))}
       </nav> */}
         <nav className={styles.navigationContainer}>
+        
           <div className={styles.navigation}>
-            
+          
             <Link href="/">
               <Image src="/netflix.png" width={80} height={45} alt="Netflix logo"></Image>
             </Link>
@@ -89,9 +94,12 @@ export default function SiteHeader() {
               (user ? (
                 <span>
                   <a onClick={logout} style={{ cursor: "pointer" }}>
+                    {/* <HeadingVideo></HeadingVideo> */}
                     Logout
                   </a>
+                  
                 </span>
+
               ) : (
                 ""
               ))}
@@ -108,7 +116,12 @@ export default function SiteHeader() {
               ""
             )}
           </div>
-
+          {!userLoading &&
+              (user ? (
+                <HeadingVideo/>
+              ) : (
+                ""
+              ))}
           {!userLoading &&
             (user ? (
               <div>

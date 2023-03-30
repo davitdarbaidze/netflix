@@ -10,6 +10,7 @@ import FrequentQuestions from "@/components/frequentQuestions";
 import Image from "next/image";
 import SiteHeader from "@/components/SiteHeader";
 import Divider from "@/components/divider";
+import Media from "@/components/media";
 import MoviesCarousel from "../components/carousel.js";
 import MyCarousel from "@/components/test2";
 
@@ -58,8 +59,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head> */}
       <SiteHeader/>
-      <MoviesCarousel/>
-
+      
+      {/* <MoviesCarousel/> */}
       {/* <MyCarousel></MyCarousel> */}
       {/* <MyCarousel></MyCarousel> */}
       {!userLoading &&
@@ -68,15 +69,7 @@ export default function Home() {
             {loading ? (
               <p>loading</p>
             ) : (
-              <div>
-                {data.reviews.data.map((review) => (
-                  <div key={review.id}>
-                    <div>{review.attributes.rating}</div>
-                    <div>{review.attributes.title}</div>
-                    <p>{review.attributes.body}</p>
-                  </div>
-                ))}
-              </div>
+              <Media/>
             )}
           </div>
         ) : (

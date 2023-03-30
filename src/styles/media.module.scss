@@ -1,0 +1,17 @@
+.container{
+    background-color: black;
+    padding-top: 3rem;
+}
+
+.heading{
+
+    width:fit-content;
+    color: rgb(194, 189, 189);
+    padding-left: 2rem;
+    font-size: 1.5em;
+    font-weight: 600;
+    background-color: black;
+    &:hover{
+        color: rgb(255, 255, 255);
+    }
+}

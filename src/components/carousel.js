@@ -128,7 +128,6 @@ const MOVIES = [
   },
 ];
 
-
 const MoviesCarousel = ({ movies }) => {
   const { width } = useWindowDimensions();
   const [currentPage, setCurrentPage] = useState(1);
@@ -143,6 +142,10 @@ const MoviesCarousel = ({ movies }) => {
   const handleClickNext = () => {
     setCurrentPage((prevPage) => prevPage + 1);
   };
+
+  const handleHover = (e) => {
+    // console.log(e.target.id)
+  }
 
   useEffect(() => {
     if (width < 576) {
@@ -161,15 +164,17 @@ const MoviesCarousel = ({ movies }) => {
       <div className={styles.movies_carousel__container}>
         {MOVIES.slice(startIndex, endIndex).map((movie, index) => (
           <div
+            onMouseEnter={(e) => handleHover(e)}
             key={index}
+            id={index}
             className={`${styles.movies_carousel__movie} ${
               index === activeIndex ? `${styles.active}` : ""
             }`}
             style={{ backgroundImage: `url(${movie.imageUrl})` }}
           >
-            <div className={styles.movies_carousel__movie_title}>
+            {/* <div className={styles.movies_carousel__movie_title}>
               {movie.title}
-            </div>
+            </div> */}
           </div>
         ))}
       </div>
@@ -178,18 +183,15 @@ const MoviesCarousel = ({ movies }) => {
         onClick={handleClickPrev}
         disabled={currentPage === 1}
       >
-        {/* {"<"} */}
-        ‹
+        {/* {"<"} */}‹
       </button>
       <button
         className={styles.movies_carousel__next}
         onClick={handleClickNext}
         disabled={currentPage === totalPages}
       >
-        {/* {">"} */}
-        ›
+        {/* {">"} */}›
       </button>
-      
     </div>
   );
 };

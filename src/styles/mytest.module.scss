@@ -96,7 +96,7 @@ $duration: 250ms;
 
         @include breakpoint(md) {
             visibility: visible;
-            left: -10px;
+            // left: -10px;
         }
     }
 
@@ -107,7 +107,7 @@ $duration: 250ms;
 
         @include breakpoint(md) {
             visibility: visible;
-            right: -10px;
+            // right: -10px;
         }
     }
 }

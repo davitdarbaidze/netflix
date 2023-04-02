@@ -13,6 +13,7 @@ import Divider from "@/components/divider";
 import Media from "@/components/media";
 import MoviesCarousel from "../components/carousel.js";
 import MyCarousel from "@/components/test2";
+import HeadingVideo from "@/components/headingVideo";
 
 
 
@@ -69,7 +70,11 @@ export default function Home() {
             {loading ? (
               <p>loading</p>
             ) : (
+              <>
+              {/* <HeadingVideo/> */}
               <Media/>
+              </>
+              
             )}
           </div>
         ) : (

@@ -1,15 +1,14 @@
-import React, { useState, } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useQuery, gql } from "@apollo/client";
 import { ALL_CATEGORIES } from "@/graphql/queries";
 import styles from "../styles/siteHeader.module.scss";
 import { useFetchUser } from "@/lib/authContext";
-import { unsetToken } from "@/lib/auth";
 import HeadingVideo from "./headingVideo";
-
 import Image from "next/image";
-
 import Languages from "./languages";
+import DropdownMenu from "./dropdown";
+import Logout from "./logout";
 
 export default function SiteHeader() {
   // const { data, error, loading } = useQuery(ALL_CATEGORIES);
@@ -47,10 +46,6 @@ export default function SiteHeader() {
     );
   };
 
-  
-  const logout = () => {
-    unsetToken();
-  };
 
   const handleClick = () => {
     console.log("clicked");
@@ -61,12 +56,9 @@ export default function SiteHeader() {
   return (
     <div
       className={styles.siteHeader}
-      style={{ backgroundImage: "url(/bg.jpg)" ,}}
-      
+      style={{ backgroundImage: "url(/bg.jpg)" }}
     >
-      
       <div className={styles.container}>
-      
         {/* <nav className="categories">
         <span>Filter by category: </span>
         {data.categories.data.map((item) => (
@@ -76,39 +68,49 @@ export default function SiteHeader() {
         ))}
       </nav> */}
         <nav className={styles.navigationContainer}>
-        
           <div className={styles.navigation}>
-          
-            <Link href="/">
-              <Image src="/netflix.png" width={80} height={45} alt="Netflix logo"></Image>
-            </Link>
+            <div style={{ display: "flex", alignItems: "flex-start" }}>
+              <Link href="/">
+                <Image
+                  src="/netflix.png"
+                  width={80}
+                  height={45}
+                  alt="Netflix logo"
+                ></Image>
+              </Link>
+              {!userLoading &&
+                (user ? (
+                  <div>
+                    <DropdownMenu/>
+                  </div>
+                ) : (
+                  ""
+                ))}
+            </div>
             {!userLoading &&
               (user ? (
-                <span>
-                  <Link href="/profile">Profile</Link>
-                </span>
+                <div>
+                  <span>
+                    <Link href="/profile">Profile</Link>
+                  </span>
+                  <Logout logoutPlaceholder='Logout'></Logout>
+                </div>
               ) : (
                 ""
               ))}
-            {!userLoading &&
+            {/* {!userLoading &&
               (user ? (
-                <span>
-                  <a onClick={logout} style={{ cursor: "pointer" }}>
-                    {/* <HeadingVideo></HeadingVideo> */}
-                    Logout
-                  </a>
-                  
-                </span>
-
+                
+                <></>
               ) : (
                 ""
-              ))}
+              ))} */}
             {!userLoading && !user ? (
               <span className={styles.spanTitle}>
                 <div className={styles.languageSelect} onClick={handleClick}>
-                  <Languages className={styles.some}/>
+                  <Languages className={styles.some} />
                   <Link href="/login">
-                    <button > Sign in </button>
+                    <button> Sign in </button>
                   </Link>
                 </div>
               </span>
@@ -116,12 +118,7 @@ export default function SiteHeader() {
               ""
             )}
           </div>
-          {!userLoading &&
-              (user ? (
-                <HeadingVideo/>
-              ) : (
-                ""
-              ))}
+          {!userLoading && (user ? <HeadingVideo /> : "")}
           {!userLoading &&
             (user ? (
               <div>

@@ -1,0 +1,135 @@
+.container {
+    width: 100vw;
+    // height: 100vh;
+    background-color: rgb(0, 0, 0);
+
+}
+
+.containerNav {
+    padding: 0.5rem;
+    // position: sticky;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #000000bb;
+    color: #fff;
+    z-index: 9999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+
+    &Left {
+        display: flex;
+        align-items: center;
+
+        &>img {
+            width: 60%;
+            object-fit: contain;
+            gap: 1rem;
+
+
+        }
+
+        &>div>div {
+            display: none;
+            @include breakpoint(md) {
+                display: block;
+            }
+        }
+    }
+
+    &Right {
+
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+        // height: 100%;
+        &>input {
+
+            background-color: #000000;
+            border: 1px solid #fff8f8;
+            padding: 0.5rem;
+            // align-self: center;
+            width: 60%;
+
+        }
+
+    }
+
+    .containerMenuContent {
+        position: fixed;
+        top: 4rem;
+        left: 0;
+        bottom: 0;
+        width: 250px;
+        background-color: black;
+        color: $base-text;
+        transform: translateX(-250px);
+        transition: all 0.2s ease-in-out;
+        z-index: 9998;
+
+
+        ul {
+            padding: 0;
+        }
+
+        &.open {
+            transform: translateX(0);
+        }
+
+        &>ul>div>li {
+            list-style: none;
+            padding: 0.3rem 0.3rem 0.3rem 2rem;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 700;
+
+            &>a {
+                display: block;
+                width: 100%;
+                height: 100%;
+                text-decoration: none;
+                color: $base-text;
+
+                &:hover {
+                    color: #fff;
+                }
+            }
+
+            &:hover {
+                color: #fff;
+            }
+
+        }
+    }
+
+    .containerMenuToggle {
+        background-color: transparent;
+        filter: invert(100%);
+
+        @include breakpoint(md) {
+            display: none;
+        }
+    }
+
+
+}
+
+#some {}
+
+.divider {
+    // position: relative;
+    height: 0.2rem;
+    margin: 0.5rem 0 0.5rem 0;
+    right: 3rem;
+    // width: 120%;
+    background-color: #2c2c2c;
+}
+
+.containerContent {
+    // width: 100%;
+    height: 110vh;
+    background-color: rgb(19, 108, 185);
+}

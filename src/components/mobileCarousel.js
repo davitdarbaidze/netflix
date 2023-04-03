@@ -1,8 +1,6 @@
 import React from "react";
-import useWindowDimensions from "@/hooks/windowSize";
-import { useState, useEffect } from "react";
-import MobileCarousel from "./mobileCarousel";
-import NormalCarousel from "./normalCarousel";
+import styles from "../styles/carousel.module.scss";
+
 
 const MOVIES = [
   {
@@ -127,23 +125,23 @@ const MOVIES = [
   },
 ];
 
-const MoviesCarousel = () => {
-  const { width } = useWindowDimensions();
-  const [responsive, setResponsive] = useState(false);
-
-
-  useEffect(() => {
-    if (width < 576) {
-      setResponsive(true);
-    } else if (width < 992) {
-      setResponsive(false);
-    } else {
-      setResponsive(false);
-    }
-  }, [width]);
+const MobileCarousel = () => {
+  const itemsPerPage = MOVIES.length;
 
   return (
-      <>{responsive ? <MobileCarousel/> : <NormalCarousel/>}</>
+    <div className={styles.mobile_movies_carousel}>
+      <div className={styles.mobile_movies_carousel__container}>
+        {MOVIES.slice(0, itemsPerPage).map((movie, index) => (
+          <div
+            key={index}
+            id={index}
+            className={`${styles.mobile_movies_carousel__movie} `}
+            style={{ backgroundImage: `url(${movie.imageUrl})` }}
+          >
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
-export default MoviesCarousel;
+export default MobileCarousel;

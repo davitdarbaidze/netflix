@@ -69,10 +69,10 @@ function DropdownMenu({ showMainMenu }) {
         {isMenuOpen && (
           <div className={styles.dropDownMenuContent}>
             <ul>
-              {CATEGORIES.map((category, index) => (
+              {jsonData.slice(0,6).map((category, index) => (
                 <li key={index}>
-                  <Link href={`browse/${category.toLowerCase()}`}>
-                    {category}
+                  <Link href={`browse/${category.name.toLowerCase()}`}>
+                    {category.name}
                   </Link>
                 </li>
               ))}
@@ -82,6 +82,8 @@ function DropdownMenu({ showMainMenu }) {
       </div>
     );
   };
+
+  // console.log(jsonData[0].name)
 
   return <div>{showMainMenu ? browseMenu() : mainMenu()}</div>;
 }

@@ -29,6 +29,7 @@ $duration: 250ms;
         }
 
     }
+
     &__movie {
         position: relative;
         width: 100%;
@@ -81,9 +82,11 @@ $duration: 250ms;
         font-size: 4rem;
         background: rgba(0, 0, 0, 0);
         font-weight: 100;
-        &:hover{
+
+        &:hover {
             color: rgb(255, 255, 255);
         }
+
         @include breakpoint(md) {
             color: #ffffff96;
         }
@@ -92,7 +95,7 @@ $duration: 250ms;
     &__prev {
         // visibility: hidden;
         left: 0px;
-        
+
 
         @include breakpoint(md) {
             visibility: visible;
@@ -117,17 +120,21 @@ $duration: 250ms;
 .mobile_movies_carousel {
     position: relative;
     width: 100%;
-    height: 200px;
-    // overflow: hidden;
+    height: 100px;
+    // overflow: scroll;
     // overflow-x: visible;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding-top: 1rem;
+    // padding-bottom: 2rem;
     background-color: black;
 
+
     &__container {
-        display: grid;
-          grid-template-columns: repeat(2, 100%);
-        //   overflow: scroll;
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        // grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        // overflow: scroll;
+        // width: 50%;
         height: 100%;
         padding: 0 2rem 0 2rem;
         transition: transform 0.3s ease-in-out;
@@ -141,17 +148,21 @@ $duration: 250ms;
     }
 
     &__movie {
-        position: relative;
-        width: 100%;
+        flex: 0 0 auto;
+        width: 160px;
         height: 100%;
+        // margin-right: 10px;
+        position: relative;
+        // width: 100px;
+        // height: 100px;
         background-size: cover;
         background-position: center;
-        opacity: 0.8;
+        opacity: 1;
         border-radius: 2px;
         //   transition: opacity 0.3s ease-in-out;
         transition: $duration all;
 
-        &:hover {
+        &:active {
             opacity: 1;
             z-index: 1;
             transform: scale(1.2);

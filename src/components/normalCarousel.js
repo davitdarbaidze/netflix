@@ -1,8 +1,8 @@
 import React from "react";
+import styles from "../styles/carousel.module.scss";
+// import { useWindowDimensions } from "@/hooks/windowSize";
 import useWindowDimensions from "@/hooks/windowSize";
-import { useState, useEffect } from "react";
-import MobileCarousel from "./mobileCarousel";
-import NormalCarousel from "./normalCarousel";
+import { useState, useEffect, useRef } from "react";
 
 const MOVIES = [
   {
@@ -127,23 +127,61 @@ const MOVIES = [
   },
 ];
 
-const MoviesCarousel = () => {
+const NormalCarousel = ({ movies }) => {
   const { width } = useWindowDimensions();
-  const [responsive, setResponsive] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [responsive, setResponsive] = useState(6);
+  const itemsPerPage = responsive;
+  const totalPages = Math.ceil(MOVIES.length / itemsPerPage);
 
+  const handleClickPrev = () => {
+    setCurrentPage((prevPage) => prevPage - 1);
+  };
+  const handleClickNext = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
 
   useEffect(() => {
-    if (width < 576) {
-      setResponsive(true);
-    } else if (width < 992) {
-      setResponsive(false);
+    if (width < 992) {
+      setResponsive(4);
     } else {
-      setResponsive(false);
+      setResponsive(6);
     }
   }, [width]);
 
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
   return (
-      <>{responsive ? <MobileCarousel/> : <NormalCarousel/>}</>
+    <div className={styles.movies_carousel}>
+      <div className={styles.movies_carousel__container}>
+        {MOVIES.slice(startIndex, endIndex).map((movie, index) => (
+          <div
+            key={index}
+            id={index}
+            className={`${styles.movies_carousel__movie} ${
+              index === activeIndex ? `${styles.active}` : ""
+            }`}
+            style={{ backgroundImage: `url(${movie.imageUrl})` }}
+          >
+          </div>
+        ))}
+      </div>
+      <button
+        className={styles.movies_carousel__prev}
+        onClick={handleClickPrev}
+        disabled={currentPage === 1}
+      >
+        {/* {"<"} */}‹
+      </button>
+      <button
+        className={styles.movies_carousel__next}
+        onClick={handleClickNext}
+        disabled={currentPage === totalPages}
+      >
+        {/* {">"} */}›
+      </button>
+    </div>
   );
 };
-export default MoviesCarousel;
+export default NormalCarousel;

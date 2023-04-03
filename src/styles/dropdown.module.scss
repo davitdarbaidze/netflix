@@ -12,6 +12,11 @@
 
 .dropDownToggle {
     background-color: transparent;
+    font-size: 1em;
+    &:hover{
+        color: red;
+    }
+
 }
 
 .dropDownMenuContent {

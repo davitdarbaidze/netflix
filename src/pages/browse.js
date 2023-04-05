@@ -1,21 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/browse.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 import { useFetchUser } from "@/lib/authContext";
-import Logout from "../components/logout";
+import Logout from "@/components/logout";
 import Divider from "@/components/divider";
+import MobileCarousel from "@/components/mobileCarousel";
+import NormalCarousel from "@/components/normalCarousel";
 import DropdownMenu from "@/components/dropdown";
+import useWindowDimensions from "@/hooks/windowSize";
 
 const CATEGORIES = ["Action", "Comedy", "Drama", "Horror", "Whitty"];
 
 export default function Browse() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, userLoading } = useFetchUser();
+  const { width } = useWindowDimensions();
+  const [responsive, setResponsive] = useState();
+
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
   }
-  const { user, userLoading } = useFetchUser();
-  console.log(isMenuOpen);
+
+  function randomCategory(list){
+    return <div className={styles.randomCategory}>{list[Math.floor(Math.random() * list.length)]}</div>
+  }
+
+  
+
+  useEffect(() => {
+    if (width < 576) {
+      setResponsive(true);
+    } else if (width < 992) {
+      setResponsive(false);
+    } else {
+      setResponsive(false);
+    }
+  }, [width]);
 
   return (
     <div className={styles.container}>
@@ -68,14 +89,32 @@ export default function Browse() {
             height={45}
             alt="Netflix logo"
           ></Image>
-          <DropdownMenu showMainMenu={true} className={styles.some}></DropdownMenu>
+          <DropdownMenu
+            showMainMenu={true}
+            className={styles.some}
+          ></DropdownMenu>
         </div>
         <div className={styles.containerNavRight}>
           <input type="search" placeholder="Search"></input>
         </div>
       </div>
 
-      <div className={styles.containerContent}></div>
+      <div className={styles.containerContent} style={{paddingTop: '4rem'}}>
+        {randomCategory(CATEGORIES)}
+        {responsive ? <MobileCarousel /> : <NormalCarousel />}
+        {randomCategory(CATEGORIES)}
+        {responsive ? <MobileCarousel /> : <NormalCarousel />}
+        {randomCategory(CATEGORIES)}
+        {responsive ? <MobileCarousel /> : <NormalCarousel />}
+        {randomCategory(CATEGORIES)}
+        {responsive ? <MobileCarousel /> : <NormalCarousel />}
+        {randomCategory(CATEGORIES)}
+        {responsive ? <MobileCarousel /> : <NormalCarousel />}
+        {randomCategory(CATEGORIES)}
+        {responsive ? <MobileCarousel /> : <NormalCarousel />}
+        {randomCategory(CATEGORIES)}
+        {responsive ? <MobileCarousel /> : <NormalCarousel />}
+      </div>
     </div>
   );
 }

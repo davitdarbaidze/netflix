@@ -11,9 +11,6 @@ import Image from "next/image";
 import SiteHeader from "@/components/SiteHeader";
 import Divider from "@/components/divider";
 import Media from "@/components/media";
-import MoviesCarousel from "../components/carousel.js";
-import MyCarousel from "@/components/test2";
-import HeadingVideo from "@/components/headingVideo";
 
 
 

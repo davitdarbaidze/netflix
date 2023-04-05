@@ -69,6 +69,7 @@ function DropdownMenu({ showMainMenu }) {
         {isMenuOpen && (
           <div className={styles.dropDownMenuContent}>
             <ul>
+              <li><Link href='/browse'>Browse All</Link></li>
               {jsonData.slice(0,6).map((category, index) => (
                 <li key={index}>
                   <Link href={`browse/${category.name.toLowerCase()}`}>

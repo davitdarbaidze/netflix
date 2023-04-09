@@ -38,8 +38,8 @@ function UseSearch() {
         <button type="submit">Add</button>
       </form>
       <h3>Items:</h3>
-      {filteredItems.map(item => (
-        <div>{item}</div>
+      {filteredItems.map((item, index) => (
+        <div key={index}>{item}</div>
       ))}
     </>
   )

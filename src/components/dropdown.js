@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import styles from "../styles/dropdown.module.scss";
 import Link from "next/link";
 import Divider from "./divider";
+import { useFetchUser } from "@/lib/authContext";
 
 function DropdownMenu({ showMainMenu }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [jsonData, setJsonData] = useState([]);
+  const { user, userLoading } = useFetchUser();
 
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
@@ -29,20 +31,36 @@ function DropdownMenu({ showMainMenu }) {
   const browseMenu = () => {
     return (
       <div className={styles.browseDropDownMenu}>
-        <button
-          className={styles.browseDropDownToggle}
-          onMouseEnter={toggleMenu}
-        >
-          Browse
-        </button>
+        {user ? (
+          <div className={styles.navItems}>
+            <button
+              className={styles.browseDropDownToggle}
+              onMouseEnter={toggleMenu}
+            >
+              Browse
+            </button>
+            <Link href="/browse/series">TV Shows</Link>
+            <Link href="/browse/movies">Movies</Link>
+            <Link href="/browse/newandpopular">New and Popular</Link>
+            <Link href="/browse/mylist">My List</Link>
+            <Link href="/browse/bylanguage">Browse by Language</Link>
+          </div>
+        ) : (
+          <button
+            className={styles.browseDropDownToggle}
+            onMouseEnter={toggleMenu}
+          >
+            Browse
+          </button>
+        )}
         {isMenuOpen && (
           <div
             className={styles.browseDropDownMenuContent}
             onMouseLeave={toggleMenu}
           >
             <div className={styles.browseDropDownMenuContentUser}>
-              <Link href="home">Home</Link>
-              <Link href="list">My List</Link>
+              <Link href="/home">Home</Link>
+              <Link href="/mylist">My List</Link>
             </div>
             <Divider className={styles.divider}></Divider>
             <div className={styles.browseDropDownMenuContentCategories}>
@@ -69,8 +87,10 @@ function DropdownMenu({ showMainMenu }) {
         {isMenuOpen && (
           <div className={styles.dropDownMenuContent}>
             <ul>
-              <li><Link href='/browse'>Browse All</Link></li>
-              {jsonData.slice(0,6).map((category, index) => (
+              <li>
+                <Link href="/browse">Browse All</Link>
+              </li>
+              {jsonData.slice(0, 6).map((category, index) => (
                 <li key={index}>
                   <Link href={`browse/${category.name.toLowerCase()}`}>
                     {category.name}

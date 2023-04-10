@@ -21,6 +21,11 @@
 
 .header {
     justify-content: space-between;
+    &>a>img {
+        width: 10%;
+        object-fit: contain;
+        gap: 1rem;
+    }
 }
 
 

@@ -31,9 +31,98 @@
 
 .navigationContainer {
     width: 100%;
+    // position: fixed;
+    // z-index: 9999;
+    // background-color: rgba(0, 0, 0, 0.295);
     // @include center-content();
     flex-direction: column;
 
+}
+.loggedContainer {
+    width: 100vw;
+    // height: 100vh;
+    background-color: rgb(0, 0, 0);
+
+}
+
+.loggedContainerNav {
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    // position: sticky;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #000000bb;
+    color: #fff;
+    z-index: 9999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+
+    &Left {
+        display: flex;
+        align-items: center;
+
+        &>div>a{
+            width: 60%;
+            >img {
+                width: 80%;
+                object-fit: contain;
+                @include breakpoint(md) {
+                    width: 100%;
+                }
+            }
+        }
+
+        &>div>div {
+            display: none;
+            @include breakpoint(md) {
+                display: block;
+            }
+        }
+        .navItems{
+            display: none;
+            @include breakpoint(md) {
+                display: flex;
+                flex-wrap: nowrap;
+                padding: 0 0.5rem 0 0.5rem;
+            }
+        }
+    }
+
+    &Right {
+
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+        // height: 100%;
+        &>input {
+
+            background-color: #000000;
+            border: 1px solid #fff8f8;
+            padding: 0.5rem;
+            // align-self: center;
+            width: 60%;
+
+        }
+
+    }
+    
+}
+.videoContainer {
+    position: relative;
+}
+
+.videoOverlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 99;
 }
 
 .navigation {
@@ -126,67 +215,6 @@
         border: none;
     }
 }
-
-// .customSelect {
-//     background-color: rgba(0, 0, 0, 0);
-//     color: white;
-//     padding: 0.5rem;
-//     font-size: 0.8rem;
-//     font-weight: 400;
-//     border: none;
-//     // border-color: #fff;
-// }
-
-// .languageSelect {
-//     display: flex;
-//     background-color: rgba(0, 0, 0, 0.541);
-
-//     // z-index: 0;
-
-// }
-
-// .languageSelect div {
-//     border: 1px solid white;
-//     border-color: #817e7e;
-//     // background-color: aliceblue;
-//     border-radius: 5px;
-//     @include center-content();
-
-
-// }
-
-// .languageSelect label {
-//     color: aliceblue;
-//     z-index: 1;
-//     overflow: hidden;
-//     pointer-events: none;
-//     position: absolute;
-
-// }
-
-// .languageSelect div img {
-//     // filter: invert(100%);
-//     // padding-left: 0.5rem;
-
-// }
-
-// .languageSelect div select {
-//     appearance: none;
-
-//     // display: none;
-//     @include breakpoint(lg) {
-//         display: inherit;
-//     }
-
-//     @include breakpoint(xl) {
-//         // padding: 1rem 7.5rem;
-//     }
-
-//     @include breakpoint(xxl) {
-//         // padding: 1rem 5rem;
-//     }
-// }
-
 
 .getStartedContainer {
     display: flex;

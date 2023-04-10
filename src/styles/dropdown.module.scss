@@ -67,10 +67,29 @@
     position: relative;
     display: inline-block;
 
-    &>button {
+    &>div{
+        display: flex;
+        align-items: center;
+        margin-left: 4rem;
+    }
+    &>div>button {
         @include breakpoint(md) {
+            
             font-size: 1em;
-            margin-left: 4rem;
+            
+        }
+    }
+    &>div>a{
+        @include breakpoint(md) {
+            padding: 0 0.5rem 0 0.5rem;
+            width: max-content;
+            font-size: 1em;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            &:hover{
+                font-weight: 500;
+            }
         }
     }
 }

@@ -9,8 +9,10 @@ import MobileCarousel from "@/components/mobileCarousel";
 import NormalCarousel from "@/components/normalCarousel";
 import DropdownMenu from "@/components/dropdown";
 import useWindowDimensions from "@/hooks/windowSize";
+import HeadingVideo from "@/components/headingVideo";
 
-const CATEGORIES = ["Action", "Comedy", "Drama", "Horror", "Whitty"];
+
+const CATEGORIES = ["Action", "Comedy", "Drama", "Horror", "Whitty", "Romance","Thriller"];
 
 export default function Browse() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,11 +24,13 @@ export default function Browse() {
     setIsMenuOpen(!isMenuOpen);
   }
 
-  function randomCategory(list){
-    return <div className={styles.randomCategory}>{list[Math.floor(Math.random() * list.length)]}</div>
+  function randomCategory(list) {
+    return (
+      <div className={styles.randomCategory}>
+        {list[Math.floor(Math.random() * list.length)]}
+      </div>
+    );
   }
-
-  
 
   useEffect(() => {
     if (width < 576) {
@@ -83,37 +87,37 @@ export default function Browse() {
               </span>
             )}
           </div>
+          <Link href="/">
           <Image
             src="/netflix.png"
             width={80}
             height={45}
             alt="Netflix logo"
           ></Image>
+          </Link>
           <DropdownMenu
             showMainMenu={true}
             className={styles.some}
           ></DropdownMenu>
         </div>
+        
         <div className={styles.containerNavRight}>
           <input type="search" placeholder="Search"></input>
         </div>
       </div>
 
-      <div className={styles.containerContent} style={{paddingTop: '4rem'}}>
-        {randomCategory(CATEGORIES)}
-        {responsive ? <MobileCarousel /> : <NormalCarousel />}
-        {randomCategory(CATEGORIES)}
-        {responsive ? <MobileCarousel /> : <NormalCarousel />}
-        {randomCategory(CATEGORIES)}
-        {responsive ? <MobileCarousel /> : <NormalCarousel />}
-        {randomCategory(CATEGORIES)}
-        {responsive ? <MobileCarousel /> : <NormalCarousel />}
-        {randomCategory(CATEGORIES)}
-        {responsive ? <MobileCarousel /> : <NormalCarousel />}
-        {randomCategory(CATEGORIES)}
-        {responsive ? <MobileCarousel /> : <NormalCarousel />}
-        {randomCategory(CATEGORIES)}
-        {responsive ? <MobileCarousel /> : <NormalCarousel />}
+      <div className={styles.container}>
+        <div className={styles.overlay}></div>
+        <HeadingVideo />
+      </div>
+
+      <div className={styles.containerContent}>
+        {CATEGORIES.map((category, index) => (
+          <div key={index}>
+            <div className={styles.randomCategory}>{category}</div>
+            {responsive ? <MobileCarousel /> : <NormalCarousel />}
+          </div>
+        ))}
       </div>
     </div>
   );

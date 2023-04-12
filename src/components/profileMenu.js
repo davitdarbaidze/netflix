@@ -10,8 +10,8 @@ export default function ProfileMenu() {
   return (
     <div className={styles.loggedContainerProfileMenu}>
       <div className={styles.Users}>
-        {fakeUsers.map((user) => (
-          <div>
+        {fakeUsers.map((user, index) => (
+          <div key={index}>
             <Image
               alt="UserIcon"
               src="/userIcon.png"

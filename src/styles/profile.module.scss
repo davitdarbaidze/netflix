@@ -1,0 +1,21 @@
+.Wrapper{
+    height: 100vh;
+    background-color: rgb(223, 247, 247);
+}
+.ProfileContainer {
+    padding: 4rem 2rem 0 2rem;
+    @include center-content();
+    font-family: Arial, Helvetica, sans-serif;
+    // height: 100vh;
+
+    .Account{
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        background-color: aqua;
+        width: 90vw;
+        @include breakpoint(md) {
+            width: 80vw;
+        }
+    }
+}

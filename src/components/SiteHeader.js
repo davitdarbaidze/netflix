@@ -8,9 +8,10 @@ import HeadingVideo from "./headingVideo";
 import Image from "next/image";
 import Languages from "./languages";
 import DropdownMenu from "./dropdown";
-import Logout from "./logout";
+import ProfileMenu from "./profileMenu";
+import { useRouter } from 'next/router'
 
-export default function SiteHeader() {
+export default function SiteHeader(props) {
   // const { data, error, loading } = useQuery(ALL_CATEGORIES);
 
   // if (loading) return <p>loading....</p>;
@@ -24,6 +25,8 @@ export default function SiteHeader() {
 
   const { user, userLoading } = useFetchUser();
   const languages = ["English", "Spanish", "French", "German"];
+  const [toggleProfile, setToggleProfile] = useState(false);
+  const router = useRouter()
 
   //Single handleChange function which works with all the inputs
   const handleCHange = (e) => {
@@ -46,8 +49,8 @@ export default function SiteHeader() {
     );
   };
 
-  const handleClick = () => {
-    console.log("clicked");
+  const handleProfileClick = () => {
+    setToggleProfile(!toggleProfile);
   };
 
   // const {user, loading} = useUser();
@@ -57,7 +60,7 @@ export default function SiteHeader() {
       {!userLoading &&
         (user ? (
           <div className={styles.loggedContainer}>
-            <div className={styles.loggedContainerNav}>
+            <div className={`${styles.loggedContainerNav} ${ router.pathname === '/' ? '' : styles.blackBackground}`}>
               <div className={styles.loggedContainerNavLeft}>
                 <div>
                   <Link href="/">
@@ -68,24 +71,39 @@ export default function SiteHeader() {
                       alt="Netflix logo"
                     ></Image>
                   </Link>
-                  
                 </div>
                 <DropdownMenu
-            showMainMenu={true}
-            className={styles.some}
-          ></DropdownMenu>
+                  showMainMenu={true}
+                  className={styles.some}
+                ></DropdownMenu>
               </div>
               <div>
                 <span>
-                  <Link href="/profile">Profile</Link>
+                  <a
+                    onClick={handleProfileClick}
+                    className={styles.loggedContainerProfile}
+                  >
+                    {toggleProfile ? (
+                      <ProfileMenu></ProfileMenu>
+                    ) : (
+                      ""
+                    )}
+                    <Image
+                      src="/userIcon.png"
+                      alt="UserIcon"
+                      width={40}
+                      height={40}
+                    ></Image>
+                  </a>
                 </span>
-                <Logout logoutPlaceholder="Logout"></Logout>
+                {/* <Logout logoutPlaceholder="Logout"></Logout> */}
               </div>
             </div>
-            <div className={styles.videoContainer}>
+            {router.pathname === "/" ? <div className={styles.videoContainer}>
               <div className={styles.videoOverlay}></div>
-              <HeadingVideo />              
-            </div>
+              <HeadingVideo />
+            </div> : ""}
+            
           </div>
         ) : (
           // not logged in user part
@@ -108,10 +126,7 @@ export default function SiteHeader() {
                   </div>
                   {!userLoading && !user ? (
                     <span className={styles.spanTitle}>
-                      <div
-                        className={styles.languageSelect}
-                        onClick={handleClick}
-                      >
+                      <div className={styles.languageSelect}>
                         <Languages className={styles.some} />
                         <Link href="/login">
                           <button> Sign in </button>

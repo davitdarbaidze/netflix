@@ -5,9 +5,11 @@ import Cookies from "js-cookie";
 export const setToken = (data) =>{
 
     if(typeof window === "undefined") return;
+    console.log(data)
 
 
     Cookies.set("id", data.user.id)
+    Cookies.set("email", data.user.email)
     Cookies.set("username", data.user.username)
     Cookies.set("jwt", data.jwt)
 
@@ -21,6 +23,7 @@ export const unsetToken = () =>{
     if(typeof window === "undefined") return;
 
     Cookies.remove("id")
+    Cookies.remove("email")
     Cookies.remove("username")
     Cookies.remove("jwt")
 
@@ -37,6 +40,10 @@ export const getUserFromLocalCookie = () => {
 
 export const getIdFromLocalCookie = () => {
     return Cookies.get("id")
+}
+
+export const getEmailFromLocalCookie = () => {
+    return Cookies.get("email")
 }
 
 export const getTokenFromLocalCookie = () => {

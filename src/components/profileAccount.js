@@ -41,7 +41,7 @@ export default function ProfileAccount() {
       <Link href={href} style={{textDecoration:'none'}} >
       <div className={styles.buttonContainer} onClick={e => togglePasswordCheckWindow(e)}>
           <button>{buttonText}</button>
-        <Image height={25} width={25} src={'/chevronForward.svg'} alt="arrow icon" />
+        <Image height={25} width={25} src={'/chevronForward.svg'} alt="arrow icon"/>
       </div>
       </Link>
     );

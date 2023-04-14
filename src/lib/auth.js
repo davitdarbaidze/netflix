@@ -2,10 +2,9 @@ import Router from "next/router";
 import Cookies from "js-cookie";
 
 
-export const setToken = (data) =>{
+export const setToken = (data,reCheck) =>{
 
     if(typeof window === "undefined") return;
-    console.log(data)
 
 
     Cookies.set("id", data.user.id)
@@ -15,8 +14,13 @@ export const setToken = (data) =>{
 
 
     if(Cookies.get('username')){
-        Router.push('/')
+        if(reCheck){
+            // Router.reload()
+        }else{
+            Router.push('/')
+        }
     }
+    return true
 }
 
 export const unsetToken = () =>{

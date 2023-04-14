@@ -5,8 +5,7 @@
 }
 
 .ProfileContainer {
-    padding: 4rem 2rem 0 2rem;
-    // padding-top: 4rem;
+    padding: 5rem 2rem 4rem 2rem;
     @include center-content();
     font-family: Arial, Helvetica, sans-serif;
     height: 100%;
@@ -17,7 +16,6 @@
 
     .Account {
         display: flex;
-        // align-items: flex-start;
         flex-direction: column;
         background-color: rgb(255, 255, 255);
         width: 100%;
@@ -49,16 +47,6 @@
             // justify-content: flex-end;
             padding: 0 1rem 0 1rem;
 
-            &>button {
-                text-align: start;
-                border-top: 1px solid gray;
-                background-color: rgb(255, 255, 255);
-                color: rgb(114, 114, 114);
-                font-weight: 500;
-                font-size: large;
-                padding-top: 1.5rem;
-                cursor: pointer;
-            }
         }
 
     }
@@ -70,24 +58,42 @@
 
     &>ul {
         padding: 0 1rem 0 1rem;
-
-        &>button {
-            text-align: start;
-            border-top: 1px solid gray;
-            background-color: rgb(255, 255, 255);
-            color: rgb(114, 114, 114);
-            font-weight: 500;
-            font-size: large;
-            width:100%;
-            padding-top: 1.5rem;
-            cursor: pointer;
-        }
     }
 
 }
 
 .Gifts {
     padding: 0 1rem 0 1rem;
+
+    &>a>button {
+        text-align: start;
+        background-color: rgb(255, 255, 255);
+        color: rgb(114, 114, 114);
+        font-weight: 500;
+        font-size: large;
+        width:100%;
+        padding-top: 1.5rem;
+        cursor: pointer;
+    }
+    
+}
+.Cancel{
+    @include center-content();
+    padding-bottom: 2rem;
+}
+
+.CancelMembership{
+    font-size:larger;
+    background-color: rgb(146, 144, 144);;
+    padding: 1rem 3rem 1rem 3rem;
+    border-radius: 0;
+}
+
+.buttonContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid gray;
 
     &>button {
         text-align: start;
@@ -100,7 +106,6 @@
         padding-top: 1.5rem;
         cursor: pointer;
     }
-
 }
 
 .divider {
@@ -109,12 +114,11 @@
     // width: 100%;
     background-color: #2c2c2c;
 }
-.CancelMembership{
-    width:100%;
-    font-size:larger;
-    height: 2.5rem;
-    background-color: rgb(146, 144, 144);;
-    // width: fit-content;
-    padding: 0 1rem 0 1rem;
-    border-radius: 0;
+
+.PasswordCheck{
+    position: absolute;
+    z-index: 10;
+    background-color: rgb(255, 255, 255);
+    width: 100vw;
+    height: 100%;
 }

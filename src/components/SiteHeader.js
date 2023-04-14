@@ -93,6 +93,7 @@ export default function SiteHeader(props) {
                       alt="UserIcon"
                       width={40}
                       height={40}
+                      style={{ borderRadius: "5px"}}
                     ></Image>
                   </a>
                 </span>

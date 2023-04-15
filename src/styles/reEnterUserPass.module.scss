@@ -5,15 +5,28 @@
     bottom: 0;
     left: 0;
     z-index: 10;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgb(214, 212, 212);
     padding: 0 1rem 0 1rem;
     @include center-content();
-
+    font-family: Arial, Helvetica, sans-serif;
 
 
     &>div>form{
         display: flex;
         flex-direction: column;
+        
+        &>input{
+            padding: 1rem 0 1rem 0;
+            margin-top:1rem;
+            width: 100%;
+            font-size: large;
+        }
+        &>button{
+          font-size: x-large;
+          padding: 1rem 0 1rem 0;
+          margin-top: 1rem;
+          
+        }
     }
 
   }

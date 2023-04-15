@@ -36,7 +36,7 @@ export default function Login() {
       }
     );
     const responseData = await response.json();
-    setToken(responseData);
+    setToken(responseData, false, new Date());
   };
 
   return (

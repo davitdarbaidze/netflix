@@ -1,14 +1,16 @@
 import React, {useState} from "react";
 import SiteHeader from "@/components/SiteHeader";
-import styles from "../styles/profile.module.scss";
+import styles from "../../styles/profile.module.scss";
 import { useFetchUser } from "@/lib/authContext";
 import { getEmailFromLocalCookie } from "@/lib/auth";
 import { getIdFromLocalCookie } from "@/lib/auth";
 import Divider from "@/components/divider";
 import Image from "next/image";
 import Link from "next/link";
-import ReEnterUserPass from "./reEnterUserPass";
+import ReEnterUserPass from "../reEnterUserPass";
 import { useRouter } from "next/router";
+import useGetTimeSinceLogin from "../../hooks/useGetTimeSinceLogin"
+import ChangeDataInput from "./changeDataInput";
 
 
 export default function ProfileAccount() {
@@ -16,46 +18,56 @@ export default function ProfileAccount() {
   const email = getEmailFromLocalCookie();
   const id = getIdFromLocalCookie();
   const [toggle, setToggle] = useState(false);
+  const [toggleModify, setToggleModify] = useState([]);
+  const timeSinceLogin = useGetTimeSinceLogin()
   const router = useRouter();
-
-  
-
-  const togglePasswordCheckWindow = (e) => {
-    if(e){
-      e.preventDefault();
-    }
-    console.log(e)
-    setToggle(!toggle);
-    if(toggle){
-      // router.push(href)
-    }else{
-      console.log('waiting for password check')
-    }
-    // router.push(href);
-  };
 
 
   //component for buttons with arrow,since there is multiple buttons with same style
-  const ButtonWithArrow = ({ href, buttonText }) => {
+  const ButtonWithArrow = ({ buttonText, inputName }) => {
+  
     return (
-      <Link href={href} style={{textDecoration:'none'}} >
-      <div className={styles.buttonContainer} onClick={e => togglePasswordCheckWindow(e)}>
+      <div style={{textDecoration:'none'}} >
+      <div className={styles.buttonContainer} onClick={e => handleClick(e)}>
           <button>{buttonText}</button>
-        <Image height={25} width={25} src={'/chevronForward.svg'} alt="arrow icon"/>
+          {toggleModify.includes(buttonText) ? <Image height={25} width={25} src={'/chevronDown.svg'} alt="down arrow icon"/> : <Image height={25} width={25} src={'/chevronForward.svg'} alt="arrow icon"/>}
       </div>
-      </Link>
+      {toggleModify.includes(buttonText) ? <ChangeDataInput inputType={buttonText}/> : ''}
+      </div>
     );
   };
+
+  
+  //function for toggling changing email,password etc divs
+  const modify = (e) => {
+    if(toggleModify.includes(e.target.innerText)){
+      setToggleModify(toggleModify.filter(item => item !== e.target.innerText))
+      return
+    }else{
+      setToggleModify([...toggleModify, e.target.innerText])
+    }
+  }
+
+  //function which toggles password reentry window if case it's been more than 5 minute
+  //since user logged in, otherwise it calls data modify function
+  function handleClick(e) {
+    if(timeSinceLogin.minutes > 5){
+      
+      setToggle(!toggle);
+    }else{
+      modify(e);
+    } 
+  }
+
 
   return (
     <div>
       
       {user ? (
         <div>
-          
           <SiteHeader />
           
-          {toggle ? <ReEnterUserPass toggleValue={toggle} toggle={togglePasswordCheckWindow}/> : ''}
+          {toggle ? <ReEnterUserPass toggleValue={toggle} toggle={setToggle}/> : ''}
           <div className={styles.ProfileContainer}>
           
             
@@ -74,7 +86,7 @@ export default function ProfileAccount() {
                   <li>Phone number: {id}</li>
                 </ul>
                 <div className={styles.ChangeButtons}>
-                  <ButtonWithArrow href="/modify/account/data" buttonText="Change email" />
+                  <ButtonWithArrow href="/modify/account/data" buttonText="Change email"/>
                   <ButtonWithArrow href="/modify/account/data" buttonText="Change password" />
                   <ButtonWithArrow href="/modify/account/data" buttonText="Change phone number" />
                 </div>

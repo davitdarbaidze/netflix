@@ -2,7 +2,7 @@ import Router from "next/router";
 import Cookies from "js-cookie";
 
 
-export const setToken = (data,reCheck) =>{
+export const setToken = (data,reCheck, time) =>{
 
     if(typeof window === "undefined") return;
 
@@ -11,6 +11,8 @@ export const setToken = (data,reCheck) =>{
     Cookies.set("email", data.user.email)
     Cookies.set("username", data.user.username)
     Cookies.set("jwt", data.jwt)
+    const now = new Date(); // Current date and time
+    Cookies.set('time_now', now.toUTCString())
 
 
     if(Cookies.get('username')){
@@ -30,6 +32,8 @@ export const unsetToken = () =>{
     Cookies.remove("email")
     Cookies.remove("username")
     Cookies.remove("jwt")
+    Cookies.remove('time_now')
+    Cookies.remove('now')
 
     
     // Router.push('/')
@@ -52,6 +56,10 @@ export const getEmailFromLocalCookie = () => {
 
 export const getTokenFromLocalCookie = () => {
     return Cookies.get("jwt")
+}
+
+export const getTimeFromLocalCookie = () => {
+    return Cookies.get("time_now")
 }
 
 export const getTokenFromServerCookie = (req) => {

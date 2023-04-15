@@ -8,7 +8,7 @@ import HeadingVideo from "./headingVideo";
 import Image from "next/image";
 import Languages from "./languages";
 import DropdownMenu from "./dropdown";
-import ProfileMenu from "./profileMenu";
+import ProfileMenu from "./profile/profileMenu";
 import { useRouter } from 'next/router'
 
 export default function SiteHeader(props) {
@@ -79,7 +79,7 @@ export default function SiteHeader(props) {
               </div>
               <div>
                 <span>
-                  <a
+                  <div
                     onClick={handleProfileClick}
                     className={styles.loggedContainerProfile}
                   >
@@ -95,7 +95,7 @@ export default function SiteHeader(props) {
                       height={40}
                       style={{ borderRadius: "5px"}}
                     ></Image>
-                  </a>
+                  </div>
                 </span>
                 {/* <Logout logoutPlaceholder="Logout"></Logout> */}
               </div>

@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "../styles/profileMenu.module.scss";
-import Logout from "./logout";
+import styles from "../../styles/profileMenu.module.scss";
+import Logout from "../logout";
 import Image from "next/image";
 import Link from "next/link";
 

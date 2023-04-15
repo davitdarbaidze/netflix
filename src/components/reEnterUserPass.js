@@ -3,6 +3,7 @@ import styles from "../styles/reEnterUserPass.module.scss";
 import { getUserFromLocalCookie } from "@/lib/auth";
 import { setToken } from "@/lib/auth";
 
+
 export default function ReEnterUserPass(props) {
 
   const [userData, setUserData] = useState({
@@ -63,6 +64,7 @@ export default function ReEnterUserPass(props) {
     <div className={styles.cover} >
       <div>
         <form onSubmit={handleSubmit}>
+          <h2 style={{padding: '0 1rem 0 1rem'}}>Verify your identity</h2>
             <div className={styles.Error}> {error ? <p>{error}</p> : ''} </div>
           <input
             placeholder="Type password"
@@ -72,14 +74,14 @@ export default function ReEnterUserPass(props) {
             required
           ></input>
           <input 
-          placeholder="Re-enter password" 
+          placeholder="Repeat password" 
           name="repeatPassword"
           type="password"
           onChange={handleCHange}
           required
           ></input>
           <button type="submit">Verify</button>
-          <button onClick={props.toggle}>close</button>
+          <button onClick={props.toggle}>Return</button>
         </form>
       </div>
     </div>

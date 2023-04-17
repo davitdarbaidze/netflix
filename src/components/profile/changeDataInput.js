@@ -2,17 +2,22 @@ import React, {useState} from "react";
 import styles from "../../styles/profile/changeDataInput.module.scss";
 import updatePassword from "../../lib/updatePassword";
 import checkPasswordMatch from "../../lib/generalFunctions";
+import { useMutation } from "@apollo/client";
+import {UPDATE_USER_EMAIL} from "../../graphql/mutations";
+
 
 export default function ChangeDataInput(props) {
     const [userData, setUserData] = useState({
         current: "",
         password: "",
         repeatPassword: "",
+        email:""
 
       });
       const handleCHange = (e) => {
         setUserData({ ...userData, [e.target.name]: e.target.value });
       };
+      const [updateUserEmail, { loading, error, data }] = useMutation(UPDATE_USER_EMAIL);
 
     const handleUpdate = (e) => {
         e.preventDefault();
@@ -23,6 +28,24 @@ export default function ChangeDataInput(props) {
             console.log('error')
         }
     }
+    console.log(userData)
+
+    const handleEmailUpdate = async (e) => {
+    
+      e.preventDefault();
+  
+      try {
+        const response = await updateUserEmail({
+          variables: { id: 2,  email: userData.email},
+        });
+        
+        console.log(response.data.updateUsersPermissionsUser.user);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    
+
   if (props.inputType === "Change password") {
     return (
       <div>
@@ -42,9 +65,10 @@ export default function ChangeDataInput(props) {
   if (props.inputType === "Change email") {
     return (
       <div>
-        <div>
-          <input type="text" name="email" />
-          <input type="password" name="password" />
+        <div className={styles.ChangePassword}>
+          <label>Enter your email: </label>
+          <input type="text" name="email" onChange={handleCHange} />          
+          <button onClick={handleEmailUpdate}>update</button>
         </div>
       </div>
     );

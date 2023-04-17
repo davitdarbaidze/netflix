@@ -14,6 +14,11 @@ import ChangeDataInput from "./changeDataInput";
 import { ButtonWithArrow } from "./buttonWithArros";
 
 
+
+
+
+
+
 export default function ProfileAccount() {
   const { user } = useFetchUser();
   const email = getEmailFromLocalCookie();
@@ -38,9 +43,14 @@ export default function ProfileAccount() {
   //     </div>
   //   );
   // };
-  
+  // const handleEmailUpdate = (e) => {
+  //   const { data, error, loading } = useMutation(UPDATE_USER_EMAIL, {
+  //     variables: { id: 2 , data: { email: 'joke@gmail.com' }},
+  //   });
+  // }
 
-  const handleClick1 = (buttonText) => {
+
+  const handleDataModifyClick = (buttonText) => {
     if (toggleModify.includes(buttonText)) {
       setToggleModify(toggleModify.filter((btnText) => btnText !== buttonText));
     } else {
@@ -84,7 +94,7 @@ export default function ProfileAccount() {
             <h3 >Account</h3>
             
             <p>Member since {new Date().toLocaleDateString("en-US")}</p>
-          
+            
             <div className={styles.Account}>
               <div>
                 <p>Membership & Billing</p>
@@ -108,11 +118,11 @@ export default function ProfileAccount() {
                       <button>{'Change email'}</button>
                       {toggleModify.includes('Change email') ? <Image loading="eager" height={25} width={25} src={'/chevronDown.svg'} alt="down arrow icon"/> : <Image loading="eager" height={25} width={25} src={'/chevronForward.svg'} alt="arrow icon"/>}
                   </div> */}
-                  {toggleModify.includes('Change email') ? <ChangeDataInput inputType={'Change email'}/> : ''}
+                  {/* {toggleModify.includes('Change email') ? <ChangeDataInput inputType={'Change email'}/> : ''} */}
                   </div>
-                  <ButtonWithArrow toggleModify={toggleModify} href="/modify/account/data" buttonText="Change email"/>
-                  <ButtonWithArrow toggleModify={toggleModify} href="/modify/account/data" buttonText="Change password" />
-                  <ButtonWithArrow toggleModify={toggleModify} href="/modify/account/data" buttonText="Change phone number" handleClick={() => handleClick1("Change phone number")}/>
+                  <ButtonWithArrow toggleModify={toggleModify} href="/modify/account/data" buttonText="Change email" handleTimerCheck={(e) => handleClick(e)} handleClick={() => handleDataModifyClick("Change email")}/>
+                  <ButtonWithArrow toggleModify={toggleModify} href="/modify/account/data" buttonText="Change password" handleTimerCheck={(e) => handleClick(e)} handleClick={() => handleDataModifyClick("Change password")}/>
+                  <ButtonWithArrow toggleModify={toggleModify} href="/modify/account/data" buttonText="Change phone number" handleTimerCheck={(e) => handleClick(e)} handleClick={() => handleDataModifyClick("Change phone number")}/>
                 </div>
                 <Divider className={styles.divider}></Divider>
                 <div className={styles.Billing}>
@@ -124,10 +134,10 @@ export default function ProfileAccount() {
                       Your next billing date is:{" "}
                       {new Date().toLocaleDateString("en-US")}
                     </div>
-                    <ButtonWithArrow toggleModify={toggleModify} href="/modify/account/payment" buttonText="Manage payment info" />
-                    <ButtonWithArrow toggleModify={toggleModify} href="/modify/account/payment" buttonText="Add backup payment method" />
-                    <ButtonWithArrow toggleModify={toggleModify} href="/modify/account/payment" buttonText="Billing details" />
-                    <ButtonWithArrow toggleModify={toggleModify} href="/modify/account/payment" buttonText="Change billing day" />
+                    <ButtonWithArrow toggleModify={toggleModify} href="/modify/account/payment" buttonText="Manage payment info" handleTimerCheck={(e) => handleClick(e)} handleClick={() => handleDataModifyClick("Manage payment info")}/>
+                    <ButtonWithArrow toggleModify={toggleModify} href="/modify/account/payment" buttonText="Add backup payment method" handleTimerCheck={(e) => handleClick(e)} handleClick={() => handleDataModifyClick("Add backup payment method")}/>
+                    <ButtonWithArrow toggleModify={toggleModify} href="/modify/account/payment" buttonText="Billing details" handleTimerCheck={(e) => handleClick(e)} handleClick={() => handleDataModifyClick("Billing details")} />
+                    <ButtonWithArrow toggleModify={toggleModify} href="/modify/account/payment" buttonText="Change billing day" handleTimerCheck={(e) => handleClick(e)} handleClick={() => handleDataModifyClick("Change billing day")}/>
                   </ul>
                 </div>
                 <Divider className={styles.divider}></Divider>

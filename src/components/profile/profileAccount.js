@@ -11,6 +11,7 @@ import ReEnterUserPass from "../reEnterUserPass";
 import { useRouter } from "next/router";
 import useGetTimeSinceLogin from "../../hooks/useGetTimeSinceLogin"
 import ChangeDataInput from "./changeDataInput";
+import { ButtonWithArrow } from "./buttonWithArros";
 
 
 export default function ProfileAccount() {
@@ -24,29 +25,38 @@ export default function ProfileAccount() {
 
 
   //component for buttons with arrow,since there is multiple buttons with same style
-  const ButtonWithArrow = ({ buttonText, inputName }) => {
+  // const ButtonWithArrow = ({ buttonText, inputName }) => {
+  //   console.log('rendered')
   
-    return (
-      <div style={{textDecoration:'none'}} >
-      <div className={styles.buttonContainer} onClick={e => handleClick(e)}>
-          <button>{buttonText}</button>
-          {toggleModify.includes(buttonText) ? <Image loading="eager" height={25} width={25} src={'/chevronDown.svg'} alt="down arrow icon"/> : <Image loading="eager" height={25} width={25} src={'/chevronForward.svg'} alt="arrow icon"/>}
-      </div>
-      {toggleModify.includes(buttonText) ? <ChangeDataInput inputType={buttonText}/> : ''}
-      </div>
-    );
-  };
+  //   return (
+  //     <div style={{textDecoration:'none'}} >
+  //     <div className={styles.buttonContainer} onClick={e => handleClick(e)}>
+  //         <button>{buttonText}</button>
+  //         {toggleModify.includes(buttonText) ? <Image loading="eager" height={25} width={25} src={'/chevronDown.svg'} alt="down arrow icon"/> : <Image loading="eager" height={25} width={25} src={'/chevronForward.svg'} alt="arrow icon"/>}
+  //     </div>
+  //     {toggleModify.includes(buttonText) ? <ChangeDataInput inputType={buttonText}/> : ''}
+  //     </div>
+  //   );
+  // };
+  
 
-  
-  //function for toggling changing email,password etc divs
-  const modify = (e) => {
-    if(toggleModify.includes(e.target.innerText)){
-      setToggleModify(toggleModify.filter(item => item !== e.target.innerText))
-      return
-    }else{
-      setToggleModify([...toggleModify, e.target.innerText])
+  const handleClick1 = (buttonText) => {
+    if (toggleModify.includes(buttonText)) {
+      setToggleModify(toggleModify.filter((btnText) => btnText !== buttonText));
+    } else {
+      setToggleModify([...toggleModify, buttonText]);
     }
-  }
+  };
+  // function for toggling changing email,password etc divs
+  // const modify = (e) => {
+  //   console.log(e.target)
+  //   if(toggleModify.includes(e.target.innerText)){
+  //     setToggleModify(toggleModify.filter(item => item !== e.target.innerText))
+  //     return
+  //   }else{
+  //     setToggleModify([...toggleModify, e.target.innerText])
+  //   }
+  // }
 
   //function which toggles password reentry window if case it's been more than 5 minute
   //since user logged in, otherwise it calls data modify function
@@ -87,7 +97,7 @@ export default function ProfileAccount() {
                 </ul>
                 <div className={styles.ChangeButtons}>
                 <div style={{textDecoration:'none'}} >
-                  <div className={styles.buttonContainer} onClick={e => handleClick(e)}>
+                  {/* <div className={styles.buttonContainer} onClick={e => handleClick(e)}>
                       <button>{'Change email'}</button>
                       {toggleModify.includes('Change email') ? <Image loading="eager" height={25} width={25} src={'/chevronDown.svg'} alt="down arrow icon"/> : <Image loading="eager" height={25} width={25} src={'/chevronForward.svg'} alt="arrow icon"/>}
                   </div>
@@ -97,12 +107,12 @@ export default function ProfileAccount() {
                   <div className={styles.buttonContainer} onClick={e => handleClick(e)}>
                       <button>{'Change email'}</button>
                       {toggleModify.includes('Change email') ? <Image loading="eager" height={25} width={25} src={'/chevronDown.svg'} alt="down arrow icon"/> : <Image loading="eager" height={25} width={25} src={'/chevronForward.svg'} alt="arrow icon"/>}
-                  </div>
+                  </div> */}
                   {toggleModify.includes('Change email') ? <ChangeDataInput inputType={'Change email'}/> : ''}
                   </div>
-                  <ButtonWithArrow href="/modify/account/data" buttonText="Change email"/>
-                  <ButtonWithArrow href="/modify/account/data" buttonText="Change password" />
-                  <ButtonWithArrow href="/modify/account/data" buttonText="Change phone number" />
+                  <ButtonWithArrow toggleModify={toggleModify} href="/modify/account/data" buttonText="Change email"/>
+                  <ButtonWithArrow toggleModify={toggleModify} href="/modify/account/data" buttonText="Change password" />
+                  <ButtonWithArrow toggleModify={toggleModify} href="/modify/account/data" buttonText="Change phone number" handleClick={() => handleClick1("Change phone number")}/>
                 </div>
                 <Divider className={styles.divider}></Divider>
                 <div className={styles.Billing}>
@@ -114,10 +124,10 @@ export default function ProfileAccount() {
                       Your next billing date is:{" "}
                       {new Date().toLocaleDateString("en-US")}
                     </div>
-                    <ButtonWithArrow href="/modify/account/payment" buttonText="Manage payment info" />
-                    <ButtonWithArrow href="/modify/account/payment" buttonText="Add backup payment method" />
-                    <ButtonWithArrow href="/modify/account/payment" buttonText="Billing details" />
-                    <ButtonWithArrow href="/modify/account/payment" buttonText="Change billing day" />
+                    <ButtonWithArrow toggleModify={toggleModify} href="/modify/account/payment" buttonText="Manage payment info" />
+                    <ButtonWithArrow toggleModify={toggleModify} href="/modify/account/payment" buttonText="Add backup payment method" />
+                    <ButtonWithArrow toggleModify={toggleModify} href="/modify/account/payment" buttonText="Billing details" />
+                    <ButtonWithArrow toggleModify={toggleModify} href="/modify/account/payment" buttonText="Change billing day" />
                   </ul>
                 </div>
                 <Divider className={styles.divider}></Divider>

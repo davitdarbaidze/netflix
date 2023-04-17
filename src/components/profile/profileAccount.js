@@ -30,7 +30,7 @@ export default function ProfileAccount() {
       <div style={{textDecoration:'none'}} >
       <div className={styles.buttonContainer} onClick={e => handleClick(e)}>
           <button>{buttonText}</button>
-          {toggleModify.includes(buttonText) ? <Image height={25} width={25} src={'/chevronDown.svg'} alt="down arrow icon"/> : <Image height={25} width={25} src={'/chevronForward.svg'} alt="arrow icon"/>}
+          {toggleModify.includes(buttonText) ? <Image loading="eager" height={25} width={25} src={'/chevronDown.svg'} alt="down arrow icon"/> : <Image loading="eager" height={25} width={25} src={'/chevronForward.svg'} alt="arrow icon"/>}
       </div>
       {toggleModify.includes(buttonText) ? <ChangeDataInput inputType={buttonText}/> : ''}
       </div>

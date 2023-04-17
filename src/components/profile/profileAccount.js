@@ -51,7 +51,7 @@ export default function ProfileAccount() {
   //function which toggles password reentry window if case it's been more than 5 minute
   //since user logged in, otherwise it calls data modify function
   function handleClick(e) {
-    if(timeSinceLogin.minutes > 5){
+    if(timeSinceLogin.minutes > 1){
       
       setToggle(!toggle);
     }else{
@@ -86,6 +86,20 @@ export default function ProfileAccount() {
                   <li>Phone number: {id}</li>
                 </ul>
                 <div className={styles.ChangeButtons}>
+                <div style={{textDecoration:'none'}} >
+                  <div className={styles.buttonContainer} onClick={e => handleClick(e)}>
+                      <button>{'Change email'}</button>
+                      {toggleModify.includes('Change email') ? <Image loading="eager" height={25} width={25} src={'/chevronDown.svg'} alt="down arrow icon"/> : <Image loading="eager" height={25} width={25} src={'/chevronForward.svg'} alt="arrow icon"/>}
+                  </div>
+                  {toggleModify.includes('Change email') ? <ChangeDataInput inputType={'Change email'}/> : ''}
+                  </div>
+                  <div style={{textDecoration:'none'}} >
+                  <div className={styles.buttonContainer} onClick={e => handleClick(e)}>
+                      <button>{'Change email'}</button>
+                      {toggleModify.includes('Change email') ? <Image loading="eager" height={25} width={25} src={'/chevronDown.svg'} alt="down arrow icon"/> : <Image loading="eager" height={25} width={25} src={'/chevronForward.svg'} alt="arrow icon"/>}
+                  </div>
+                  {toggleModify.includes('Change email') ? <ChangeDataInput inputType={'Change email'}/> : ''}
+                  </div>
                   <ButtonWithArrow href="/modify/account/data" buttonText="Change email"/>
                   <ButtonWithArrow href="/modify/account/data" buttonText="Change password" />
                   <ButtonWithArrow href="/modify/account/data" buttonText="Change phone number" />

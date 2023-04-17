@@ -17,6 +17,7 @@ export default function ReEnterUserPass(props) {
   const handleCHange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
+  console.log(userData)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -68,14 +69,14 @@ export default function ReEnterUserPass(props) {
             <div className={styles.Error}> {error ? <p>{error}</p> : ''} </div>
           <input
             placeholder="Type password"
-            type="password"
-            name="password"
+            type="text"
+            name="username"
             onChange={handleCHange}
             required
           ></input>
           <input 
           placeholder="Repeat password" 
-          name="repeatPassword"
+          name="password"
           type="password"
           onChange={handleCHange}
           required

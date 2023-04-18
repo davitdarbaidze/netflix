@@ -13,6 +13,7 @@ export const setToken = (data,reCheck, time) =>{
     Cookies.set("jwt", data.jwt)
     const now = new Date(); // Current date and time
     Cookies.set('time_now', now.toUTCString())
+    
 
 
     if(Cookies.get('username')){

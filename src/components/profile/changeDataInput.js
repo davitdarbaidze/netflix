@@ -4,10 +4,13 @@ import updatePassword from "../../lib/updatePassword";
 import checkPasswordMatch from "../../lib/generalFunctions";
 import { useMutation } from "@apollo/client";
 import {UPDATE_USER_EMAIL} from "../../graphql/mutations";
+import {updateUserAttribute} from "../../lib/generalFunctions";
+import { getIdFromLocalCookie } from "@/lib/auth";
 
 
 export default function ChangeDataInput(props) {
     const [userData, setUserData] = useState({
+        id: getIdFromLocalCookie(),
         current: "",
         password: "",
         repeatPassword: "",
@@ -28,21 +31,27 @@ export default function ChangeDataInput(props) {
             console.log('error')
         }
     }
-    console.log(userData)
 
-    const handleEmailUpdate = async (e) => {
-    
-      e.preventDefault();
-  
-      try {
-        const response = await updateUserEmail({
-          variables: { id: 2,  email: userData.email},
-        });
-        
-        console.log(response.data.updateUsersPermissionsUser.user);
-      } catch (err) {
-        console.error(err);
+    const handleAttributeUpdate = async (e, attributeToUpdate) => {
+      e.preventDefault()
+
+      if(e.target.name === 'email'){
+
+        await updateUserAttribute(userData.id, 'email', userData.email, updateUserEmail)
+      }else if(e.target.name === 'phone'){
+        await updateUserAttribute(userData.id, 'phone', userData.phone, updateUserPhone)
       }
+
+      // try {
+      //   const response = await updateUserEmail({
+      //     variables: { id: 2,  email: userData.email},
+      //   });
+        
+      //   console.log(response.data.updateUsersPermissionsUser.user);
+      // } catch (err) {
+      //   console.error(err);
+      // }
+      
     };
     
 
@@ -68,7 +77,7 @@ export default function ChangeDataInput(props) {
         <div className={styles.ChangePassword}>
           <label>Enter your email: </label>
           <input type="text" name="email" onChange={handleCHange} />          
-          <button onClick={handleEmailUpdate}>update</button>
+          <button onClick={(e) => handleAttributeUpdate(e, 'email')}>update</button>
         </div>
       </div>
     );

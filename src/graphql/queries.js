@@ -1,23 +1,23 @@
 import { gql } from "@apollo/client";
 
-
-export const SINGLE_CATEGORY = gql `
-query getSingleCategory($id: ID!) {
-  category(id: $id) {
-    data {
-      id
-      attributes {
-        reviews {
-          data {
-            attributes {
-              title
-              rating
-              body
-              categories{
-                data{
-                    attributes{
-                        Name
+export const SINGLE_CATEGORY = gql`
+  query getSingleCategory($id: ID!) {
+    category(id: $id) {
+      data {
+        id
+        attributes {
+          reviews {
+            data {
+              attributes {
+                title
+                rating
+                body
+                categories {
+                  data {
+                    attributes {
+                      Name
                     }
+                  }
                 }
               }
             }
@@ -26,7 +26,6 @@ query getSingleCategory($id: ID!) {
       }
     }
   }
-}
 `;
 
 export const ALL_CATEGORIES = gql`
@@ -43,19 +42,18 @@ export const ALL_CATEGORIES = gql`
 `;
 
 export const REVIEWS = gql`
-query Reviews{
-  reviews {
-    data {
-      id
-      attributes {
-        
-        title
-        rating
-        body
+  query Reviews {
+    reviews {
+      data {
+        id
+        attributes {
+          title
+          rating
+          body
+        }
       }
     }
   }
-}
 `;
 
 export const SINGLE_REVIEW = gql`
@@ -72,3 +70,26 @@ export const SINGLE_REVIEW = gql`
     }
   }
 `;
+
+export const GET_ME = gql`
+  query getMe {
+    me {
+      id
+      username
+    }
+  }
+`;
+
+
+// you need to enable
+export const GET_USER = gql`
+  query getUser($id: ID!){
+    usersPermissionsUser(id: $id){
+      data{
+        attributes{
+          email
+          phone
+        }
+      }
+    }
+  }`;

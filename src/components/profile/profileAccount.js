@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import SiteHeader from "@/components/SiteHeader";
 import styles from "../../styles/profile.module.scss";
 import { useFetchUser } from "@/lib/authContext";
@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 import useGetTimeSinceLogin from "../../hooks/useGetTimeSinceLogin"
 import ChangeDataInput from "./changeDataInput";
 import { ButtonWithArrow } from "./buttonWithArros";
+import { getTokenFromLocalCookie } from "@/lib/auth";
 
 
 
@@ -27,8 +28,28 @@ export default function ProfileAccount() {
   const [toggleModify, setToggleModify] = useState([]);
   const timeSinceLogin = useGetTimeSinceLogin()
   const router = useRouter();
+  const [data, setData] = useState(null);
 
 
+
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}api/users/me`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${getTokenFromLocalCookie()}`
+        }
+      });
+      const responseData = await response.json();
+      setData(responseData);
+    }
+    fetchData();
+  }, []);
+  
+    
   //component for buttons with arrow,since there is multiple buttons with same style
   // const ButtonWithArrow = ({ buttonText, inputName }) => {
   //   console.log('rendered')
@@ -51,10 +72,10 @@ export default function ProfileAccount() {
 
 
   const handleDataModifyClick = (buttonText) => {
-    if (toggleModify.includes(buttonText)) {
-      setToggleModify(toggleModify.filter((btnText) => btnText !== buttonText));
+    if (toggleModify.includes(buttonText.target.innerText)) {
+      setToggleModify(toggleModify.filter((btnText) => btnText !== buttonText.target.innerText));
     } else {
-      setToggleModify([...toggleModify, buttonText]);
+      setToggleModify([...toggleModify, buttonText.target.innerText]);
     }
   };
   // function for toggling changing email,password etc divs
@@ -71,11 +92,11 @@ export default function ProfileAccount() {
   //function which toggles password reentry window if case it's been more than 5 minute
   //since user logged in, otherwise it calls data modify function
   function handleClick(e) {
-    if(timeSinceLogin.minutes > 1){
+    if(timeSinceLogin.minutes > 5){
       
       setToggle(!toggle);
     }else{
-      modify(e);
+      handleDataModifyClick(e);
     } 
   }
 
@@ -83,7 +104,7 @@ export default function ProfileAccount() {
   return (
     <div>
       
-      {user ? (
+      {data ? (
         <div>
           <SiteHeader />
           
@@ -93,7 +114,7 @@ export default function ProfileAccount() {
             
             <h3 >Account</h3>
             
-            <p>Member since {new Date().toLocaleDateString("en-US")}</p>
+            <p>Member since {data.createdAt}</p>
             
             <div className={styles.Account}>
               <div>
@@ -103,7 +124,7 @@ export default function ProfileAccount() {
                     {email}
                   </li>
                   <li>Password: ********</li>
-                  <li>Phone number: {id}</li>
+                  <li>Phone number: {data.phone}</li>
                 </ul>
                 <div className={styles.ChangeButtons}>
                 <div style={{textDecoration:'none'}} >
@@ -127,7 +148,7 @@ export default function ProfileAccount() {
                 <Divider className={styles.divider}></Divider>
                 <div className={styles.Billing}>
                   <div style={{ padding: "0 1rem 0 1rem", fontWeight: "bold" }}>
-                    **** **** **** 0759
+                    **** **** **** {data.card.primary.slice(12, 16)}
                   </div>
                   <ul>
                     <div style={{ border: "0" , paddingBottom:'1rem'}}>
@@ -159,7 +180,7 @@ export default function ProfileAccount() {
           </div>
         </div>
       ) : (
-        <p>Please login from home page</p>
+        <p>..Loading</p>
       )}
     </div>
   );

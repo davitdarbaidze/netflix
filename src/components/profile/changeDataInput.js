@@ -2,10 +2,14 @@ import React, {useState} from "react";
 import styles from "../../styles/profile/changeDataInput.module.scss";
 import updatePassword from "../../lib/updatePassword";
 import checkPasswordMatch from "../../lib/generalFunctions";
-import { useMutation } from "@apollo/client";
-import {UPDATE_USER_EMAIL} from "../../graphql/mutations";
-import {updateUserAttribute} from "../../lib/generalFunctions";
+import { 
+  UPDATE_USER_EMAIL, 
+  UPDATE_USER_PHONE,
+  UPDATE_USER_CARD,
+  UPDATE_USER_SECONDARY_CARD
+ } from "../../graphql/mutations";
 import { getIdFromLocalCookie } from "@/lib/auth";
+import { updateUserAttributes } from "@/lib/updateAttributes";
 
 
 export default function ChangeDataInput(props) {
@@ -14,13 +18,16 @@ export default function ChangeDataInput(props) {
         current: "",
         password: "",
         repeatPassword: "",
-        email:""
-
+        email:"",
+        phone:"",
+        cardNumber: "",
+        cardName: "",
+        cardExpire: "",
+        cardCVC: "",
       });
       const handleCHange = (e) => {
         setUserData({ ...userData, [e.target.name]: e.target.value });
       };
-      const [updateUserEmail, { loading, error, data }] = useMutation(UPDATE_USER_EMAIL);
 
     const handleUpdate = (e) => {
         e.preventDefault();
@@ -33,25 +40,32 @@ export default function ChangeDataInput(props) {
     }
 
     const handleAttributeUpdate = async (e, attributeToUpdate) => {
-      e.preventDefault()
+      e.preventDefault()      
 
-      if(e.target.name === 'email'){
-
-        await updateUserAttribute(userData.id, 'email', userData.email, updateUserEmail)
-      }else if(e.target.name === 'phone'){
-        await updateUserAttribute(userData.id, 'phone', userData.phone, updateUserPhone)
+      if(attributeToUpdate === 'email'){
+        updateUserAttributes(userData.id, 'email', userData.email, UPDATE_USER_EMAIL)
       }
-
-      // try {
-      //   const response = await updateUserEmail({
-      //     variables: { id: 2,  email: userData.email},
-      //   });
-        
-      //   console.log(response.data.updateUsersPermissionsUser.user);
-      // } catch (err) {
-      //   console.error(err);
-      // }
-      
+      else if(attributeToUpdate === 'phone'){
+        updateUserAttributes(userData.id, 'phone', userData.phone, UPDATE_USER_PHONE)
+      }
+      else if (attributeToUpdate === 'primary'){
+        updateUserAttributes(userData.id, 'primary', {primary: 
+          {
+            number: userData.cardNumber, 
+            name: userData.cardName,
+            expiry: userData.cardExpire,
+            cvc: userData.cardCVC
+          }}, UPDATE_USER_CARD)
+      }
+      else if (attributeToUpdate === 'secondary'){
+        await updateUserAttributes(userData.id, 'secondary', {secondary: 
+          {
+            number: userData.cardNumber, 
+            name: userData.cardName, 
+            expiry: userData.cardExpire,
+            cvc: userData.cardCVC
+          }}, UPDATE_USER_SECONDARY_CARD)
+      }      
     };
     
 
@@ -86,11 +100,49 @@ export default function ChangeDataInput(props) {
   if (props.inputType === "Change phone number") {
     return (
       <div>
-        <div>
-          <input type="text" name="phone" />
-          <input type="text" name="password" />
+        <div className={styles.ChangePassword}>
+          <label>Enter new phone number: </label>
+          <input type="text" name="phone" onChange={handleCHange} />          
+          <button onClick={(e) => handleAttributeUpdate(e, 'phone')}>update</button>
         </div>
       </div>
     );
   }
+
+  if (props.inputType === "Manage payment info") {
+    return (
+      <div>
+        <div className={styles.ChangePassword}>
+          <label>Enter card number: </label>
+          <input type="text" name="cardNumber" onChange={handleCHange} />
+          <label>Enter name on Card: </label>
+          <input type="text" name="cardName" onChange={handleCHange} />
+          <label>Enter card expire date: </label>
+          <input type="text" name="cardExpire" onChange={handleCHange} />
+          <label>Enter card CVC: </label>
+          <input type="password" name="cardCVC" onChange={handleCHange} />  
+          <button onClick={(e) => handleAttributeUpdate(e, 'primary')}>update</button>
+        </div>
+      </div>
+    );
+  }
+
+  if (props.inputType === "Add backup payment method") {
+    return (
+      <div>
+        <div className={styles.ChangePassword}>
+          <label>Enter backup card number: </label>
+          <input type="text" name="cardNumber" onChange={handleCHange} />
+          <label>Enter name on backup Card: </label>
+          <input type="text" name="cardName" onChange={handleCHange} />
+          <label>Enter backup card expire date: </label>
+          <input type="text" name="cardExpire" onChange={handleCHange} />
+          <label>Enter backup card CVC: </label>
+          <input type="password" name="cardCVC" onChange={handleCHange} />  
+          <button onClick={(e) => handleAttributeUpdate(e, 'secondary')}>update</button>
+        </div>
+      </div>
+    );
+  }
+
 }

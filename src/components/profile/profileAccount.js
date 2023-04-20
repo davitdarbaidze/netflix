@@ -99,6 +99,7 @@ export default function ProfileAccount() {
       handleDataModifyClick(e);
     } 
   }
+  console.log(data)
 
 
   return (
@@ -148,7 +149,7 @@ export default function ProfileAccount() {
                 <Divider className={styles.divider}></Divider>
                 <div className={styles.Billing}>
                   <div style={{ padding: "0 1rem 0 1rem", fontWeight: "bold" }}>
-                    **** **** **** {data.card.primary.slice(12, 16)}
+                    **** **** **** {data.card.primary.number.slice(12, 16)}
                   </div>
                   <ul>
                     <div style={{ border: "0" , paddingBottom:'1rem'}}>

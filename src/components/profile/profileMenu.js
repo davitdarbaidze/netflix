@@ -25,36 +25,37 @@ export default function ProfileMenu() {
       <div className={styles.Kids}>
         <div>Kids</div>
         <Link href='/manage/profile'>
-        <div>
+        <div className={styles.IconAndButton}>
           <Image
             src="/pencilIcon.png"
             alt="manage profiles"
             width={27}
             height={27}
           ></Image>
-          Manage Profiles
+          <span>Manage Profiles</span>
+          
         </div>
         </Link>
         <Link href='/profile'>
-          <div>
+          <div className={styles.IconAndButton}>
             <Image
               src="/profileIcon.png"
               alt="Go to profile managment"
               width={27}
               height={27}
             ></Image>
-            Account
+            <span>Account</span>
           </div>
         </Link>
         <Link href='/help'>
-        <div>
+        <div className={styles.IconAndButton}>
           <Image
             src="/helpIcon.png"
             alt="help center"
             width={27}
             height={27}
           ></Image>
-          Help Center
+          <span>Help Center</span>
         </div>
         </Link>
       </div>

@@ -20,11 +20,12 @@ export const updateUserAttributes = async (idValue ,attributeKey, attributeValue
   
     if (!response.ok) {
       const errorData = await response.json();
-      console.log(errorData);
-      return;
+      // console.log(errorData);
+      return errorData;
     }
   
+
     const responseData = await response.json();
-    console.log(responseData);
+    return responseData;
   };
   

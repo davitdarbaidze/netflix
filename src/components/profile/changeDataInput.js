@@ -5,6 +5,8 @@ import checkPasswordMatch from "../../lib/generalFunctions";
 import { 
   UPDATE_USER_EMAIL, 
   UPDATE_USER_PHONE,
+  UPDATE_USER_PLAN,
+  UPDATE_USER_BILLING_DAY,
   UPDATE_USER_CARD,
   UPDATE_USER_SECONDARY_CARD
  } from "../../graphql/mutations";
@@ -24,10 +26,13 @@ export default function ChangeDataInput(props) {
         cardName: "",
         cardExpire: "",
         cardCVC: "",
+        plan: "",
+        billdingDay: "",
       });
       const handleCHange = (e) => {
         setUserData({ ...userData, [e.target.name]: e.target.value });
       };
+      const [graphqlResponse, setGraphqlResponse] = useState(null)
 
     const handleUpdate = (e) => {
         e.preventDefault();
@@ -39,14 +44,24 @@ export default function ChangeDataInput(props) {
         }
     }
 
+
+
+
     const handleAttributeUpdate = async (e, attributeToUpdate) => {
       e.preventDefault()      
 
       if(attributeToUpdate === 'email'){
-        updateUserAttributes(userData.id, 'email', userData.email, UPDATE_USER_EMAIL)
+        return updateUserAttributes(userData.id, 'email', userData.email, UPDATE_USER_EMAIL)
       }
       else if(attributeToUpdate === 'phone'){
-        updateUserAttributes(userData.id, 'phone', userData.phone, UPDATE_USER_PHONE)
+        const response = await updateUserAttributes(userData.id, 'phone', userData.phone, UPDATE_USER_PHONE)
+        console.log(response)
+        if(response.data){
+          setGraphqlResponse(true)
+        }else if(response.errors){
+          setGraphqlResponse(false)
+        }
+        return true
       }
       else if (attributeToUpdate === 'primary'){
         updateUserAttributes(userData.id, 'primary', {primary: 
@@ -65,9 +80,20 @@ export default function ChangeDataInput(props) {
             expiry: userData.cardExpire,
             cvc: userData.cardCVC
           }}, UPDATE_USER_SECONDARY_CARD)
-      }      
+          
+      }else if (attributeToUpdate === 'plan'){
+        await updateUserAttributes(userData.id, 'plan', userData.plan, UPDATE_USER_PLAN)  
+      }else if (attributeToUpdate === 'billingDay'){
+        await updateUserAttributes(userData.id, 'billingDay', userData.billdingDay, UPDATE_USER_BILLING_DAY)          
+      }
+      return false
     };
+
+    const handleResponse = (response) => {
+      //create a function which is checking variable and if that variable is true 
+    }
     
+    console.log(userData)
 
   if (props.inputType === "Change password") {
     return (
@@ -104,6 +130,7 @@ export default function ChangeDataInput(props) {
           <label>Enter new phone number: </label>
           <input type="text" name="phone" onChange={handleCHange} />          
           <button onClick={(e) => handleAttributeUpdate(e, 'phone')}>update</button>
+          {graphqlResponse && handleAttributeUpdate ? <p>Success</p> : <p>Fail</p>}
         </div>
       </div>
     );
@@ -144,5 +171,83 @@ export default function ChangeDataInput(props) {
       </div>
     );
   }
+
+  if (props.inputType === "Change plan") {
+    return (
+      <div>
+        <div className={styles.ChangePassword}>
+        <div className={styles.wrapper}>
+          <div className={styles.card}>
+            <input className={styles.input} type="radio" name="plan" value="Basic" onChange={handleCHange}/>
+            <span className={styles.check}></span>
+            <label className={styles.label}>
+              <div className={styles.title}>BASIC</div>
+              <div className={styles.price}>
+                <span className={styles.span}>$</span>
+                7
+                <span className={styles.span}>/month</span>
+              </div>
+            </label>
+          </div>
+          <div className={styles.card}>
+            <input className={styles.input} type="radio" name="plan" value="Standard" onChange={handleCHange}/>
+            <span className={styles.check}></span>
+            <label className={styles.label}>
+              <div className={styles.title}>STANDARD</div>
+              <div className={styles.price}>
+                <span className={styles.span}>$</span>
+                10
+                <span className={styles.span}>/month</span>
+              </div>
+            </label>
+          </div>
+          <div className={styles.card}>
+            <input className={styles.input} type="radio" name="plan" value="Premium" onChange={handleCHange}/>
+            <span className={styles.check}></span>
+            <label className={styles.label}>
+              <div className={styles.title}>PREMIUM</div>
+              <div className={styles.price}>
+                <span className={styles.span}>$</span>
+                15
+                <span className={styles.span}>/month</span>
+              </div>
+            </label>
+          </div>
+        </div>
+        <button onClick={(e) => handleAttributeUpdate(e, 'plan')}>update</button>
+        </div>
+        
+      </div>
+    );
+  }
+
+  if (props.inputType === "Billing details") {
+    return (
+      <div>
+        <div className={styles.ChangePassword}>
+          <div className={styles.PlanContainer}>
+          <span>Plan</span>
+          <h3>{props.data}</h3>
+          <span>Next billing date</span>
+          <h3>{new Date().toLocaleDateString("en-GB", { day: "2-digit", month: "2-digit", year: "numeric" })}</h3>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (props.inputType === "Change billing day") {
+    return (
+      <div>
+        <div className={styles.ChangePassword}>
+          <label>Currenly you are billed every month on <label>{props.data}</label></label>
+          <label>Select month of the day you wish to be billed on Range 1-30:</label>
+          <input type="text" name="billdingDay" onChange={handleCHange} />
+          <button onClick={(e) => handleAttributeUpdate(e, 'billingDay')}>update</button>
+        </div>
+      </div>
+    );
+  }
+  
 
 }

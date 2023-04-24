@@ -3,7 +3,7 @@ import styles from "../../styles/profile.module.scss";
 import Image from "next/image";
 
 
-export const ButtonWithArrow = ({ buttonText, toggleModify, handleClick, handleTimerCheck }) => {
+export const ButtonWithArrow = ({ buttonText, toggleModify, handleClick, handleTimerCheck, data }) => {
   
     return (
       <div style={{ textDecoration: "none" }}>
@@ -15,7 +15,7 @@ export const ButtonWithArrow = ({ buttonText, toggleModify, handleClick, handleT
             <Image loading="eager" height={25} width={25} src={"/chevronForward.svg"} alt="arrow icon" />
           )}
         </div>
-        {toggleModify.includes(buttonText) ? <ChangeDataInput inputType={buttonText} /> : ""}
+        {toggleModify.includes(buttonText) ? <ChangeDataInput data={data} inputType={buttonText} /> : ""}
       </div>
     );
   };

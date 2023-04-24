@@ -40,9 +40,23 @@
     
     &>a>div>img{
         filter: invert(100%);
-        padding-top: 1rem;
+        // padding-top: 1rem;
         padding-right: 0.5rem;
         
+        
 
+    }
+    .IconAndButton{
+        display: flex;
+        // // text-align: center;
+        align-items: center;
+        justify-content: flex-start;
+        // @include center-content();
+        text-align: center;
+        padding: 0.5rem 0;
+        :hover{
+            // background-color: #ec0f0f;
+            text-decoration: underline;
+        }
     }
 }

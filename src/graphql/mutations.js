@@ -24,9 +24,33 @@ export const UPDATE_USER_PHONE = gql`
   }
 `;
 
+export const UPDATE_USER_PLAN= gql`
+  mutation UpdateUserEmail($id: ID!, $plan: ENUM_USERSPERMISSIONSUSER_PLAN!) {
+    updateUsersPermissionsUser(id: $id, data: { plan: $plan }) {
+      data {
+        attributes {
+          plan
+        }
+      }
+    }
+  }
+`;
+
+export const UPDATE_USER_BILLING_DAY= gql`
+  mutation UpdateUserEmail($id: ID!, $billingDay: String!) {
+    updateUsersPermissionsUser(id: $id, data: { billingDay: $billingDay }) {
+      data {
+        attributes {
+          billingDay
+        }
+      }
+    }
+  }
+`;
+
 export const UPDATE_USER_CARD = gql`
   mutation UpdateUserEmail($id: ID!, $primary: JSON!) {
-    updateUsersPermissionsUser(id: $id, data: { card: $primary }) {
+    updateUsersPermissionsUser(id: $id, data: { primary: $primary }) {
       data {
         attributes {
           card
@@ -38,7 +62,7 @@ export const UPDATE_USER_CARD = gql`
 
 export const UPDATE_USER_SECONDARY_CARD = gql`
   mutation UpdateUserEmail($id: ID!, $secondary: JSON!) {
-    updateUsersPermissionsUser(id: $id, data: { card: $secondary }) {
+    updateUsersPermissionsUser(id: $id, data: { secondary: $secondary }) {
       data {
         attributes {
           card

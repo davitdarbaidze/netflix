@@ -4,13 +4,12 @@ import styles from "../../styles/profile.module.scss";
 import { getEmailFromLocalCookie } from "@/lib/auth";
 import Divider from "@/components/divider";
 import Link from "next/link";
-import ReEnterUserPass from "../reEnterUserPass";
+import ReEnterUserPass from "./reEnterUserPass";
 import useGetTimeSinceLogin from "../../hooks/useGetTimeSinceLogin"
 import { ButtonWithArrow } from "./buttonWithArros";
 import { getTokenFromLocalCookie } from "@/lib/auth";
 import { fetchData } from "@/lib/generalFunctions";
-
-
+import ChangeDataInput from "./changeDataInput";
 
 
 
@@ -22,7 +21,9 @@ export default function ProfileAccount() {
   const [toggleModify, setToggleModify] = useState([]);
   const timeSinceLogin = useGetTimeSinceLogin()
   const [data, setData] = useState(null);
+  const [showOverlay, setShowOverlay] = useState(true);
 
+  console.log(data)
   useEffect(() => {
     async function outerFetchData() {
       const url = `${process.env.NEXT_PUBLIC_API_URL}api/users/me`;
@@ -64,6 +65,7 @@ export default function ProfileAccount() {
           <SiteHeader />
           
           {toggle ? <ReEnterUserPass toggleValue={toggle} toggle={setToggle}/> : ''}
+          
           <div className={styles.ProfileContainer}>
           
             
@@ -105,18 +107,18 @@ export default function ProfileAccount() {
                   </ul>
                 </div>
                 <Divider className={styles.divider}></Divider>
-                {/* <div>
-                  <ul className={styles.Gifts}>
-                    <Link href="/gifts"><button>Redeem gift card or promo code</button></Link>
-                    <Link href="/gifts"><button>Where to buy gift cards</button></Link>
-                  </ul>
-                </div> */}
                 <div className={styles.Cancel} style={{textDecoration:'none'}}>
-                  <Link href={'/modify/account/data'}>
-                  <button className={styles.CancelMembership}>
+                  {showOverlay ? 
+                    <div></div> : 
+                    <div className={styles.CancelMembershipCover}>
+                      <h1>Are you sure you want to cancel membership?</h1>
+                      <ChangeDataInput data={{id:data.id, status: false}}inputType={'cancel membership'} />
+                      <br></br>
+                      <button onClick={() => setShowOverlay(!showOverlay)}>cancel</button>
+                    </div>}
+                  <button className={styles.CancelMembership} onClick={() => setShowOverlay(!showOverlay)}>
                     Cancel Membership
                   </button>
-                  </Link>                  
                 </div>
               </div>
             </div>

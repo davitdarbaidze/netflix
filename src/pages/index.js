@@ -64,6 +64,7 @@ export default function Home() {
       {!userLoading &&
         (user ? (
           <div>
+            
             {loading ? (
               <p>loading</p>
             ) : (

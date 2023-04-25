@@ -81,6 +81,7 @@ export default function SiteHeader(props) {
                 <span>
                   <div
                     onClick={handleProfileClick}
+                    onMouseLeave={handleProfileClick}
                     className={styles.loggedContainerProfile}
                   >
                     {toggleProfile ? (

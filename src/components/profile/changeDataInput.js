@@ -7,6 +7,7 @@ import {
   UPDATE_USER_PHONE,
   UPDATE_USER_PLAN,
   UPDATE_USER_BILLING_DAY,
+  UPDATE_USER_STATUS,
   UPDATE_USER_CARD,
   UPDATE_USER_SECONDARY_CARD
  } from "../../graphql/mutations";
@@ -85,7 +86,10 @@ export default function ChangeDataInput(props) {
         await updateUserAttributes(userData.id, 'plan', userData.plan, UPDATE_USER_PLAN)  
       }else if (attributeToUpdate === 'billingDay'){
         await updateUserAttributes(userData.id, 'billingDay', userData.billdingDay, UPDATE_USER_BILLING_DAY)          
+      }else if (attributeToUpdate === 'cancelMembership'){
+        await updateUserAttributes(props.data.id, 'status', props.data.status, UPDATE_USER_STATUS)          
       }
+      
       return false
     };
 
@@ -245,6 +249,17 @@ export default function ChangeDataInput(props) {
           <input type="text" name="billdingDay" onChange={handleCHange} />
           <button onClick={(e) => handleAttributeUpdate(e, 'billingDay')}>update</button>
         </div>
+      </div>
+    );
+  }
+
+  if (props.inputType === "cancel membership") {
+    return (
+      <div>
+        
+          
+          <button onClick={(e) => handleAttributeUpdate(e, 'cancelMembership')}>Yes</button>
+        
       </div>
     );
   }

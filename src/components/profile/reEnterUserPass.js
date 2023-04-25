@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "../styles/reEnterUserPass.module.scss";
+import styles from "../../styles/reEnterUserPass.module.scss";
 import { getUserFromLocalCookie } from "@/lib/auth";
 import { setToken } from "@/lib/auth";
 

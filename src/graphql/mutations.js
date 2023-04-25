@@ -48,6 +48,18 @@ export const UPDATE_USER_BILLING_DAY= gql`
   }
 `;
 
+export const UPDATE_USER_STATUS= gql`
+  mutation UpdateUserEmail($id: ID!, $status: Boolean!) {
+    updateUsersPermissionsUser(id: $id, data: { status: $status }) {
+      data {
+        attributes {
+          status
+        }
+      }
+    }
+  }
+`;
+
 export const UPDATE_USER_CARD = gql`
   mutation UpdateUserEmail($id: ID!, $primary: JSON!) {
     updateUsersPermissionsUser(id: $id, data: { primary: $primary }) {

@@ -81,3 +81,79 @@ export default function ResponsiveCarousel() {
     </div>
   );
 }
+
+
+// //public/Items.json
+
+// import MobileCarousel from "@/components/mobileCarousel";
+// import styles from "../styles/test.module.scss";
+// import { useState } from "react";
+
+
+// export default function ResponsiveCarousel() {
+//   //   const { responsive } = ITEMS;
+
+//   const [data, setData] = useState([]);
+  
+//   const some = () => (fetch(`https://www.googleapis.com/youtube/v3/search?key=${process.env.NEXT_PUBLIC_YOUTUBE_UNRESTRICTED_API_KEY}&part=snippet&type=video&maxResults=10&q=random`)
+//     .then(response => response.json())
+//     .then(data => {
+//       const videoLinks = data.items.map(item => `https://www.youtube.com/watch?v=${item.id.videoId}`);
+//       console.log(videoLinks); // log the array of video links to the console
+//       setData(videoLinks)
+//     })
+//     .catch(error => {
+//       console.log(error);
+//     }))
+
+    
+//   return (
+//     <div className={styles.container}>
+//       {data.length > 0 ? <MobileCarousel data={data}/> : <div>loading...</div>}
+      
+
+//     </div>
+//   );
+// }
+
+// import React from 'react';
+// import MobileCarousel from "@/components/mobileCarousel";
+
+
+// function MyComponent({ videoLinks }) {
+//   return (
+//     <div>
+//       {/* {videoLinks.map((link, index) => (
+//         <div key={index}>
+//           <a href={link} target="_blank" rel="noopener noreferrer">{link}</a>
+//         </div>
+//       ))} */}
+//       <MobileCarousel data={videoLinks}/>
+//     </div>
+//   );
+// }
+
+// export async function getStaticProps() {
+//   try {
+//     const response = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${process.env.NEXT_PUBLIC_YOUTUBE_UNRESTRICTED_API_KEY2}&part=snippet&type=video&maxResults=10&q=random`);
+//     const data = await response.json();
+//     const videoLinks = data.items ? data.items.map(item => `https://www.youtube.com/watch?v=${item.id.videoId}`) : [];
+//     console.log(data)
+
+//     return {
+//       props: {
+//         videoLinks
+//       }
+//     };
+//   } catch (error) {
+//     console.log(error);
+
+//     return {
+//       props: {
+//         videoLinks: []
+//       }
+//     };
+//   }
+// }
+
+// export default MyComponent;

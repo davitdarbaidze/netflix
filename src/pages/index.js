@@ -184,7 +184,6 @@ export async function getStaticProps() {
   
   try {
     client.videos.popular({ per_page: 24 }).then(videosRaw => {
-      console.log(videosRaw,'some')
       videosData.push(videosRaw)})
     const response = await fetch('https://api.pexels.com/videos/search?query=example&per_page=15', {
       headers: {

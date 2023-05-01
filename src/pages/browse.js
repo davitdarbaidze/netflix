@@ -10,11 +10,12 @@ import NormalCarousel from "@/components/normalCarousel";
 import DropdownMenu from "@/components/dropdown";
 import useWindowDimensions from "@/hooks/windowSize";
 import HeadingVideo from "@/components/headingVideo";
+import { createClient } from "pexels";
 
 
 const CATEGORIES = ["Action", "Comedy", "Drama", "Horror", "Whitty", "Romance","Thriller"];
 
-export default function Browse() {
+export default function Browse( {videosData}) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, userLoading } = useFetchUser();
   const { width } = useWindowDimensions();
@@ -115,10 +116,44 @@ export default function Browse() {
         {CATEGORIES.map((category, index) => (
           <div key={index}>
             <div className={styles.randomCategory}>{category}</div>
-            {responsive ? <MobileCarousel /> : <NormalCarousel />}
+            {responsive ? <MobileCarousel movies={videosData[0].videos}/> : <NormalCarousel movies={videosData[0].videos}/>}
           </div>
         ))}
       </div>
     </div>
   );
+}
+
+
+export async function getStaticProps() {
+  let videosData = [];
+
+  const client = createClient(process.env.NEXT_PUBLIC_PEXELS_URL);
+  
+  try {
+    client.videos.popular({ per_page: 24 }).then(videosRaw => {
+      videosData.push(videosRaw)})
+    const response = await fetch('https://api.pexels.com/videos/search?query=example&per_page=15', {
+      headers: {
+        Authorization: process.env.NEXT_PUBLIC_PEXELS_URL,
+      },
+    });
+
+    const { videos } = await response.json();
+
+    return {
+      props: {
+        videos,
+        videosData
+        
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      props: {
+        videos: [],
+      },
+    };
+  }
 }

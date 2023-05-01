@@ -17,6 +17,7 @@ import { createClient } from "pexels";
 
 
 export default function Home({videosData}) {
+  console.log(videosData)
 
   const { data, error, loading } = useQuery(REVIEWS);
   // if (qloading) return <p>loading....</p>;
@@ -70,7 +71,8 @@ export default function Home({videosData}) {
             ) : (
               <>
               {/* <HeadingVideo/> */}
-              <Media videos={videosData[0].videos}/>
+              {videosData.length > 0 ? <Media videos={videosData[0].videos}/> : <p>loading</p>}
+             
               </>
               
             )}
@@ -183,19 +185,19 @@ export async function getStaticProps() {
   const client = createClient(process.env.NEXT_PUBLIC_PEXELS_URL);
   
   try {
-    client.videos.popular({ per_page: 24 }).then(videosRaw => {
+    await client.videos.popular({ per_page: 24 }).then(videosRaw => {
       videosData.push(videosRaw)})
-    const response = await fetch('https://api.pexels.com/videos/search?query=example&per_page=15', {
-      headers: {
-        Authorization: process.env.NEXT_PUBLIC_PEXELS_URL,
-      },
-    });
+    // const response = await fetch('https://api.pexels.com/videos/search?query=example&per_page=15', {
+    //   headers: {
+    //     Authorization: process.env.NEXT_PUBLIC_PEXELS_URL,
+    //   },
+    // });
 
-    const { videos } = await response.json();
+    // const { videos } = await response.json();
 
     return {
       props: {
-        videos,
+        // videos,
         videosData
         
       },

@@ -131,19 +131,19 @@ export async function getStaticProps() {
   const client = createClient(process.env.NEXT_PUBLIC_PEXELS_URL);
   
   try {
-    client.videos.popular({ per_page: 24 }).then(videosRaw => {
+    await client.videos.popular({ per_page: 24 }).then(videosRaw => {
       videosData.push(videosRaw)})
-    const response = await fetch('https://api.pexels.com/videos/search?query=example&per_page=15', {
-      headers: {
-        Authorization: process.env.NEXT_PUBLIC_PEXELS_URL,
-      },
-    });
+    // const response = await fetch('https://api.pexels.com/videos/search?query=example&per_page=15', {
+    //   headers: {
+    //     Authorization: process.env.NEXT_PUBLIC_PEXELS_URL,
+    //   },
+    // });
 
-    const { videos } = await response.json();
+    // const { videos } = await response.json();
 
     return {
       props: {
-        videos,
+        // videos,
         videosData
         
       },

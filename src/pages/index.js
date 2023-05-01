@@ -11,12 +11,12 @@ import Image from "next/image";
 import SiteHeader from "@/components/SiteHeader";
 import Divider from "@/components/divider";
 import Media from "@/components/media";
+import { createClient } from "pexels";
 
 
 
 
-export default function Home() {
-
+export default function Home({videosData}) {
 
   const { data, error, loading } = useQuery(REVIEWS);
   // if (qloading) return <p>loading....</p>;
@@ -70,7 +70,7 @@ export default function Home() {
             ) : (
               <>
               {/* <HeadingVideo/> */}
-              <Media/>
+              <Media videos={videosData[0].videos}/>
               </>
               
             )}
@@ -174,4 +174,39 @@ export default function Home() {
         ))}
     </>
   );
+}
+
+
+export async function getStaticProps() {
+  let videosData = [];
+
+  const client = createClient(process.env.NEXT_PUBLIC_PEXELS_URL);
+  
+  try {
+    client.videos.popular({ per_page: 24 }).then(videosRaw => {
+      console.log(videosRaw,'some')
+      videosData.push(videosRaw)})
+    const response = await fetch('https://api.pexels.com/videos/search?query=example&per_page=15', {
+      headers: {
+        Authorization: process.env.NEXT_PUBLIC_PEXELS_URL,
+      },
+    });
+
+    const { videos } = await response.json();
+
+    return {
+      props: {
+        videos,
+        videosData
+        
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      props: {
+        videos: [],
+      },
+    };
+  }
 }

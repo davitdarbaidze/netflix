@@ -10,6 +10,7 @@ import { ButtonWithArrow } from "./buttonWithArros";
 import { getTokenFromLocalCookie } from "@/lib/auth";
 import { fetchData } from "@/lib/generalFunctions";
 import ChangeDataInput from "./changeDataInput";
+import PopupMessage from "../popup";
 
 
 
@@ -22,8 +23,16 @@ export default function ProfileAccount() {
   const timeSinceLogin = useGetTimeSinceLogin()
   const [data, setData] = useState(null);
   const [showOverlay, setShowOverlay] = useState(true);
+  const [showPopup, setShowPopup] = useState(false);
 
-  console.log(data)
+  const handleButtonClick = () => {
+    setShowPopup(true);
+  };
+
+  const handleClose = () => {
+    setShowPopup(false);
+  };
+
   useEffect(() => {
     async function outerFetchData() {
       const url = `${process.env.NEXT_PUBLIC_API_URL}api/users/me`;
@@ -130,6 +139,10 @@ export default function ProfileAccount() {
               <ButtonWithArrow toggleModify={toggleModify} href="/modify/account/plan" buttonText="Change plan" handleTimerCheck={(e) => handleClick(e)} handleClick={() => handleDataModifyClick("Change plan")}/>
             </div>
           </div>
+          {/* <button onClick={handleButtonClick}>Show Popup</button>
+            {showPopup && (
+              <PopupMessage message="You have logged in successfully" onClose={handleClose} />
+            )} */}
         </div>
       ) : data && data.error ? (
         <p>Please login</p>    

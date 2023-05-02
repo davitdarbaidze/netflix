@@ -1,10 +1,8 @@
 import Head from "next/head";
 import { useQuery, gql } from "@apollo/client";
 import { REVIEWS } from "@/graphql/queries";
-import { setToken, unsetToken } from "@/lib/auth";
 import { useState } from "react";
-import Link from "next/link";
-import { useUser, useFetchUser } from "@/lib/authContext";
+import { useFetchUser } from "@/lib/authContext";
 import styles from "../styles/siteHeader.module.scss";
 import FrequentQuestions from "@/components/frequentQuestions";
 import Image from "next/image";
@@ -12,9 +10,6 @@ import SiteHeader from "@/components/SiteHeader";
 import Divider from "@/components/divider";
 import Media from "@/components/media";
 import { createClient } from "pexels";
-
-
-
 
 export default function Home({videosData}) {
   console.log(videosData)

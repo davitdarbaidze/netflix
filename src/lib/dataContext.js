@@ -1,50 +1,59 @@
 import { useContext, createContext } from "react";
+import { createClient } from "pexels";
+import { useState, useEffect } from "react";
 
-const DataContext = createContext(
-    {
-        number: 0,
-        enabled: false,
-    }
-);
+export const DataContext = createContext({ number: 0, enabled: false, data: [] });
 
+export async function useData() {
+  const client = createClient(process.env.NEXT_PUBLIC_PEXELS_URL);
 
-export function useData(){
-    return useContext(DataContext)
+  try {
+    const videosRaw = await client.videos.popular({ per_page: 24 });
+    const videosData = videosRaw.videos.map((video) => ({
+      id: video.id,
+      url: video.url,
+      image: video.image,
+      duration: video.duration,
+      user: video.user,
+      width: video.width,
+      height: video.height,
+    }));
+
+    return videosData;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
 }
 
+export function DataProvider({ children }) {
+  const [data, setData] = useState([]);
 
-export function DataProvider({ children }){
-    return <DataContext.Provider value={{ number: 0, enabled: false}}>{children}</DataContext.Provider>
+  useEffect(() => {
+    useData().then((videosData) => setData(videosData));
+  }, []);
+
+  return (
+    <DataContext.Provider value={{ number: 0, enabled: true, data }}>
+      {children}
+    </DataContext.Provider>
+  );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-//Boiler plate for data  context, don't forge to use wrap whole app with DataProvider
-
 
 // import { useContext, createContext } from "react";
 
 // const DataContext = createContext(
 //     {
-
+//         number: 0,
+//         enabled: false,
 //     }
+
 // );
 
-
-// export function useData(){
-//     return useContext(DataContext)
+// export async function useData(){
+//     return useContext(videosData)
 // }
 
-
 // export function DataProvider({ children }){
-//     return <DataContext.Provider value={{}}>{children}</DataContext.Provider>
+//     return <DataContext.Provider value={{ number: 0, enabled: true}}>{children}</DataContext.Provider>
 // }

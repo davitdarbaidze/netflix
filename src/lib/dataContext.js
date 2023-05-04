@@ -4,41 +4,47 @@ import { useState, useEffect } from "react";
 
 export const DataContext = createContext({ number: 0, enabled: false, data: [] });
 
-export async function useData() {
-  const client = createClient(process.env.NEXT_PUBLIC_PEXELS_URL);
+export function useVideos() {
+  const [videos, setVideos] = useState([]);
 
-  try {
-    const videosRaw = await client.videos.popular({ per_page: 24 });
-    const videosData = videosRaw.videos.map((video) => ({
-      id: video.id,
-      url: video.url,
-      image: video.image,
-      duration: video.duration,
-      user: video.user,
-      width: video.width,
-      height: video.height,
-    }));
+  useEffect(() => {
+    async function fetchVideos() {
+      const client = createClient(process.env.NEXT_PUBLIC_PEXELS_URL);
 
-    return videosData;
-  } catch (error) {
-    console.error(error);
-    return [];
-  }
+      try {
+        const videosRaw = await client.videos.popular({ per_page: 24 });
+        const videosData = videosRaw.videos.map((video) => ({
+          id: video.id,
+          url: video.url,
+          image: video.image,
+          duration: video.duration,
+          user: video.user,
+          width: video.width,
+          height: video.height,
+        }));
+
+        setVideos(videosData);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchVideos();
+  }, []);
+
+  return videos;
 }
 
 export function DataProvider({ children }) {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    useData().then((videosData) => setData(videosData));
-  }, []);
+  const videos = useVideos();
 
   return (
-    <DataContext.Provider value={{ number: 0, enabled: true, data }}>
+    <DataContext.Provider value={{ number: 0, enabled: true, data: videos }}>
       {children}
     </DataContext.Provider>
   );
 }
+
 
 // import { useContext, createContext } from "react";
 

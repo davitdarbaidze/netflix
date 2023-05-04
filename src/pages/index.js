@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useQuery, gql } from "@apollo/client";
 import { REVIEWS } from "@/graphql/queries";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useFetchUser } from "@/lib/authContext";
 import styles from "../styles/siteHeader.module.scss";
 import FrequentQuestions from "@/components/frequentQuestions";
@@ -10,11 +10,14 @@ import SiteHeader from "@/components/SiteHeader";
 import Divider from "@/components/divider";
 import Media from "@/components/media";
 import { createClient } from "pexels";
+import { DataContext } from "@/lib/dataContext";
 
 export default function Home({videosData}) {
-  console.log(videosData)
 
-  const { data, error, loading } = useQuery(REVIEWS);
+  const { data } = useContext(DataContext);
+  console.log(data);
+
+  // const { data, error, loading } = useQuery(REVIEWS);
   // if (qloading) return <p>loading....</p>;
   // if (qerror) return <p>error</p>;
 

@@ -14,10 +14,7 @@ import { DataContext } from "@/lib/dataContext";
 
 export default function Home({videosData}) {
 
-  const { data } = useContext(DataContext);
-  console.log(data);
-
-  // const { data, error, loading } = useQuery(REVIEWS);
+  const { data, error, loading } = useQuery(REVIEWS);
   // if (qloading) return <p>loading....</p>;
   // if (qerror) return <p>error</p>;
 

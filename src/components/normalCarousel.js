@@ -4,6 +4,7 @@ import styles from "../styles/carousel.module.scss";
 import useWindowDimensions from "@/hooks/windowSize";
 import { useState, useEffect, useRef, useContext } from "react";
 import { DataContext } from "@/lib/dataContext";
+import VideoThumbnail from "./videoSingleComp";
 
 const NormalCarousel = (props) => {
   const { data } = useContext(DataContext);
@@ -12,37 +13,7 @@ const NormalCarousel = (props) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [responsive, setResponsive] = useState(6);
   const itemsPerPage = responsive;
-  const totalPages = Math.ceil(data / itemsPerPage);
-
-// Function to handle rendering the next set of videos
-  
-  const videoRefs = [
-    
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-  ];
+  const totalPages = Math.ceil(data.length / itemsPerPage);
 
   const handleClickPrev = () => {
     setCurrentPage((prevPage) => prevPage - 1);
@@ -50,25 +21,6 @@ const NormalCarousel = (props) => {
 
   const handleClickNext = () => {
     setCurrentPage((prevPage) => prevPage + 1);
-  };
-
-  const handlePlay = (event) => {    
-    const index = event.target.id;    
-    const videoElement = document.getElementById(`video${index}`);
-    setTimeout(() => {
-      videoElement.play();
-      
-    }, 500)
-    
-  };
-
-  const handlePause = (event) => {
-    const index = event.target.id;
-    
-    if (videoRefs[index] && videoRefs[index].current) {
-      videoRefs[index].current.pause();
-      videoRefs[index].current = null;
-    }
   };
 
   useEffect(() => {
@@ -81,14 +33,10 @@ const NormalCarousel = (props) => {
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  // console.log(videoRefs)
 
-
-  // console.log(props.movies[0].video_files[0], 'props')
   return (
     <div className={styles.movies_carousel}>
       <div className={styles.movies_carousel__container}>
-        
         {data.slice(startIndex, endIndex).map((movie, index) => (
           <div
             key={index}
@@ -97,13 +45,12 @@ const NormalCarousel = (props) => {
               index === activeIndex ? `${styles.active}` : ""
             }`}
             style={{ backgroundImage: `url(${movie.image})` }}
-            onMouseEnter={handlePlay}
-            onMouseLeave={handlePause}
           >
-            <video id={`video${index}`} className={styles.video} width="160px" height="100%"><source src={movie.video_files.link} type="video/mp4"/></video>
+            <VideoThumbnail thumbnailUrl={movie.image} videoUrl={movie.video_files.link} />
           </div>
         ))}
       </div>
+      
       <button
         className={styles.movies_carousel__prev}
         onClick={handleClickPrev}

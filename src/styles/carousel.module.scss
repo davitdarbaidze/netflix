@@ -42,13 +42,17 @@ $duration: 250ms;
         transition: $duration all;
 
         &:hover {
-            opacity: 1;
-            z-index: 1;
-            transform: scale(1.2);
+
+            // opacity: 1;
+            // z-index: 1;
+            // transform: scale(1.2);
             .video {
                 display: block;
             }
+
+            visibility:none;
         }
+
         .video {
             position: absolute;
             top: 0;
@@ -58,7 +62,7 @@ $duration: 250ms;
             // display: none;
             display: none;
             transform: scale(1.2);
-          }
+        }
 
         // &.active {
         //   opacity: 1;
@@ -177,10 +181,12 @@ $duration: 250ms;
             opacity: 1;
             z-index: 1;
             transform: scale(1.2);
+
             .video {
                 display: block;
             }
         }
+
         .video {
             position: absolute;
             top: 0;
@@ -190,7 +196,7 @@ $duration: 250ms;
             // display: none;
             display: none;
             transform: scale(1.2);
-          }
+        }
 
         // &.active {
         //   opacity: 1;

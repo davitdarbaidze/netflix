@@ -24,6 +24,7 @@ const VideoThumbnail = ({ thumbnailUrl, videoUrl }) => {
           src={videoUrl}
           autoPlay
           loop
+          muted={true}
           style={{
             position: 'absolute',
             top: 0,

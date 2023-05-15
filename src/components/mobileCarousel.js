@@ -1,7 +1,7 @@
 import React, { useContext} from "react";
 import styles from "../styles/carousel.module.scss";
 import { DataContext } from "@/lib/dataContext";
-import VideoThumbnail from "./videoSingleComp";
+import VideoThumbnailMob from "./videoSingleCompMob";
 
 const MobileCarousel = (props) => {
   const { data } = useContext(DataContext);
@@ -19,7 +19,7 @@ const MobileCarousel = (props) => {
             className={`${styles.mobile_movies_carousel__movie} `}
             style={{ backgroundImage: `url(${movie.image})` }}
           >
-            <VideoThumbnail thumbnailUrl={movie.image} videoUrl={movie.video_files.link} />
+            <VideoThumbnailMob thumbnailUrl={movie.image} videoUrl={movie.video_files.link} />
           </div>
         )
         }) : <div>Error loading video</div>}

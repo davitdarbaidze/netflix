@@ -144,6 +144,7 @@ $duration: 250ms;
     padding-top: 1rem;
     // padding-bottom: 2rem;
     background-color: black;
+    
 
 
     &__container {
@@ -153,6 +154,7 @@ $duration: 250ms;
         height: 100%;
         padding: 0 1rem 0 1rem;
         transition: transform 0.3s ease-in-out;
+        overflow-y: hidden;
         scroll-behavior: smooth;
         gap: 0.5rem;
 
@@ -174,13 +176,13 @@ $duration: 250ms;
         background-position: center;
         opacity: 1;
         border-radius: 2px;
-        //   transition: opacity 0.3s ease-in-out;
+        // transition: opacity 0.3s ease-in-out;
         transition: $duration all;
 
         &:active {
             opacity: 1;
             z-index: 1;
-            transform: scale(1.2);
+            transform: scale(1.1);
 
             .video {
                 display: block;

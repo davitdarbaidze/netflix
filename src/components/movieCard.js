@@ -1,7 +1,6 @@
 import React from "react";
 
 import styles from "@/styles/carousel.module.scss";
-import Image from "next/image";
 
 export default function MovieCard(props) {
 

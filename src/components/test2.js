@@ -1,7 +1,6 @@
-import Image from "next/image";
+
 import React from "react";
 import styles from "../styles/mytest.module.scss";
-// import { useWindowDimensions } from "@/hooks/windowSize";
 import useWindowDimensions from "@/hooks/windowSize";
 import { useState, useEffect, useRef } from "react";
 

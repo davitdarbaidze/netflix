@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "../styles/carousel.module.scss";
-// import { useWindowDimensions } from "@/hooks/windowSize";
 import useWindowDimensions from "@/hooks/windowSize";
 import { useState, useEffect, useRef, useContext } from "react";
 import { DataContext } from "@/lib/dataContext";

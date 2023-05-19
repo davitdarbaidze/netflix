@@ -1,4 +1,4 @@
-import React, { useContext, useState} from "react";
+import React, { useContext } from "react";
 import styles from "../styles/carousel.module.scss";
 import { DataContext } from "@/lib/dataContext";
 import VideoThumbnailMob from "./videoSingleCompMob";

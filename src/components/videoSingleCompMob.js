@@ -1,39 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import MovieDetails from './movieDetails';
+import React from 'react';
 
 
 const VideoThumbnailMob = ({ id, thumbnailUrl, videoUrl }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [ movieDetails, setMovieDetails ] = useState(false);
-  const videoRef = useRef(null);
-  const router = useRouter();
 
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
 
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    if (videoRef.current) {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
-    }
-  };
-
-  const handleVideoClick = () => {
-    // router.push({
-    //   pathname: `/videos/${id}`,
-    //   query: { videoUrl },
-
-    // })
-    setMovieDetails(!movieDetails)
-    console.log(movieDetails, 'parent')
-  };
 
   return (
     <div
-      onClick={handleVideoClick}
       style={{
         position: 'relative',
         display: 'inline-block',
@@ -48,14 +21,7 @@ const VideoThumbnailMob = ({ id, thumbnailUrl, videoUrl }) => {
         width="100%"
         style={{ objectFit: 'cover' }}
       />
-
-      {isHovered && (
-        <video
-          ref={videoRef}
-          src={videoUrl}
-        />
-      )}
-      {movieDetails ? <MovieDetails id={id} toggle={handleVideoClick}/>: null}
+      
     </div>
   );
 };

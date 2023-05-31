@@ -4,7 +4,6 @@ import styles from '../styles/moviedetails.module.scss'
 export default function MovieDetails({id, toggle}) {
 
   const handleClick = () => {
-    // props.toggle()
     console.log(id)
     toggle()
   }

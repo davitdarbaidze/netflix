@@ -40,8 +40,6 @@ const MobileCarousel = (props) => {
             style={{ backgroundImage: `url(${movie.image})` }}
             onClick={handleVideoClick}
           >
-            
-
             <VideoThumbnailMob id={index} thumbnailUrl={movie.image} videoUrl={movie.video_files.link} />
             {movieDetails && <MovieDetails id={index} toggle={handleCoverClick}/>}
           </div>

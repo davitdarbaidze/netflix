@@ -3,14 +3,12 @@ import SiteHeader from "@/components/SiteHeader";
 import styles from "../../styles/profile.module.scss";
 import { getEmailFromLocalCookie } from "@/lib/auth";
 import Divider from "@/components/divider";
-import Link from "next/link";
 import ReEnterUserPass from "./reEnterUserPass";
 import useGetTimeSinceLogin from "../../hooks/useGetTimeSinceLogin"
 import { ButtonWithArrow } from "./buttonWithArros";
 import { getTokenFromLocalCookie } from "@/lib/auth";
 import { fetchData } from "@/lib/generalFunctions";
 import ChangeDataInput from "./changeDataInput";
-import PopupMessage from "../popup";
 
 
 

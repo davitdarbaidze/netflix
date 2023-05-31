@@ -98,7 +98,6 @@ export default function SiteHeader(props) {
                     ></Image>
                   </div>
                 </span>
-                {/* <Logout logoutPlaceholder="Logout"></Logout> */}
               </div>
             </div>
             {router.pathname === "/" ? <div className={styles.videoContainer}>

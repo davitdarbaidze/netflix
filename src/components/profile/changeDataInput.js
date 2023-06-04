@@ -93,11 +93,8 @@ export default function ChangeDataInput(props) {
       return false
     };
 
-    const handleResponse = (response) => {
-      //create a function which is checking variable and if that variable is true 
-    }
     
-    console.log(userData)
+    
 
   if (props.inputType === "Change password") {
     return (

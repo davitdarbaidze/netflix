@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const VideoThumbnailMob = ({ id, thumbnailUrl, videoUrl }) => {
+const VideoThumbnailMob = ({ thumbnailUrl }) => {
 
 
 

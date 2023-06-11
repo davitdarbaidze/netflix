@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from '../styles/moviedetails.module.scss'
 
-export default function MovieDetails({id, toggle}) {
+export default function MovieDetails({id, toggle, singleMovie}) {
 
   const handleClick = () => {
     console.log(id)
@@ -10,9 +10,8 @@ export default function MovieDetails({id, toggle}) {
 
   return (
       <div className={styles.container}>
-        AdditionalInfo
-        {id}
-      <button onClick={handleClick}>close</button>  
+        {singleMovie}
+      <button onClick={handleClick}>X</button>  
       </div>
   )
 }

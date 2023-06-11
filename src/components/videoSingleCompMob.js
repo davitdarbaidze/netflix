@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const VideoThumbnailMob = ({ thumbnailUrl }) => {
+const VideoThumbnailMob = ({ thumbnailUrl, id }) => {
 
 
 
@@ -15,6 +15,7 @@ const VideoThumbnailMob = ({ thumbnailUrl }) => {
       }}
     >
       <img
+        id={id}
         src={thumbnailUrl}
         alt="Thumbnail"
         height="100%"

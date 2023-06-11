@@ -2,7 +2,7 @@
 
 .container{
     position: fixed;
-    background-color: $base-gray;
+    background-color: $base-gray-cover;
     top: 4rem;
     left: 0;
     width: 100vw;
@@ -12,4 +12,10 @@
     flex-direction: column;
     // justify-content: center;
     align-items: center;
+    border-radius: 25px 25px 0 0;
+    &>button{
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
 }

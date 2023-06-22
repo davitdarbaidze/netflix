@@ -9,7 +9,6 @@ const MobileCarousel = (props) => {
   const [movieDetails, setMovieDetails] = useState(false);
   const [singleMovie, setSingleMovie] = useState(null);
 
-  // console.log(data, 'some')
   const itemsPerPage = data.length;
 
   const handleVideoClick = (e) => {

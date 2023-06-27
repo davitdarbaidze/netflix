@@ -3,6 +3,7 @@ $duration: 250ms;
 
 .movies_carousel {
     position: relative;
+    z-index: 0;
     width: 100%;
     height: 100px;
     padding-top: 1rem;
@@ -237,24 +238,57 @@ $duration: 250ms;
             height: 100%;
             border-radius: 25px 25px 0 0;
         }
+        @include breakpoint(md) {
+            height: 300px;
+        }
     }
     .descriptionBox{
         display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 1rem;
+        padding: 1rem 0;
+
         .mainInfo{
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             width: 50%;
+            padding: 0 2rem;
+            .LastDayWatch{
+                font-size: larger;
+                font-weight: 600;
+            }
+            &>div>img{
+                filter: invert(80%);
+                padding: 0.5rem 0.5rem 0 0;
+            }
+            &>text{
+                display: -webkit-box;
+                -webkit-line-clamp: 7; /* Number of lines to display */
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
         }
         .secondInfo{
+            display: flex;
+            flex-direction: column;
+            padding: 0;
             &>div>p{
                 color: $base-text
             }
             width: 50%;
         }
     }
+}
+
+.grayText{
+    color: $base-text
+}
+.some{
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    background-color: aqua;
+    top: 2rem;
+    left: 0;
+    z-index:10000000;
 }

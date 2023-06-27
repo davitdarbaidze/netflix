@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const VideoThumbnail = ({ thumbnailUrl, videoUrl }) => {
+const VideoThumbnail = ({ movieDetails, id, thumbnailUrl, videoUrl }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -9,18 +9,21 @@ const VideoThumbnail = ({ thumbnailUrl, videoUrl }) => {
 
   const handleMouseLeave = () => {
     setIsHovered(false);
+    console.log(movieDetails)
   };
 
   return (
+    
     <div
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      style={{position: 'relative', display: 'inline-block', width: '100%', height: '100%'}}
+      style={{position: 'relative', zIndex:'0',display: 'inline-block', width: '100%', height: '100%'}}
     >
       <img src={thumbnailUrl} alt="Thumbnail" height='100%' width='100%' objectFit='cover'/>
 
       {isHovered && (
         <video
+          id={id}
           src={videoUrl}
           autoPlay
           loop

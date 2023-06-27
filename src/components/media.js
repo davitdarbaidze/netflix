@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import MoviesCarousel from "./carousel.js";
 import styles from "../styles/media.module.scss";
+
 
 const CATEGORIES = [
   {

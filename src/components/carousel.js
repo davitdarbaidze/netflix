@@ -8,7 +8,6 @@ const MoviesCarousel = (props) => {
   const { width } = useWindowDimensions();
   const [responsive, setResponsive] = useState(false);
 
-
   useEffect(() => {
     if (width < 576) {
       setResponsive(true);
@@ -20,7 +19,17 @@ const MoviesCarousel = (props) => {
   }, [width]);
 
   return (
-      <>{responsive ? <MobileCarousel movies={props.movies}/> : <NormalCarousel movies={props.movies}/>}</>
+    <>
+      {responsive ? (
+        <MobileCarousel movies={props.movies} />
+      ) : (
+        <NormalCarousel
+          movieDetailsToggle={props.movieDetailsToggle}
+          filteredMovie={props.filteredMovie}
+          movies={props.movies}
+        />
+      )}
+    </>
   );
 };
 export default MoviesCarousel;

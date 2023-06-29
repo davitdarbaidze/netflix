@@ -19,7 +19,7 @@ const VideoThumbnail = ({ movieDetails, id, thumbnailUrl, videoUrl }) => {
       onMouseLeave={handleMouseLeave}
       style={{position: 'relative', zIndex:'0',display: 'inline-block', width: '100%', height: '100%'}}
     >
-      <img src={thumbnailUrl} alt="Thumbnail" height='100%' width='100%' objectFit='cover'/>
+      <img src={thumbnailUrl} id={id} alt="Thumbnail" height='100%' width='100%' objectFit='cover'/>
 
       {isHovered && (
         <video

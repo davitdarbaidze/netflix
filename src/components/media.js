@@ -1,6 +1,8 @@
-import React, {useState} from "react";
+import React, { useContext, useState } from "react";
+import { DataContext } from "@/lib/dataContext";
 import MoviesCarousel from "./carousel.js";
 import styles from "../styles/media.module.scss";
+import SingleMovieDetailsNormalCarousel from './SingleMovieDetailsNMCarousel';
 
 
 const CATEGORIES = [
@@ -57,15 +59,31 @@ const CATEGORIES = [
 ];
 
 export default function Media(props) {
+
+  const { data } = useContext(DataContext);
+  const [showOverlay, setShowOverlay] = useState(false);
+  const [filteredMovie, setFilteredMovie] = useState(0)
+  
+  //This function is used in multiple component, first passed to MovieCarousel 
+  //then from there to NormalCarousel and also passed to OverplayPageComponent
+  //
+  const handlePictureClick = () => {
+    setShowOverlay(!showOverlay);
+  };
+  
+  
+
   return (
-    <div>
+    <div style={{position:'relative'}}>
       {CATEGORIES.map((category) => (
         <div className={styles.container} key={category.id}>
           <div className={styles.heading}>{category.title}</div>
-          <MoviesCarousel movies={props.videos}/>
+          <MoviesCarousel movieDetailsToggle={setShowOverlay} filteredMovie={setFilteredMovie} movies={props.videos} />
         </div>
       ))}
+      {showOverlay && <SingleMovieDetailsNormalCarousel data={data} filteredMovie={filteredMovie} movieDetailsToggle={handlePictureClick}/>}
       <p>{props.text}</p>
+      
     </div>
   );
 }

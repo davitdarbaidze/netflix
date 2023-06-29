@@ -1,0 +1,94 @@
+.main{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    
+    .container{
+        margin:1rem;
+    }
+}
+
+.singleMovie{
+    display: flex;
+    flex-direction: column;
+    padding: 1px;
+    color: white;
+    position: relative;
+    background-color: $base-gray;
+    border-radius: 25px 25px 0 0;
+    
+    
+    .imageBox{
+        // width: 100;
+        background-color: aliceblue;
+        height: 200px;
+        border-radius: 25px 25px 0 0;
+        
+        &>img{
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            border-radius: 25px 25px 0 0;
+        }
+        @include breakpoint(md) {
+            height: 300px;
+        }
+    }
+    .descriptionBox{
+        display: flex;
+        padding: 1rem 0;
+
+        .mainInfo{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 50%;
+            padding: 0 2rem;
+            .LastDayWatch{
+                font-size: larger;
+                font-weight: 600;
+            }
+            &>div>img{
+                filter: invert(80%);
+                padding: 0.5rem 0.5rem 0 0;
+            }
+            &>text{
+                display: -webkit-box;
+                -webkit-line-clamp: 7; /* Number of lines to display */
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+        .secondInfo{
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            &>div>p{
+                color: $base-text
+            }
+            width: 50%;
+        }
+    }
+    .closeButton{
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 10px 20px 0 0;
+        background-color: $base-gray;
+        width: 25px;
+        height: 25px;
+        text-align: center;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+}
+
+.grayText{
+    color: $base-text
+}

@@ -45,7 +45,7 @@ const NormalCarousel = (props) => {
   return (
     <div className={styles.movies_carousel}>
       <div className={styles.movies_carousel__container}>
-        {props.movies != null ? (
+        {props.movies[0] ? (
           props.movies[0].data
             .slice(startIndex, endIndex)
             .map((movie, index) => (

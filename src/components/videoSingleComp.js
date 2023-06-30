@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from "../styles/videoSingleComp.module.scss"
 
 const VideoThumbnail = ({ movieDetails, id, thumbnailUrl, videoUrl }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -19,7 +20,7 @@ const VideoThumbnail = ({ movieDetails, id, thumbnailUrl, videoUrl }) => {
       onMouseLeave={handleMouseLeave}
       style={{position: 'relative', zIndex:'0',display: 'inline-block', width: '100%', height: '100%'}}
     >
-      <img src={thumbnailUrl} id={id} alt="Thumbnail" height='100%' width='100%' objectFit='cover'/>
+      <img src={thumbnailUrl} id={id} alt="Thumbnail" height='100%' width='100%' className={styles.thumbnail}/>
 
       {isHovered && (
         <video
@@ -34,9 +35,9 @@ const VideoThumbnail = ({ movieDetails, id, thumbnailUrl, videoUrl }) => {
             left: 0,
             width: '100%',
             height: '100%',
-            objectFit: 'cover',
             transform: 'scale(1.2)'
           }}
+          className={styles.thumbnail}
         />
       )}
     </div>

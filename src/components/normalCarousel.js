@@ -2,21 +2,18 @@ import React from "react";
 import styles from "../styles/carousel.module.scss";
 import useWindowDimensions from "@/hooks/windowSize";
 import { useState, useEffect, useRef, useContext } from "react";
-import { DataContext } from "@/lib/dataContext";
 import VideoThumbnail from "./videoSingleComp";
 import MovieDetails from "./movieDetails";
 import Image from "next/image";
 
 const NormalCarousel = (props) => {
-  const { data } = useContext(DataContext);
   const { width } = useWindowDimensions();
   const [currentPage, setCurrentPage] = useState(1);
   const [activeIndex, setActiveIndex] = useState(0);
   const [responsive, setResponsive] = useState(6);
   const itemsPerPage = responsive;
-  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const totalPages = Math.ceil(24 / itemsPerPage);
   const [movieDetails, setMovieDetails] = useState(false);
-
 
   const handleClickPrev = () => {
     setCurrentPage((prevPage) => prevPage - 1);
@@ -37,9 +34,10 @@ const NormalCarousel = (props) => {
   //This function sets movie id in Media component
   //so then that one can pass it to OverlayPage component
   //in case user opens the movie for more details
-  const preAssignMovieNumber = (e) =>{
-    props.filteredMovie(e.target.id)
-  }
+  const preAssignMovieNumber = (e) => {
+    props.filteredMovie(e.target.id);
+    props.moviePage(e.target.src);
+  };
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -47,28 +45,34 @@ const NormalCarousel = (props) => {
   return (
     <div className={styles.movies_carousel}>
       <div className={styles.movies_carousel__container}>
-        {data.slice(startIndex, endIndex).map((movie, index) => (
-          <div
-            key={index}
-            id={index}
-            className={`${styles.movies_carousel__movie} ${
-              index === activeIndex ? `${styles.active}` : ""
-            }`}
-            style={{
-              backgroundImage: `url(${movie.image})`,
-              position: "relative",
-            }}
-            onClick={props.movieDetailsToggle}
-            onMouseEnter={preAssignMovieNumber}
-          >
-            <VideoThumbnail
-              movieDetails={movieDetails}
-              id={index}
-              thumbnailUrl={movie.image}
-              videoUrl={movie.video_files.link}
-            />
-          </div>
-        ))}
+        {props.movies[0] ? (
+          props.movies[0].data
+            .slice(startIndex, endIndex)
+            .map((movie, index) => (
+              <div
+                key={index}
+                id={index}
+                className={`${styles.movies_carousel__movie} ${
+                  index === activeIndex ? `${styles.active}` : ""
+                }`}
+                style={{
+                  backgroundImage: `url(${movie.image})`,
+                  position: "relative",
+                }}
+                onClick={props.movieDetailsToggle}
+                onMouseEnter={preAssignMovieNumber}
+              >
+                <VideoThumbnail
+                  movieDetails={movieDetails}
+                  id={index}
+                  thumbnailUrl={movie.image}
+                  videoUrl={movie.video_files.link}
+                />
+              </div>
+            ))
+        ) : (
+          <div>Error loading video</div>
+        )}
       </div>
 
       <button

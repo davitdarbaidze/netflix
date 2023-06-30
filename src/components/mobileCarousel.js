@@ -19,7 +19,7 @@ const MobileCarousel = (props) => {
     //   query: { videoUrl },
 
     // })
-    const filterMovie = data.filter((item, index) => index == e.target.id);
+    const filterMovie = props.movies[0].data.filter((item, index) => index == e.target.id);
     console.log(e.target)
     const randomIndex = Math.floor(Math.random() * months.length);
     const randomDay = Math.floor(Math.random() * 30);
@@ -95,7 +95,7 @@ const MobileCarousel = (props) => {
     <div className={styles.mobile_movies_carousel}>
       <div className={styles.mobile_movies_carousel__container}>
         {data ? (
-          data.slice(0, itemsPerPage).map((movie, index) => {
+          props.movies[0].data.slice(0, itemsPerPage).map((movie, index) => {
             return (
               <div
                 key={index}

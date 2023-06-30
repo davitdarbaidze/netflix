@@ -39,13 +39,14 @@ const NormalCarousel = (props) => {
     props.moviePage(e.target.src);
   };
 
+  console.log(props.movies[0].data.length)
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
   return (
     <div className={styles.movies_carousel}>
       <div className={styles.movies_carousel__container}>
-        {props.movies[0] ? (
+        {props.movies[0].data.length > 0 ? (
           props.movies[0].data
             .slice(startIndex, endIndex)
             .map((movie, index) => (

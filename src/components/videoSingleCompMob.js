@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from "../styles/videoSingleComp.module.scss"
 
 
 const VideoThumbnailMob = ({ thumbnailUrl, id }) => {
@@ -20,7 +21,7 @@ const VideoThumbnailMob = ({ thumbnailUrl, id }) => {
         alt="Thumbnail"
         height="100%"
         width="100%"
-        style={{ objectFit: 'cover' }}
+        className={styles.thumbnail}
       />
       
     </div>

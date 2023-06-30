@@ -39,7 +39,6 @@ const NormalCarousel = (props) => {
     props.moviePage(e.target.src);
   };
 
-  console.log(props.movies[0].data.length)
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 

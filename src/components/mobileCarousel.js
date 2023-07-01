@@ -82,11 +82,12 @@ const MobileCarousel = (props) => {
     );
     if (!movieDetails) {
       setMovieDetails(true);
-      console.log(itemsPerPage);
     }
   };
+
+
   const handleCoverClick = () => {
-    setMovieDetails(false);
+    setMovieDetails(!movieDetails);
   };
 
   console.log(singleMovie);

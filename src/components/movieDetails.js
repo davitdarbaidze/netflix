@@ -10,7 +10,7 @@ export default function MovieDetails({id, toggle, singleMovie}) {
   return (
       <div className={styles.container}>
         {singleMovie}
-      <button onClick={handleClick}>X</button>
+      <button onTouchEnd={handleClick}>X</button>
       </div>
   )
 }

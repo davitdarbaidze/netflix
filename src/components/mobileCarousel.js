@@ -4,14 +4,26 @@ import { DataContext } from "@/lib/dataContext";
 import VideoThumbnailMob from "./videoSingleCompMob";
 import MovieDetails from "./movieDetails";
 import Image from "next/image";
+import { useRouter } from 'next/router';
 
 const MobileCarousel = (props) => {
   const { data } = useContext(DataContext);
   const [movieDetails, setMovieDetails] = useState(false);
   const [singleMovie, setSingleMovie] = useState(null);
+  const router = useRouter();
 
-  const months = ['January', 'February', 'March', 'April', 'May', 'June']
+  const months = ["January", "February", "March", "April", "May", "June"];
   const itemsPerPage = data.length;
+
+  const handleDirectToMoviePage = (e) => {
+    if (sessionStorage.getItem('video_link')) {
+      sessionStorage.removeItem('video_link');
+    }
+    sessionStorage.setItem('video_link', e.target.dataset.link);
+    
+    router.push('/play')
+
+  };
 
   const handleVideoClick = (e) => {
     // router.push({
@@ -19,16 +31,28 @@ const MobileCarousel = (props) => {
     //   query: { videoUrl },
 
     // })
-    const filterMovie = props.movies[0].data.filter((item, index) => index == e.target.id);
-    console.log(e.target)
+    const filterMovie = props.movies[0].data.filter(
+      (item, index) => index == e.target.id
+    );
+    // console.log(e.target)
     const randomIndex = Math.floor(Math.random() * months.length);
     const randomDay = Math.floor(Math.random() * 30);
-
 
     setSingleMovie(
       <div className={styles.singleMovie}>
         <div className={styles.imageBox}>
           <img src={filterMovie[0].image}></img>
+          <div className={styles.playButton} onTouchEnd={handleDirectToMoviePage}>
+          <Image
+                src="/play-outline.svg"
+                alt="Play movie button"
+                width={20}
+                height={20}
+              ></Image>
+            <button data-link={filterMovie[0].video_files.link}>
+              Play
+            </button>
+          </div>
         </div>
         <div className={styles.descriptionBox}>
           <div className={styles.mainInfo}>
@@ -85,7 +109,6 @@ const MobileCarousel = (props) => {
     }
   };
 
-
   const handleCoverClick = () => {
     setMovieDetails(!movieDetails);
   };
@@ -102,7 +125,7 @@ const MobileCarousel = (props) => {
                 key={index}
                 id={index}
                 className={`${styles.mobile_movies_carousel__movie} `}
-                style={{ backgroundImage: `url(${movie.image})`}}
+                style={{ backgroundImage: `url(${movie.image})` }}
                 onClick={handleVideoClick}
               >
                 <VideoThumbnailMob

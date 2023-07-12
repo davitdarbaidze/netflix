@@ -70,11 +70,6 @@ export default function Media(props) {
   const handlePictureClick = () => {
     setShowOverlay(!showOverlay);
   };
-  console.log(allData[0]);
-  // console.log(allData.flat(2))
-
-
-  console.log(allData.filter((item) => item.queryName === "You"));
 
   return (
     <div style={{ position: "relative" }}>

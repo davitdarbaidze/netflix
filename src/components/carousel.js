@@ -24,7 +24,7 @@ const MoviesCarousel = (props) => {
         <MobileCarousel movies={props.movies} />
       ) : (
         <NormalCarousel
-          moviePage={props.moviePage}
+          movieThumbnail={props.movieThumbnail}
           movieDetailsToggle={props.movieDetailsToggle}
           filteredMovie={props.filteredMovie}
           movies={props.movies}

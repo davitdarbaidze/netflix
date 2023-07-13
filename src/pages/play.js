@@ -1,16 +1,24 @@
 import React, { useState, useEffect } from "react";
 import styles from "../styles/play.module.scss";
+import Loading from "@/components/loading";
+import { useRouter } from "next/router";
 
 export default function Play() {
   const [display, setDisplay] = useState(false);
   const [videoUrl, setVideoUrl] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
-    if (sessionStorage.getItem("video_link")) {
+    const storedVideo = JSON.parse(sessionStorage.getItem("playback_data"));
+    if (storedVideo.link) {
       setDisplay(true);
-      setVideoUrl(sessionStorage.getItem("video_link"));
+      setVideoUrl(storedVideo.link);
     }
   }, []);
+
+  const handleBackClick = () => {
+    router.push("/");
+  };
 
   return (
     <div className={styles.container}>
@@ -19,15 +27,21 @@ export default function Play() {
           <iframe
             src={videoUrl}
             className={styles.videoPlayback}
-            frameborder="0"
+            frameBorder="0"
             allow="autoplay; encrypted-media"
             allowfullscreen
             title="video"
           />
+          <button onTouchEnd={handleBackClick} className={styles.backButton}>
+            back
+          </button>
         </div>
       ) : (
-        <div className={styles.loadingContainer}>
-          <div className={styles.loading}></div>
+        <div style={{ position: "relative" }}>
+          <Loading />
+          <button onTouchEnd={handleBackClick} className={styles.backButton}>
+            back
+          </button>
         </div>
       )}
     </div>

@@ -19,9 +19,9 @@ export default function MoreSimilarMovies(props) {
     <div>
       {display ? (
         <div className={styles.similarMovieContainer}>
-          {props.similarMovies.map((item) => {
+          {props.similarMovies.map((item, index) => {
             return (
-              <div className={styles.similarMovieItem}>
+              <div className={styles.similarMovieItem} key={index}>
                 <img src={item.image} alt="video Thumbnail"></img>
                 <p>{item.user.name}</p>
                 

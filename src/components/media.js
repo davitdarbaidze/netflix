@@ -61,8 +61,9 @@ export default function Media(props) {
   const { data, allData } = useContext(DataContext);
   const [showOverlay, setShowOverlay] = useState(false);
   const [filteredMovie, setFilteredMovie] = useState(0);
-  const [moviePage, setMoviePage] = useState(0);
-  console.log(moviePage);
+  const [movieThumbnail, setMovieThumbnail] = useState('');
+  
+  
 
   //This function is used in multiple component, first passed to MovieCarousel
   //then from there to NormalCarousel and also passed to OverplayPageComponent
@@ -78,7 +79,7 @@ export default function Media(props) {
           <div className={styles.heading}>{category.title}</div>
           <MoviesCarousel
             movieDetailsToggle={setShowOverlay}
-            moviePage={setMoviePage}
+            movieThumbnail={setMovieThumbnail}
             filteredMovie={setFilteredMovie}
             movies={allData.filter((item) => item.queryName == category.title)}
           />
@@ -90,6 +91,7 @@ export default function Media(props) {
           allData={allData}
           filteredMovie={filteredMovie}
           movieDetailsToggle={handlePictureClick}
+          movieThumbnail={movieThumbnail}
         />
       )}
       <p>{props.text}</p>

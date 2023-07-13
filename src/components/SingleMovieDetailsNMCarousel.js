@@ -8,12 +8,13 @@ const SingleMovieDetailsNormalCarousel = (props) => {
   const randomIndex = Math.floor(Math.random() * months.length);
   const randomDay = Math.floor(Math.random() * 30);
 
+
   return (
     <div className={styles.main} style={{ display: "absolute" }}>
       <div className={styles.container}>
         <div className={styles.singleMovie}>
           <div className={styles.imageBox}>
-            <img src={filterMovie[0].image}></img>
+            <img src={props.movieThumbnail} alt='movie thumbnail'></img>
           </div>
           <div className={styles.descriptionBox}>
             <div className={styles.mainInfo}>

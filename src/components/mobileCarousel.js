@@ -5,38 +5,50 @@ import VideoThumbnailMob from "./videoSingleCompMob";
 import MovieDetails from "./movieDetails";
 import Image from "next/image";
 import { useRouter } from 'next/router';
+import MoreSimilarMovies from "./moreSimilarMovies";
+import { fetchDataFromPexels } from "@/lib/generalFunctions";
 
 const MobileCarousel = (props) => {
   const { data } = useContext(DataContext);
+  const router = useRouter();
   const [movieDetails, setMovieDetails] = useState(false);
   const [singleMovie, setSingleMovie] = useState(null);
-  const router = useRouter();
+
 
   const months = ["January", "February", "March", "April", "May", "June"];
   const itemsPerPage = data.length;
 
   const handleDirectToMoviePage = (e) => {
-    if (sessionStorage.getItem('video_link')) {
-      sessionStorage.removeItem('video_link');
+    const videoData = JSON.parse(sessionStorage.getItem('playback_data'))
+
+    if (videoData.link) {
+      delete videoData.link;      
     }
-    sessionStorage.setItem('video_link', e.target.dataset.link);
     
-    router.push('/play')
-
+    const newVideoData = {
+      ...videoData,
+      link: e.target.dataset.link,
+      // Add other properties as needed
+    };
+    
+    sessionStorage.setItem('playback_data', JSON.stringify(newVideoData));
+    
+    router.push('/play');
   };
+  
 
-  const handleVideoClick = (e) => {
-    // router.push({
-    //   pathname: `/videos/${id}`,
-    //   query: { videoUrl },
+  const handleVideoClick = async (e) => {
 
-    // })
     const filterMovie = props.movies[0].data.filter(
       (item, index) => index == e.target.id
     );
-    // console.log(e.target)
+    
     const randomIndex = Math.floor(Math.random() * months.length);
     const randomDay = Math.floor(Math.random() * 30);
+    const randomWordFromUrl = filterMovie[0].url.replace("https://www.pexels.com/video/", "").match(/[a-zA-Z]+/g);
+    const randomWord = randomWordFromUrl[Math.floor(Math.random() * randomWordFromUrl.length)];
+    const similarMovies = await fetchDataFromPexels(randomWord)
+    
 
     setSingleMovie(
       <div className={styles.singleMovie}>
@@ -102,6 +114,7 @@ const MobileCarousel = (props) => {
           </div>
         </div>
         <h1>More like this</h1>
+        <MoreSimilarMovies similarMovies={similarMovies}/>
       </div>
     );
     if (!movieDetails) {
@@ -113,7 +126,7 @@ const MobileCarousel = (props) => {
     setMovieDetails(!movieDetails);
   };
 
-  console.log(singleMovie);
+  
 
   return (
     <div className={styles.mobile_movies_carousel}>

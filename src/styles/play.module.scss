@@ -27,3 +27,13 @@
     100% { transform: rotate(360deg); }
     }
 }
+
+.backButton{
+    position: absolute;
+    left: 10px;
+    top:10px;
+    background-color: $base-gray-border;
+    font-weight: 600;
+    font-size: medium;
+    padding: 0.5rem;
+}

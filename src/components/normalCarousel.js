@@ -36,7 +36,8 @@ const NormalCarousel = (props) => {
   //in case user opens the movie for more details
   const preAssignMovieNumber = (e) => {
     props.filteredMovie(e.target.id);
-    props.moviePage(e.target.src);
+    console.log(e.target.src)
+    props.movieThumbnail(e.target.src);
   };
 
   const startIndex = (currentPage - 1) * itemsPerPage;

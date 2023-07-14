@@ -5,6 +5,7 @@ export default function MovieDetails({id, toggle, singleMovie}) {
 
   const handleClick = () => {
     toggle()
+    document.body.classList.remove('no-scroll');
   }
 
   return (

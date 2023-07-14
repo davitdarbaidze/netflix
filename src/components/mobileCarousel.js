@@ -114,7 +114,7 @@ const MobileCarousel = (props) => {
           </div>
         </div>
         <h1>More like this</h1>
-        <MoreSimilarMovies similarMovies={similarMovies}/>
+        {similarMovies.length > 0 ? <MoreSimilarMovies similarMovies={similarMovies}/>: <div></div>}
       </div>
     );
     if (!movieDetails) {

@@ -8,11 +8,11 @@ $duration: 250ms;
     padding-top: 1rem;
     padding-bottom: 2rem;
     background-color: black;
-
+    
     @include breakpoint(md) {
         height: 150px;
     }
-
+    
     &__container {
         display: flex;
         //   grid-template-columns: repeat(2, 1fr);

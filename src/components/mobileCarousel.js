@@ -21,7 +21,7 @@ const MobileCarousel = (props) => {
   const handleDirectToMoviePage = (e) => {
     const videoData = JSON.parse(sessionStorage.getItem('playback_data'))
 
-    if (videoData.link) {
+    if (videoData) {
       delete videoData.link;      
     }
     
@@ -39,6 +39,9 @@ const MobileCarousel = (props) => {
 
   const handleVideoClick = async (e) => {
 
+    //disable main body scroll so that mobile component doesn't break
+    document.body.classList.add('no-scroll');
+    
     const filterMovie = props.movies[0].data.filter(
       (item, index) => index == e.target.id
     );
@@ -114,7 +117,7 @@ const MobileCarousel = (props) => {
           </div>
         </div>
         <h1>More like this</h1>
-        {similarMovies.length > 0 ? <MoreSimilarMovies similarMovies={similarMovies}/>: <div></div>}
+        <MoreSimilarMovies similarMovies={similarMovies}/>
       </div>
     );
     if (!movieDetails) {
@@ -125,7 +128,6 @@ const MobileCarousel = (props) => {
   const handleCoverClick = () => {
     setMovieDetails(!movieDetails);
   };
-
   
 
   return (

@@ -34,7 +34,6 @@ export async function fetchDataFromPexels(wordToSearch) {
         query: wordToSearch,
         per_page: 10,
       });
-      console.log(videosRaw);
       const videosData = videosRaw.videos.map((video) => ({
         id: video.id,
         url: video.url,

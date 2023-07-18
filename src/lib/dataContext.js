@@ -105,7 +105,6 @@ export function useVideos() {
 
       try {
         const videosRaw = await client.videos.popular({ per_page: 24 });
-        // console.log(videosRaw)
         const videosData = videosRaw.videos.map((video) => ({
           id: video.id,
           url: video.url,

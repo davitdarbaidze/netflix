@@ -12,7 +12,6 @@ export default function MoreSimilarMovies(props) {
     if (props.similarMovies.length > 0) {
       setDisplay(true);
     }
-    console.log(props.similarMovies)
   }, []);
 
   return (

@@ -4,69 +4,68 @@ import { DataContext } from "@/lib/dataContext";
 import VideoThumbnailMob from "./videoSingleCompMob";
 import MovieDetails from "./movieDetails";
 import Image from "next/image";
-import { useRouter } from 'next/router';
-import MoreSimilarMovies from "./moreSimilarMovies";
-import { fetchDataFromPexels } from "@/lib/generalFunctions";
+import { useRouter } from "next/router";
+import Loading from "./loading";
+import Link from "next/link";
 
 const MobileCarousel = (props) => {
   const { data } = useContext(DataContext);
   const router = useRouter();
   const [movieDetails, setMovieDetails] = useState(false);
   const [singleMovie, setSingleMovie] = useState(null);
-
+  const [display, setDisplay] = useState(true);
 
   const months = ["January", "February", "March", "April", "May", "June"];
   const itemsPerPage = data.length;
 
   const handleDirectToMoviePage = (e) => {
-    const videoData = JSON.parse(sessionStorage.getItem('playback_data'))
+    const videoData = JSON.parse(sessionStorage.getItem("playback_data"));
 
     if (videoData) {
-      delete videoData.link;      
+      delete videoData.link;
     }
-    
+
     const newVideoData = {
       ...videoData,
       link: e.target.dataset.link,
       // Add other properties as needed
     };
-    
-    sessionStorage.setItem('playback_data', JSON.stringify(newVideoData));
-    
-    router.push('/play');
+
+    sessionStorage.setItem("playback_data", JSON.stringify(newVideoData));
+    router.push("/play");
   };
-  
 
   const handleVideoClick = async (e) => {
-
     //disable main body scroll so that mobile component doesn't break
-    document.body.classList.add('no-scroll');
-    
+    document.body.classList.add("no-scroll");
+
     const filterMovie = props.movies[0].data.filter(
       (item, index) => index == e.target.id
     );
-    
+
     const randomIndex = Math.floor(Math.random() * months.length);
     const randomDay = Math.floor(Math.random() * 30);
-    const randomWordFromUrl = filterMovie[0].url.replace("https://www.pexels.com/video/", "").match(/[a-zA-Z]+/g);
+    const randomWordFromUrl = filterMovie[0].url
+      .replace("https://www.pexels.com/video/", "")
+      .match(/[a-zA-Z]+/g);
     const randomWord = randomWordFromUrl[Math.floor(Math.random() * randomWordFromUrl.length)];
-    const similarMovies = await fetchDataFromPexels(randomWord)
-    
+
 
     setSingleMovie(
       <div className={styles.singleMovie}>
         <div className={styles.imageBox}>
           <img src={filterMovie[0].image}></img>
-          <div className={styles.playButton} onTouchEnd={handleDirectToMoviePage}>
-          <Image
-                src="/play-outline.svg"
-                alt="Play movie button"
-                width={20}
-                height={20}
-              ></Image>
-            <button data-link={filterMovie[0].video_files.link}>
-              Play
-            </button>
+          <div
+            className={styles.playButton}
+            onTouchEnd={handleDirectToMoviePage}
+          >
+            <Image
+              src="/play-outline.svg"
+              alt="Play movie button"
+              width={20}
+              height={20}
+            ></Image>
+            <button data-link={filterMovie[0].video_files.link}>Play</button>
           </div>
         </div>
         <div className={styles.descriptionBox}>
@@ -114,10 +113,13 @@ const MobileCarousel = (props) => {
               <p>Genre:</p> {filterMovie[0].user.name}{" "}
               {filterMovie[0].user.name}
             </div>
+            <div>
+              <Link href={`similar/${randomWord}`}>
+              <button className={styles.moreSimilarMovies} onClick={()=>{document.body.classList.remove('no-scroll')}}>Click here to see More like this</button>
+              </Link>
+            </div>
           </div>
         </div>
-        <h1>More like this</h1>
-        {/* <MoreSimilarMovies similarMovies={similarMovies}/> */}
       </div>
     );
     if (!movieDetails) {
@@ -128,7 +130,6 @@ const MobileCarousel = (props) => {
   const handleCoverClick = () => {
     setMovieDetails(!movieDetails);
   };
-  
 
   return (
     <div className={styles.mobile_movies_carousel}>

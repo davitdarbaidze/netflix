@@ -272,10 +272,22 @@ $duration: 250ms;
             display: flex;
             flex-direction: column;
             padding: 0;
+            position: relative;
             &>div>p{
                 color: $base-text
             }
             width: 50%;
+
+            .moreSimilarMovies{
+                position: absolute;
+                right: 1rem;
+                bottom: 0;
+                padding: 1rem 1rem;
+                font-size: large;
+                background-color: $base-gray;
+                border-radius: 5px;
+                text-decoration: none;
+            }
         }
     }
 }

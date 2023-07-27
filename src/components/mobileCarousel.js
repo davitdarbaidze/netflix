@@ -14,6 +14,7 @@ const MobileCarousel = (props) => {
   const [movieDetails, setMovieDetails] = useState(false);
   const [singleMovie, setSingleMovie] = useState(null);
   const [display, setDisplay] = useState(true);
+  const [randomWordForLink, setRandomWordForLink] = useState('')
 
   const months = ["January", "February", "March", "April", "May", "June"];
   const itemsPerPage = data.length;
@@ -35,9 +36,15 @@ const MobileCarousel = (props) => {
     router.push("/play");
   };
 
+  const handleMoreMovieClick = () =>{
+    const word = sessionStorage.getItem('wordForSimilarMovie')
+    // document.body.classList.remove('no-scroll')
+    router.push(`similar/${word}`)
+  }
   const handleVideoClick = async (e) => {
     //disable main body scroll so that mobile component doesn't break
-    document.body.classList.add("no-scroll");
+    // document.body.classList.add("no-scroll");
+    sessionStorage.removeItem('wordForSimilarMovie')
 
     const filterMovie = props.movies[0].data.filter(
       (item, index) => index == e.target.id
@@ -48,8 +55,11 @@ const MobileCarousel = (props) => {
     const randomWordFromUrl = filterMovie[0].url
       .replace("https://www.pexels.com/video/", "")
       .match(/[a-zA-Z]+/g);
-    const randomWord = randomWordFromUrl[Math.floor(Math.random() * randomWordFromUrl.length)];
+    
+      const randomWord = randomWordFromUrl[Math.floor(Math.random() * randomWordFromUrl.length)];
+    sessionStorage.setItem('wordForSimilarMovie',randomWord)
 
+    
 
     setSingleMovie(
       <div className={styles.singleMovie}>
@@ -114,9 +124,7 @@ const MobileCarousel = (props) => {
               {filterMovie[0].user.name}
             </div>
             <div>
-              <Link href={`similar/${randomWord}`}>
-              <button className={styles.moreSimilarMovies} onClick={()=>{document.body.classList.remove('no-scroll')}}>Click here to see More like this</button>
-              </Link>
+              <button className={styles.moreSimilarMovies} onTouchEnd={handleMoreMovieClick}>Click here to see More like this</button>
             </div>
           </div>
         </div>
@@ -134,7 +142,7 @@ const MobileCarousel = (props) => {
   return (
     <div className={styles.mobile_movies_carousel}>
       <div className={styles.mobile_movies_carousel__container}>
-        {data ? (
+        {data.length >  0 ? (
           props.movies[0].data.slice(0, itemsPerPage).map((movie, index) => {
             return (
               <div

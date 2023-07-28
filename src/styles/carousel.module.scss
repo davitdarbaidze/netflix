@@ -325,3 +325,30 @@ $duration: 250ms;
         font-size: larger;
     }
 }
+
+.container{
+    position: fixed;
+    background-color: $base-gray-cover;
+    top: 4rem;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    align-items: center;
+    border-radius: 25px 25px 0 0;
+    @include breakpoint(md){
+        top:6rem;
+    }
+    &>button{
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        @include breakpoint(md){
+            right: 30px;
+            top: 30px;
+        }
+    }
+}

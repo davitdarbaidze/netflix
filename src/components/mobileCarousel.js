@@ -15,6 +15,7 @@ const MobileCarousel = (props) => {
   const [singleMovie, setSingleMovie] = useState(null);
   const [display, setDisplay] = useState(true);
   const [randomWordForLink, setRandomWordForLink] = useState('')
+  const [some, setSome] = useState(null)
 
   const months = ["January", "February", "March", "April", "May", "June"];
   const itemsPerPage = data.length;
@@ -49,6 +50,7 @@ const MobileCarousel = (props) => {
     const filterMovie = props.movies[0].data.filter(
       (item, index) => index == e.target.id
     );
+    setSome(filterMovie)
 
     const randomIndex = Math.floor(Math.random() * months.length);
     const randomDay = Math.floor(Math.random() * 30);
@@ -162,6 +164,9 @@ const MobileCarousel = (props) => {
                     id={index}
                     singleMovie={singleMovie}
                     toggle={handleCoverClick}
+                    some={some}
+                    handleDirectToMoviePage={handleDirectToMoviePage}
+                    handleMoreMovieClick={handleMoreMovieClick}
                   />
                 )}
                 {/* {movieDetails && <>{singleMovie}</>} */}

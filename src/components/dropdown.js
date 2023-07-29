@@ -104,8 +104,6 @@ function DropdownMenu({ showMainMenu }) {
     );
   };
 
-  // console.log(jsonData[0].name)
-
   return <div>{showMainMenu ? browseMenu() : mainMenu()}</div>;
 }
 

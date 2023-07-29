@@ -39,7 +39,6 @@ export default function ReEnterUserPass(props) {
 
     if (!response.ok) {
         const errorData = await response.json();
-        console.log(errorData)
         setError(errorData.error.name);
         return;
       }

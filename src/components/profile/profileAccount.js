@@ -62,7 +62,6 @@ export default function ProfileAccount() {
     } 
   }
 
-  console.log(data)
 
   return (
     <div>

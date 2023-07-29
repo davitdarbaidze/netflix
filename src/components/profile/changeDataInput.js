@@ -56,7 +56,6 @@ export default function ChangeDataInput(props) {
       }
       else if(attributeToUpdate === 'phone'){
         const response = await updateUserAttributes(userData.id, 'phone', userData.phone, UPDATE_USER_PHONE)
-        console.log(response)
         if(response.data){
           setGraphqlResponse(true)
         }else if(response.errors){

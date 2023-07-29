@@ -10,7 +10,6 @@ const VideoThumbnail = ({ movieDetails, id, thumbnailUrl, videoUrl }) => {
 
   const handleMouseLeave = () => {
     setIsHovered(false);
-    console.log(movieDetails)
   };
 
   return (

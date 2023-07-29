@@ -36,7 +36,6 @@ const NormalCarousel = (props) => {
   //in case user opens the movie for more details
   const preAssignMovieNumber = (e) => {
     props.filteredMovie(e.target.id);
-    console.log(e.target.src)
     props.movieThumbnail(e.target.src);
   };
 

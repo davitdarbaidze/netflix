@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import { createClient } from "pexels";
+import React, { useState, useEffect } from "react";
 import Loading from "./loading";
-import { DataContext } from "@/lib/dataContext";
 import styles from "../styles/moreSimilarMovies.module.scss";
 
 export default function MoreSimilarMovies(props) {
@@ -12,7 +10,7 @@ export default function MoreSimilarMovies(props) {
     if (props.similarMovies.length > 0) {
       setDisplay(true);
     }
-  }, []);
+  }, [props.similarMovies]);
 
   return (
     <div>

@@ -3,6 +3,7 @@ import { DataContext } from "@/lib/dataContext";
 import MoviesCarousel from "./carousel.js";
 import styles from "../styles/media.module.scss";
 import SingleMovieDetailsNormalCarousel from "./SingleMovieDetailsNMCarousel";
+import MovieDetails from "./movieDetails.js";
 
 const CATEGORIES = [
   {
@@ -60,6 +61,7 @@ const CATEGORIES = [
 export default function Media(props) {
   const { data, allData } = useContext(DataContext);
   const [showOverlay, setShowOverlay] = useState(false);
+  const [showOverlayMob, setShowOverlayMob] = useState(false);
   const [filteredMovie, setFilteredMovie] = useState(0);
   const [movieThumbnail, setMovieThumbnail] = useState('');
   
@@ -74,11 +76,16 @@ export default function Media(props) {
 
   return (
     <div style={{ position: "relative" }}>
+      {showOverlayMob && (        
+        <MovieDetails movieDetailsToggle={setShowOverlayMob}/>
+      )}
+
       {CATEGORIES.map((category) => (
         <div className={styles.container} key={category.id}>
           <div className={styles.heading}>{category.title}</div>
           <MoviesCarousel
             movieDetailsToggle={setShowOverlay}
+            movieDetailsToggleMob={setShowOverlayMob}
             movieThumbnail={setMovieThumbnail}
             filteredMovie={setFilteredMovie}
             movies={allData.filter((item) => item.queryName == category.title)}
@@ -93,7 +100,7 @@ export default function Media(props) {
           movieDetailsToggle={handlePictureClick}
           movieThumbnail={movieThumbnail}
         />
-      )}
+        )}
       <p>{props.text}</p>
     </div>
   );

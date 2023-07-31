@@ -21,7 +21,7 @@ const MoviesCarousel = (props) => {
   return (
     <>
       {responsive ? (
-        <MobileCarousel movies={props.movies} />
+        <MobileCarousel movies={props.movies} movieDetailsToggle={props.movieDetailsToggleMob}/>
       ) : (
         <NormalCarousel
           movieThumbnail={props.movieThumbnail}

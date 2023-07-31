@@ -29,8 +29,9 @@ export default function Play() {
             className={styles.videoPlayback}
             frameBorder="0"
             allow="autoplay; encrypted-media"
-            allowfullscreen
+            allowFullScreen
             title="video"
+            muted={false}
           />
           <button onTouchEnd={handleBackClick} className={styles.backButton}>
             back

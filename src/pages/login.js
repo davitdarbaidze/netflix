@@ -30,7 +30,7 @@ export default function Login() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          identifier: userData.identifier,
+          identifier: userData.identifier.toLowerCase(),
           password: userData.password,
         }),
       }

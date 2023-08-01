@@ -4,67 +4,29 @@ import MoviesCarousel from "./carousel.js";
 import styles from "../styles/media.module.scss";
 import SingleMovieDetailsNormalCarousel from "./SingleMovieDetailsNMCarousel";
 import MovieDetails from "./movieDetails.js";
+import { CATEGORIES } from "@/lib/dataContext";
 
-const CATEGORIES = [
-  {
-    id: 1,
-    title: "You",
-    imageUrl: "https://placeimg.com/640/480/animals?v=1",
-  },
-  {
-    id: 2,
-    title: "Movies",
-    imageUrl: "https://placeimg.com/640/480/animals?v=2",
-  },
-  {
-    id: 3,
-    title: "Treanding Now",
-    imageUrl: "https://placeimg.com/640/480/animals?v=3",
-  },
-  {
-    id: 4,
-    title: "Satires",
-    imageUrl: "https://placeimg.com/640/480/animals?v=4",
-  },
-  {
-    id: 5,
-    title: "Abstract",
-    imageUrl: "https://placeimg.com/640/480/animals?v=5",
-  },
-  {
-    id: 6,
-    title: "Landscape",
-    imageUrl: "https://placeimg.com/640/480/animals?v=6",
-  },
-  {
-    id: 7,
-    title: "Dark",
-    imageUrl: "https://placeimg.com/640/480/animals?v=7",
-  },
-  {
-    id: 8,
-    title: "Thriller",
-    imageUrl: "https://placeimg.com/640/480/animals?v=8",
-  },
-  {
-    id: 9,
-    title: "Documentaries",
-    imageUrl: "https://placeimg.com/640/480/animals?v=9",
-  },
-  {
-    id: 10,
-    title: "Disasters",
-    imageUrl: "https://placeimg.com/640/480/animals?v=10",
-  },
-];
 
 export default function Media(props) {
+
+  function getRandomItemsFromArray(arr, count) {
+    // Fisher-Yates Shuffle algorithm to randomize the array order
+    const shuffledArray = [...arr];
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+    }
+  
+    // Return the first 'count' items from the shuffled array
+    return shuffledArray.slice(0, count);
+  }
+
   const { data, allData } = useContext(DataContext);
   const [showOverlay, setShowOverlay] = useState(false);
   const [showOverlayMob, setShowOverlayMob] = useState(false);
   const [filteredMovie, setFilteredMovie] = useState(0);
   const [movieThumbnail, setMovieThumbnail] = useState('');
-  
+  const [categories, setCategories] = useState(getRandomItemsFromArray(CATEGORIES, 28))
   
 
   //This function is used in multiple component, first passed to MovieCarousel
@@ -74,13 +36,16 @@ export default function Media(props) {
     setShowOverlay(!showOverlay);
   };
 
+
+
   return (
     <div style={{ position: "relative" }}>
       {showOverlayMob && (        
         <MovieDetails movieDetailsToggle={setShowOverlayMob}/>
       )}
 
-      {CATEGORIES.map((category) => (
+      {categories.map((category) => {
+        return (
         <div className={styles.container} key={category.id}>
           <div className={styles.heading}>{category.title}</div>
           <MoviesCarousel
@@ -90,8 +55,9 @@ export default function Media(props) {
             filteredMovie={setFilteredMovie}
             movies={allData.filter((item) => item.queryName == category.title)}
           />
-        </div>
-      ))}
+        </div>)
+      }
+      )}
       {showOverlay && (
         <SingleMovieDetailsNormalCarousel
           data={data}

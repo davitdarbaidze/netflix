@@ -2,7 +2,7 @@ import { useContext, createContext } from "react";
 import { createClient } from "pexels";
 import { useState, useEffect } from "react";
 
-const CATEGORIES = [
+export const CATEGORIES = [
   {
     id: 1,
     title: "You",
@@ -53,19 +53,101 @@ const CATEGORIES = [
     title: "Disasters",
     imageUrl: "https://placeimg.com/640/480/animals?v=10",
   },
+  {
+    id: 11,
+    title: "Drama"
+  },
+  {
+    id: 12,
+    title: "Science Fiction"
+  },
+  {
+    id: 13,
+    title: "Horror"
+  },
+  {
+    id: 14,
+    title: "Romance"
+  },
+  {
+    id: 15,
+    title: "Thriller"
+  },
+  {
+    id: 16,
+    title: "Adventure"
+  },
+  {
+    id: 17,
+    title: "Fantasy"
+  },
+  {
+    id: 18,
+    title: "Animation"
+  },
+  {
+    id: 19,
+    title: "Family"
+  },
+  {
+    id: 20,
+    title: "Mystery"
+  },
+  {
+    id: 21,
+    title: "Crime"
+  },
+  {
+    id: 22,
+    title: "Documentary"
+  },
+  {
+    id: 23,
+    title: "History"
+  },
+  {
+    id: 24,
+    title: "War"
+  },
+  {
+    id: 25,
+    title: "Western"
+  },
+  {
+    id: 26,
+    title: "Musical"
+  },
+  {
+    id: 27,
+    title: "Sci-Fi"
+  },
+  {
+    id: 28,
+    title: "Superhero"
+  }
 ];
 
+export const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June']
 export const DataContext = createContext({ number: 0, enabled: false, data: [] });
+
+function getRandomCategories(categoriesList, count) {
+  // Shuffle the categories list to get a random order
+  const shuffledCategories = categoriesList.sort(() => Math.random() - 0.5);
+
+  // Return the first 'count' categories from the shuffled list
+  return shuffledCategories.slice(0, count);
+}
 
 export function useAllVideos() {
 
   const [allVideos, setAllVideos] = useState([]);
   const client = createClient(process.env.NEXT_PUBLIC_PEXELS_URL);
+  const randomCategories = getRandomCategories(CATEGORIES, 28);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const promises = CATEGORIES.map(async (item) => {
+        const promises = randomCategories.map(async (item) => {
           const searchVideos = await client.videos.search({ query: item.title, per_page: 24 });
           const searchVideosData = searchVideos.videos.map((video) => ({
             id: video.id,

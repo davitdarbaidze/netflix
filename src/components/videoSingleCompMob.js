@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from "../styles/videoSingleComp.module.scss"
+import styles from "../styles/videoThumbnail.module.scss"
 
 
 const VideoThumbnailMob = ({ thumbnailUrl, id }) => {

@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../styles/carousel.module.scss";
 import useWindowDimensions from "@/hooks/windowSize";
 import { useState, useEffect, useRef, useContext } from "react";
-import VideoThumbnail from "./videoSingleComp";
+import VideoThumbnail from "./videoThumbnail";
 import MovieDetails from "./movieDetails";
 import Image from "next/image";
 
@@ -35,8 +35,10 @@ const NormalCarousel = (props) => {
   //so then that one can pass it to OverlayPage component
   //in case user opens the movie for more details
   const preAssignMovieNumber = (e) => {
+    console.log(e.target)
     props.filteredMovie(e.target.id);
     props.movieThumbnail(e.target.src);
+    // console.log(props.movies[0].)
   };
 
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -54,7 +56,7 @@ const NormalCarousel = (props) => {
                 id={index}
                 className={`${styles.movies_carousel__movie} ${
                   index === activeIndex ? `${styles.active}` : ""
-                }`}
+                } ${styles.grid_item}`}
                 style={{
                   backgroundImage: `url(${movie.image})`,
                   position: "relative",
@@ -66,6 +68,7 @@ const NormalCarousel = (props) => {
                   movieDetails={movieDetails}
                   id={index}
                   thumbnailUrl={movie.image}
+                  fullItem={movie}
                   videoUrl={movie.video_files.link}
                 />
               </div>

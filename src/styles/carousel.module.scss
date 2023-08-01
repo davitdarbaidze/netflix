@@ -14,18 +14,25 @@ $duration: 250ms;
     }
     
     &__container {
-        display: flex;
-        //   grid-template-columns: repeat(2, 1fr);
+        display: grid;
+        
         //   overflow: scroll;
         height: 100%;
         padding: 0 2rem 0 2rem;
         transition: transform 0.3s ease-in-out;
         scroll-behavior: smooth;
-        gap: 0.5rem;
+        gap: 0.3rem;
+        .grid_item{
 
-        @include breakpoint(md) {
-            // padding: 0 3rem 0 3rem;
-            scroll-behavior: smooth;
+        }
+        &:hover .grid_item:not(:hover) {
+            transform: scale(0.8); /* Adjust the scaling factor as needed */
+        }
+
+        scroll-behavior: smooth;
+        grid-template-columns: repeat(4, 1fr);
+        @include breakpoint(lg){
+            grid-template-columns: repeat(6, 1fr);
         }
 
     }
@@ -45,27 +52,39 @@ $duration: 250ms;
 
             // opacity: 1;
             // transform: scale(1.2);
-            .video {
-                display: block;
-            }
+            // .video {
+            //     display: block;
+            // }
 
             visibility:none;
+            // z-index:-1;
         }
-
-        .video {
+        .test{
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            // display: none;
-            display: none;
-            transform: scale(1.2);
+            background-color: rgb(255, 51, 0);
+            width: 300px;
+            height: 200px;
+            // color:wheat;
+            // z-index: 10;
         }
 
-        // &.active {
-        //   opacity: 1;
+        // .video {
+        //     position: absolute;
+        //     top: 0;
+        //     left: 0;
+        //     width: 100%;
+        //     height: 100%;
+        //     // display: none;
+        //     display: none;
+        //     transform: scale(1.2);
         // }
+
+        &.active {
+          opacity: 1;
+        //   width: 100px;
+        }
 
         &_title {
             position: absolute;
@@ -198,7 +217,6 @@ $duration: 250ms;
             display: none;
             transform: scale(1.2);
         }
-
         // &.active {
         //   opacity: 1;
         // }

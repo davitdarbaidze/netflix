@@ -82,6 +82,8 @@
         background-color: $base-gray;
         width: 25px;
         height: 25px;
+        padding: 1.5rem;
+        @include center_content();
         text-align: center;
         border-radius: 50%;
         cursor: pointer;

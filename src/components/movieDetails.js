@@ -5,59 +5,53 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { fetchDataFromPexels } from "@/lib/generalFunctions";
 import MoreSimilarMovies from "./moreSimilarMovies";
-
+import { MONTHS } from "@/lib/dataContext";
 
 export default function MovieDetails(props) {
   const [display, setDisplay] = useState(false);
   const [movie, setMovie] = useState(null);
-  const [randomWordFromUrl, setRandomWordFromUrl] = useState('')
-  const [randomWord, setRandomWord] = useState('')
-  const [similarContent, setSimilarContent] = useState([])
+  const [randomWordFromUrl, setRandomWordFromUrl] = useState("");
+  const [randomWord, setRandomWord] = useState("");
+  const [similarContent, setSimilarContent] = useState([]);
   const router = useRouter();
 
-  const months = ["January", "February", "March", "April", "May", "June"];
-  const randomIndex = Math.floor(Math.random() * months.length);
+  const randomIndex = Math.floor(Math.random() * MONTHS.length);
   const randomDay = Math.floor(Math.random() * 30);
-  
 
-  useEffect(()=>{
-    const tempRandomWord = randomWordFromUrl[Math.floor(Math.random() * randomWordFromUrl.length)]
-    
+  useEffect(() => {
+    const tempRandomWord =
+      randomWordFromUrl[Math.floor(Math.random() * randomWordFromUrl.length)];
+
     async function fetchData() {
-        
       const similarMovies = await fetchDataFromPexels(tempRandomWord);
       setSimilarContent(similarMovies);
-  
     }
 
-    if(randomWordFromUrl.length > 0){
-      fetchData()
-      setRandomWord(tempRandomWord)
-      sessionStorage.setItem('wordForSimilarMovie',tempRandomWord)
+    if (randomWordFromUrl.length > 0) {
+      fetchData();
+      setRandomWord(tempRandomWord);
+      sessionStorage.setItem("wordForSimilarMovie", tempRandomWord);
     }
+  }, [randomWordFromUrl]);
 
-  },[randomWordFromUrl])
-
-
-    useEffect(() => {
-        if (sessionStorage.getItem("specificMovie")) {
-            const retrievedData = JSON.parse(sessionStorage.getItem("specificMovie"));
-            setDisplay(true);
-            setMovie(retrievedData);
-            setRandomWordFromUrl(retrievedData.url.replace("https://www.pexels.com/video/", "").match(/[a-zA-Z]+/g))
-
-
-            }
-
-        
+  useEffect(() => {
+    if (sessionStorage.getItem("specificMovie")) {
+      const retrievedData = JSON.parse(sessionStorage.getItem("specificMovie"));
+      setDisplay(true);
+      setMovie(retrievedData);
+      setRandomWordFromUrl(
+        retrievedData.url
+          .replace("https://www.pexels.com/video/", "")
+          .match(/[a-zA-Z]+/g)
+      );
+    }
   }, []);
 
   const handleClick = () => {
     props.movieDetailsToggle(false);
     sessionStorage.removeItem("specificMovie");
-    sessionStorage.removeItem('wordForSimilarMovie')
+    sessionStorage.removeItem("wordForSimilarMovie");
   };
-
 
   //function to direct user to specific video and play it
   const handleDirectToMoviePage = (e) => {
@@ -79,11 +73,11 @@ export default function MovieDetails(props) {
 
   //function which direct to another page
   //the page shows similar content based on URL Random word
-  const handleMoreMovieClick = () =>{
-    const word = sessionStorage.getItem('wordForSimilarMovie')
+  const handleMoreMovieClick = () => {
+    const word = sessionStorage.getItem("wordForSimilarMovie");
     // document.body.classList.remove('no-scroll')
-    router.push(`similar/${word}`)
-  }
+    router.push(`similar/${word}`);
+  };
 
   return (
     <div>
@@ -102,9 +96,7 @@ export default function MovieDetails(props) {
                   width={20}
                   height={20}
                 ></Image>
-                <button data-link={movie.video_files.link}>
-                  Play
-                </button>
+                <button data-link={movie.video_files.link}>Play</button>
               </div>
             </div>
             <div className={styles.descriptionBox}>
@@ -128,7 +120,7 @@ export default function MovieDetails(props) {
                 </div>
 
                 <div className={styles.LastDayWatch}>
-                  Last Days to watch on Netflix: {months[randomIndex]}{" "}
+                  Last Days to watch on Netflix: {MONTHS[randomIndex]}{" "}
                   {randomDay}
                 </div>
                 <text>
@@ -149,10 +141,8 @@ export default function MovieDetails(props) {
               <div className={styles.secondInfo}>
                 {movie.user.name}
                 <div>
-                  <p>Cast:</p> {movie.user.name}{" "}
-                  {movie.user.name}
-                  <p>Genre:</p> {movie.user.name}{" "}
-                  {movie.user.name}
+                  <p>Cast:</p> {movie.user.name} {movie.user.name}
+                  <p>Genre:</p> {movie.user.name} {movie.user.name}
                 </div>
                 <div>
                   <button
@@ -164,11 +154,14 @@ export default function MovieDetails(props) {
                 </div>
               </div>
             </div>
-                <div>Similar
-                  <MoreSimilarMovies similarMovies={similarContent}/>
-                </div>
+            <div>
+              Similar
+              <MoreSimilarMovies similarMovies={similarContent} />
+            </div>
           </div>
-          <button className={styles.closeButton} onTouchEnd={handleClick}>X</button>
+          <button className={styles.closeButton} onTouchEnd={handleClick}>
+            X
+          </button>
         </div>
       ) : (
         <div>

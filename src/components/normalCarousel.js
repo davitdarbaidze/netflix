@@ -7,6 +7,7 @@ import MovieDetails from "./movieDetails";
 import Image from "next/image";
 
 const NormalCarousel = (props) => {
+  const [display, setDisplay] = useState(false);
   const { width } = useWindowDimensions();
   const [currentPage, setCurrentPage] = useState(1);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -31,6 +32,13 @@ const NormalCarousel = (props) => {
     }
   }, [width]);
 
+  useEffect(() => {
+    
+    if (props.movies[0]) {
+      setDisplay(true);
+    }
+  }, [props.movies[0]]);
+
   //This function sets movie id in Media component
   //so then that one can pass it to OverlayPage component
   //in case user opens the movie for more details
@@ -47,7 +55,7 @@ const NormalCarousel = (props) => {
   return (
     <div className={styles.movies_carousel}>
       <div className={styles.movies_carousel__container}>
-        {props.movies[0] ? (
+        {display ? (
           props.movies[0].data
             .slice(startIndex, endIndex)
             .map((movie, index) => (

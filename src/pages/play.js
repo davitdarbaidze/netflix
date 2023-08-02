@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "../styles/play.module.scss";
 import Loading from "@/components/loading";
 import { useRouter } from "next/router";
+import ReactPlayer from 'react-player/lazy'
 
 export default function Play() {
   const [display, setDisplay] = useState(false);
@@ -24,7 +25,7 @@ export default function Play() {
     <div className={styles.container}>
       {display ? (
         <div className={styles.videoContainer}>
-          <iframe
+          {/* <iframe
             src={videoUrl}
             className={styles.videoPlayback}
             frameBorder="0"
@@ -32,8 +33,9 @@ export default function Play() {
             allowFullScreen
             title="video"
             muted={false}
-          />
-          <button onTouchEnd={handleBackClick} className={styles.backButton}>
+          /> */}
+          <ReactPlayer url={videoUrl} playing={true} controls={true} loop={true} height={'100vh'} width={'100vw'}/>
+          <button onTouchEnd={handleBackClick} onClick={handleBackClick} className={styles.backButton}>
             back
           </button>
         </div>

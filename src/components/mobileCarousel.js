@@ -1,10 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import styles from "../styles/carousel.module.scss";
 import { DataContext } from "@/lib/dataContext";
 import VideoThumbnailMob from "./videoSingleCompMob";
 
 
 const MobileCarousel = (props) => {
+  const [display, setDisplay] = useState(false);
   const { data } = useContext(DataContext);
   const itemsPerPage = data.length;
 
@@ -15,6 +16,15 @@ const MobileCarousel = (props) => {
     sessionStorage.setItem('specificMovie', JSON.stringify(filterMovie[0]))
     props.movieDetailsToggle(true)
   }
+
+  useEffect(() => {
+    
+    if (props.movies[0]) {
+      if(props.movies[0].length > 0){
+        setDisplay(true);
+      }
+    }
+  }, [data]);
 
   return (
     <div className={styles.mobile_movies_carousel}>

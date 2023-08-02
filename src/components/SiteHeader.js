@@ -33,6 +33,12 @@ export default function SiteHeader(props) {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
 
+  const handleStart = () => {
+    sessionStorage.setItem('getStartedEmail', userData.email)
+    router.push('/register')
+  }
+
+
   const getStarted = () => {
     return (
       <div className={styles.getStartedContainer}>
@@ -44,7 +50,7 @@ export default function SiteHeader(props) {
           onChange={handleCHange}
           // value={userData.email}
         ></input>
-        <button className={styles.getStarted}>Get Started</button>
+        <button onClick={handleStart} onTouchEnd={handleStart} className={styles.getStarted}>Get Started</button>
       </div>
     );
   };

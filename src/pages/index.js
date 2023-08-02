@@ -10,11 +10,12 @@ import SiteHeader from "@/components/SiteHeader";
 import Divider from "@/components/divider";
 import Media from "@/components/media";
 import { createClient } from "pexels";
-import { DataContext } from "@/lib/dataContext";
+import { useRouter } from "next/router";
 
 export default function Home({videosData}) {
 
   const { data, error, loading } = useQuery(REVIEWS);
+  const router = useRouter();
   // if (qloading) return <p>loading....</p>;
   // if (qerror) return <p>error</p>;
 
@@ -27,7 +28,11 @@ export default function Home({videosData}) {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
 
+
+
+
   const getStarted = () => {
+
     return (
       <div className={styles.getStartedContainer}>
         <input

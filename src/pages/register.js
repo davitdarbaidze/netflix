@@ -7,7 +7,7 @@ import Link from "next/link";
 import Divider from "@/components/divider";
 
 export default function Register() {
-  const [email, setEmail] = useState(sessionStorage.getItem("getStartedEmail"));
+  const [email, setEmail] = useState('');
   const [userData, setUserData] = useState({
     username: "",
     password: "",
@@ -16,6 +16,11 @@ export default function Register() {
   });
 
   const handleCHange = (e) => {
+    if(sessionStorage.getItem("getStartedEmail")){
+      if(email.length == 0){
+        setEmail(sessionStorage.getItem("getStartedEmail"))
+      }
+    }
 
     //email is handled separately because 
     //if user has entered on main page emai
@@ -26,6 +31,12 @@ export default function Register() {
 
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
+
+  useEffect(()=>{
+    if(email.length == 0){
+      setEmail(sessionStorage.getItem('getStartedEmail'))
+    }
+  },[])
 
   const handleSubmit = async (e) => {
     e.preventDefault();

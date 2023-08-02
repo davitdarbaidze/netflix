@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "../styles/register.module.scss";
 import { setToken } from "@/lib/auth";
@@ -7,6 +7,7 @@ import Link from "next/link";
 import Divider from "@/components/divider";
 
 export default function Register() {
+  const [email, setEmail] = useState('');
   const [userData, setUserData] = useState({
     username: "",
     password: "",
@@ -14,13 +15,36 @@ export default function Register() {
     email: "",
   });
 
-
   const handleCHange = (e) => {
+    if(sessionStorage.getItem("getStartedEmail")){
+      if(email.length == 0){
+        setEmail(sessionStorage.getItem("getStartedEmail"))
+      }
+    }
+
+    //email is handled separately because 
+    //if user has entered on main page emai
+    //it is retrived it from session Storage
+    if (e.target.name == "email") {
+      setEmail(e.target.value);
+    }
+
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
 
+  useEffect(()=>{
+    if(email.length == 0){
+      setEmail(sessionStorage.getItem('getStartedEmail'))
+    }
+  },[])
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    sessionStorage.removeItem("getStartedEmail")
+
+
+    //pay attention that email 
+    //doesn't come from same Object 'userData' it's separate state
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}api/auth/local/register`,
       {
@@ -28,7 +52,7 @@ export default function Register() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: userData.email,
+          email: email,
           password: userData.password,
           username: userData.username,
         }),
@@ -73,6 +97,7 @@ export default function Register() {
                     name="email"
                     onChange={handleCHange}
                     placeholder="Email"
+                    value={email}
                     required
                   ></input>
                   <input

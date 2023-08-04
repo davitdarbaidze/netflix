@@ -1,4 +1,5 @@
 import { createClient } from "pexels";
+import { CATEGORIES } from "./dataContext";
 
 export const checkPasswordMatch = (current, newPassword) => {
   if (current === newPassword) {
@@ -53,4 +54,8 @@ export async function fetchDataFromPexels(wordToSearch) {
   
 
   return fetchVideos;
+}
+
+export function randomNumberGenerator(min, max){
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }

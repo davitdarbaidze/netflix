@@ -67,7 +67,6 @@ const NormalCarousel = (props) => {
                 } ${styles.grid_item}`}
                 style={{
                   backgroundImage: `url(${movie.image})`,
-                  position: "relative",
                 }}
                 onClick={props.movieDetailsToggle}
                 onMouseEnter={preAssignMovieNumber}

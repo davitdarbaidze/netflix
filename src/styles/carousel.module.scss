@@ -15,22 +15,29 @@ $duration: 250ms;
     
     &__container {
         display: grid;
-        
-        //   overflow: scroll;
+        position: relative;
         height: 100%;
         padding: 0 2rem 0 2rem;
         transition: transform 0.3s ease-in-out;
         scroll-behavior: smooth;
         gap: 0.3rem;
+
         .grid_item{
 
+            &:hover {
+                opacity: 1;
+            }
         }
+        
         &:hover .grid_item:not(:hover) {
-            transform: scale(0.8); /* Adjust the scaling factor as needed */
+            // some styles goes here if you want to modify things about not hovered
+            //items in carousel
+            
         }
-
+        
         scroll-behavior: smooth;
         grid-template-columns: repeat(4, 1fr);
+
         @include breakpoint(lg){
             grid-template-columns: repeat(6, 1fr);
         }

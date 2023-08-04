@@ -1,15 +1,89 @@
-.some{
-    position: absolute;
-    top:0;
-    left:0;
-    height: 200px;
-    width: 300px;
-    background-color: aqua;
-    z-index: 10;
-}
-.thumbnail{
-    object-fit: cover;
-    opacity: 1;
-    z-index: 100;
+.container{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+
+    .videoContainer{
+        @include center-content();
+        flex-direction: column;
+        height: 100%;
+        position: relative;
+        
+        .thumbnail{
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: scale(1.6);
+            z-index: 1;
+            border-radius: 5px;    
+        }
+    }
+    .currentVideoInfo{
     
+        background-color: $base-gray-cover;
+        position: absolute;
+        bottom: 1;
+        transform: scale(1.6);
+        z-index: 1;
+        width:100%;
+        color: $base-text;
+        font-size: small;
+        padding: 0.5rem 0;
+        
+        // padding: 1rem 0.5rem;
+
+        .iconButtons{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            
+            &>div{
+                padding-left: 0.5rem;
+            }
+            .moreDetailsButton{
+                padding-right: 0.5rem;
+            }
+            
+            &>div>img{
+                cursor: pointer;
+                padding-right: 0.2rem;
+                filter: invert(100%);            
+            }
+        }
+        .videoDetails{
+            display: flex;
+            // justify-content: center;
+            gap: 0.3rem;
+            align-items: flex-start;
+            padding: 0.3rem 0.5rem;
+
+            .age{
+                border: solid 0.5px;
+                padding: 0 0.1rem;
+                text-align: center;
+                border-color: $base-text;
+            }
+            .matchPercent{
+                color: rgb(37, 185, 37);
+            }
+            &>div>img{
+                filter: invert(100%);     
+            }
+
+        }
+        .categories{
+            display: flex;
+            // justify-content: center;
+            padding-left: 0.5rem;
+            align-items: flex-start;
+            color: white;
+            gap: 0.2rem;
+        }
+    }
 }
+

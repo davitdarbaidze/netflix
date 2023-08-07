@@ -59,3 +59,7 @@ export async function fetchDataFromPexels(wordToSearch) {
 export function randomNumberGenerator(min, max){
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+export function zoomOutHTMLBodyLevel(){
+  window.document.body.style.zoom = 1;  
+}

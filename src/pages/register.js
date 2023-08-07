@@ -5,6 +5,7 @@ import { setToken } from "@/lib/auth";
 import Languages from "@/components/languages";
 import Link from "next/link";
 import Divider from "@/components/divider";
+import { zoomOutHTMLBodyLevel } from "@/lib/generalFunctions";
 
 export default function Register() {
   const [email, setEmail] = useState('');
@@ -89,6 +90,7 @@ export default function Register() {
                     type="text"
                     name="username"
                     onChange={handleCHange}
+                    onBlur={zoomOutHTMLBodyLevel}
                     placeholder="Username"
                     required
                   ></input>
@@ -96,6 +98,7 @@ export default function Register() {
                     type="text"
                     name="email"
                     onChange={handleCHange}
+                    onBlur={zoomOutHTMLBodyLevel}
                     placeholder="Email"
                     value={email}
                     required
@@ -104,6 +107,7 @@ export default function Register() {
                     type="password"
                     name="password"
                     onChange={handleCHange}
+                    onBlur={zoomOutHTMLBodyLevel}
                     placeholder="Password"
                     required
                   ></input>
@@ -111,6 +115,7 @@ export default function Register() {
                     type="password"
                     name="repeatPassword"
                     onChange={handleCHange}
+                    onBlur={zoomOutHTMLBodyLevel}
                     placeholder="Repeat Password"
                     required
                   ></input>

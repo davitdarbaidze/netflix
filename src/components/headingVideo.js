@@ -9,7 +9,7 @@ export default function HeadingVideo() {
         src="https://www.youtube.com/embed/dQw4w9WgXcQ?&autoplay=1&mute=0&controls=0&Loop=1&Title=0&Showinfo=0"
         title="My video"
         frameBorder={0}
-        style={{width: '100%', height: '70vh'}}
+        style={{width: '100%', height: '70vh', marginTop:'4rem'}}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen></iframe>
     </div>

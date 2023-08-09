@@ -31,18 +31,12 @@
 
 .navigationContainer {
     width: 100%;
-    // position: fixed;
-    // z-index: 9999;
-    // background-color: rgba(0, 0, 0, 0.295);
-    // @include center-content();
     flex-direction: column;
 
 }
 .loggedContainer {
     width: 100vw;
     background-color: black;
-    // height: 100vh;
-    // background-color: rgb(0, 0, 0);
 
 }
 
@@ -255,6 +249,9 @@
         // padding-right: 6rem;
         width: 80%;
         padding-left: 0.5rem;
+        @include breakpoint(md){
+            width: 40%;
+        }
     }
 
     &>button {

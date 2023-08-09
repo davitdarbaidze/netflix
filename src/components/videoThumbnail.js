@@ -24,7 +24,6 @@ const VideoThumbnail = ({
       quality: fullItem.video_files.quality,
       id: fullItem.id
     })
-    console.log(fullItem)
   };
 
   const handleMouseLeave = () => {
@@ -32,12 +31,6 @@ const VideoThumbnail = ({
     setPlaying(false)
     sessionStorage.removeItem("movieNMDetails");
   };
-
-  // useEffect(()=>{
-  //   const stream = document.getElementsByName('videoThumbnail_thumbnail__eLf7U');
-  //   console.log(stream, 'this is stream')
-  //   console.log(stream.id, 'this is stream')
-  // }, [isHovered])
 
   const handlePlay = (e) =>{    
     setPlaying(true)

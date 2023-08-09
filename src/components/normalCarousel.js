@@ -43,10 +43,8 @@ const NormalCarousel = (props) => {
   //so then that one can pass it to OverlayPage component
   //in case user opens the movie for more details
   const preAssignMovieNumber = (e) => {
-    console.log(e.target)
     props.filteredMovie(e.target.id);
     props.movieThumbnail(e.target.src);
-    // console.log(props.movies[0].)
   };
 
   const startIndex = (currentPage - 1) * itemsPerPage;

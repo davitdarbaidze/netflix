@@ -211,12 +211,52 @@ export function useVideos() {
   return videos;
 }
 
+export function useSingleVideo() {
+  const [singleVideo, setSingleVideo] = useState([]);
+
+  //select random title from categories and below make a search query
+  //for single video
+  const randomIndex = Math.floor(Math.random() * CATEGORIES.length);
+  const randomTitle = CATEGORIES[randomIndex].title;
+
+
+  useEffect(() => {
+    async function fetchVideos() {
+      const client = createClient(process.env.NEXT_PUBLIC_PEXELS_URL);
+
+      try {
+        const videosRaw = await client.videos.search({ query:  randomTitle,per_page: 1 });
+        const videosData = videosRaw.videos.map((video) => ({
+          id: video.id,
+          url: video.url,
+          image: video.image,
+          duration: video.duration,
+          user: video.user,
+          width: video.width,
+          height: video.height,
+          video_files: video.video_files[0],
+          
+        }));
+
+        setSingleVideo(videosData);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchVideos();
+  }, []);
+
+  return singleVideo;
+}
+
 export function DataProvider({ children }) {
   const videos = useVideos();
   const allVideos = useAllVideos()
+  const singleVideo = useSingleVideo()
 
   return (
-    <DataContext.Provider value={{ number: 0, enabled: true, data: videos, allData: allVideos }}>
+    <DataContext.Provider value={{ number: 0, enabled: true, data: videos, allData: allVideos, singleVideo: singleVideo }}>
       {children}
     </DataContext.Provider>
   );

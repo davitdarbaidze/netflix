@@ -6,6 +6,7 @@ import { useState } from "react";
 import Languages from "@/components/languages";
 import Divider from "@/components/divider";
 import Link from "next/link";
+import Error from "@/components/error";
 
 export default function Login() {
   const [userData, setUserData] = useState({
@@ -13,11 +14,11 @@ export default function Login() {
     password: "",
     email: "",
   });
+
+  const [error, setError] = useState('')
+
   const handleCHange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
-  };
-  const divider = () => {
-    return <div className={styles.divider}></div>;
   };
 
   const handleSubmit = async (e) => {
@@ -36,7 +37,12 @@ export default function Login() {
       }
     );
     const responseData = await response.json();
-    setToken(responseData, false, new Date());
+
+    if(responseData.error){
+      setError(responseData.error.message)
+    }else{
+      setToken(responseData, false, new Date());
+    }
   };
 
   return (
@@ -60,6 +66,7 @@ export default function Login() {
             <div className={styles.middleContainer}>
               <div className={styles.middle}>
                 <h1 style={{ alignSelf: "flex-start" }}>Sign in</h1>
+                {error.length > 0 && <Error message={error}></Error>}
                 <form onSubmit={handleSubmit} className={styles.form}>
                   <input
                     type="text"
@@ -67,6 +74,7 @@ export default function Login() {
                     onChange={handleCHange}
                     placeholder="Username or Email"
                     required
+                    onFocus={()=> setError('')}
                   ></input>
                   <input
                     type="password"
@@ -74,6 +82,7 @@ export default function Login() {
                     onChange={handleCHange}
                     placeholder="Password"
                     required
+                    onFocus={()=> setError('')}
                   ></input>
 
                   <button type="submit">

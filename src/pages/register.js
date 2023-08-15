@@ -6,6 +6,7 @@ import Languages from "@/components/languages";
 import Link from "next/link";
 import Divider from "@/components/divider";
 import { zoomOutHTMLBodyLevel } from "@/lib/generalFunctions";
+import Error from "@/components/error";
 
 export default function Register() {
   const [email, setEmail] = useState('');
@@ -15,6 +16,7 @@ export default function Register() {
     repeatPassword: "",
     email: "",
   });
+  const [error, setError] = useState('')
 
   const handleCHange = (e) => {
     if(sessionStorage.getItem("getStartedEmail")){
@@ -29,7 +31,6 @@ export default function Register() {
     if (e.target.name == "email") {
       setEmail(e.target.value);
     }
-
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
 
@@ -59,9 +60,14 @@ export default function Register() {
         }),
         method: "POST",
       }
-    );
+      );
     const responseData = await response.json();
-    setToken(responseData);
+    
+    if(responseData.error){
+      setError(responseData.error.message)
+    }else{
+      setToken(responseData);      
+    }
   };
 
   return (
@@ -74,17 +80,16 @@ export default function Register() {
                 {" "}
                 <Image
                   src="/netflix.png"
-                  width={80}
+                  width={100}
                   height={45}
                   alt="Netflix Logo"
                 ></Image>
               </Link>
-
-              <div style={{ display: "none" }}>some2</div>
             </div>
             <div className={styles.middleContainer}>
               <div className={styles.middle}>
                 <h1 style={{ alignSelf: "flex-start" }}>Register</h1>
+                {error.length > 0 && <Error message={error}></Error>}
                 <form onSubmit={handleSubmit} className={styles.form}>
                   <input
                     type="text"
@@ -93,6 +98,7 @@ export default function Register() {
                     onBlur={zoomOutHTMLBodyLevel}
                     placeholder="Username"
                     required
+                    onFocus={()=> setError('')}
                   ></input>
                   <input
                     type="text"
@@ -102,6 +108,7 @@ export default function Register() {
                     placeholder="Email"
                     value={email}
                     required
+                    onFocus={()=> setError('')}
                   ></input>
                   <input
                     type="password"
@@ -110,6 +117,7 @@ export default function Register() {
                     onBlur={zoomOutHTMLBodyLevel}
                     placeholder="Password"
                     required
+                    onFocus={()=> setError('')}
                   ></input>
                   <input
                     type="password"
@@ -118,6 +126,7 @@ export default function Register() {
                     onBlur={zoomOutHTMLBodyLevel}
                     placeholder="Repeat Password"
                     required
+                    onFocus={()=> setError('')}
                   ></input>
 
                   <button type="submit">

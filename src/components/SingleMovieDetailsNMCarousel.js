@@ -9,9 +9,7 @@ import Loading from "./loading";
 import { useRouter } from "next/router";
 
 const SingleMovieDetailsNormalCarousel = (props) => {
-  const filterMovie = props.data.filter(
-    (item, index) => index == props.filteredMovie
-  );
+
   const [movie, setMovie] = useState({});
   const randomIndex = Math.floor(Math.random() * MONTHS.length);
   const randomDay = Math.floor(Math.random() * 30);

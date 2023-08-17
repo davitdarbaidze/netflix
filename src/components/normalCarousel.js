@@ -1,10 +1,9 @@
 import React from "react";
 import styles from "../styles/carousel.module.scss";
 import useWindowDimensions from "@/hooks/windowSize";
-import { useState, useEffect, useRef, useContext } from "react";
+import { useState, useEffect } from "react";
 import VideoThumbnail from "./videoThumbnail";
-import MovieDetails from "./movieDetails";
-import Image from "next/image";
+
 
 const NormalCarousel = (props) => {
   const [display, setDisplay] = useState(false);

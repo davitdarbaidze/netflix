@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "../styles/videoThumbnail.module.scss";
 import Loading from "./loading";
 import Image from "next/image";

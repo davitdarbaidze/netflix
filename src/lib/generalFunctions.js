@@ -1,5 +1,4 @@
 import { createClient } from "pexels";
-import { CATEGORIES } from "./dataContext";
 
 export const checkPasswordMatch = (current, newPassword) => {
   if (current === newPassword) {

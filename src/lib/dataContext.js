@@ -138,14 +138,28 @@ function getRandomCategories(categoriesList, count) {
   return shuffledCategories.slice(0, count);
 }
 
+async function getRandomWord () {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_WORD_URL}`,
+    {
+      method: "GET",
+    }
+    );
+  const responseData = await response.json();
+
+  return responseData
+}
+
 export function useAllVideos() {
 
   const [allVideos, setAllVideos] = useState([]);
+  const [allVideoTitles, setAllVideoTitles] = useState([]);
   const client = createClient(process.env.NEXT_PUBLIC_PEXELS_URL);
   const randomCategories = getRandomCategories(CATEGORIES, 28);
 
   useEffect(() => {
     const fetchData = async () => {
+      let videoTitles = []
       try {
         const promises = randomCategories.map(async (item) => {
           const searchVideos = await client.videos.search({ query: item.title, per_page: 24 });

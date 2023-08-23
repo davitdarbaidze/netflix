@@ -12,6 +12,7 @@ export default function Media(props) {
   function getRandomItemsFromArray(arr, count) {
     // Fisher-Yates Shuffle algorithm to randomize the array order
     const shuffledArray = [...arr];
+    
     for (let i = shuffledArray.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
@@ -53,7 +54,7 @@ export default function Media(props) {
             movieDetailsToggleMob={setShowOverlayMob}
             movieThumbnail={setMovieThumbnail}
             filteredMovie={setFilteredMovie}
-            movies={allData.filter((item) => item.queryName == category.title)}
+            movies={allData.filter((item) => item.queryName == 'stream')}
           />
         </div>)
       }

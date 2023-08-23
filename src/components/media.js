@@ -54,7 +54,7 @@ export default function Media(props) {
             movieDetailsToggleMob={setShowOverlayMob}
             movieThumbnail={setMovieThumbnail}
             filteredMovie={setFilteredMovie}
-            movies={allData.filter((item) => item.queryName == 'stream')}
+            movies={allData.filter((item) => item.queryName == category.title)}
           />
         </div>)
       }

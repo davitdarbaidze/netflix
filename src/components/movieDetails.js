@@ -155,7 +155,7 @@ export default function MovieDetails(props) {
               </div>
             </div>
             <div>
-              Similar
+              <h2>Similar</h2>
               <MoreSimilarMovies similarMovies={similarContent} />
             </div>
           </div>

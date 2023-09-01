@@ -155,7 +155,7 @@ export default function MovieDetails(props) {
               </div>
             </div>
             <div>
-              Similar
+              <h2 style={{ paddingLeft:'0.5rem'}}>Similar content</h2>
               <MoreSimilarMovies similarMovies={similarContent} />
             </div>
           </div>

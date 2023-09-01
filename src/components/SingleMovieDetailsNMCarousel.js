@@ -16,6 +16,7 @@ const SingleMovieDetailsNormalCarousel = (props) => {
   const [similarContent, setSimilarContent] = useState([]);
   const [display, setDisplay] = useState(false);
   const router = useRouter();
+  const [scrollPosition, setScrollPosition] = useState(0)
 
   useEffect(() => {
     if (display) {
@@ -44,6 +45,20 @@ const SingleMovieDetailsNormalCarousel = (props) => {
       setMovie(retrievedData);
     }
   }, []);
+  useEffect(() => {
+    const handleScroll = () => {
+      // Update the scroll position in the state
+      setScrollPosition(window.scrollY);
+    };
+
+    // Add the scroll event listener
+    window.addEventListener('scroll', handleScroll);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const handleDirectToMoviePage = (e) => {
     const videoData = JSON.parse(sessionStorage.getItem("playback_data"));
@@ -62,10 +77,12 @@ const SingleMovieDetailsNormalCarousel = (props) => {
     router.push("/play");
   };
 
+
+  console.log(props.scrollLevel)
   return (
     <div>
       {display ? (
-        <div className={styles.main} style={{ display: "absolute" }}>
+        <div className={styles.main} style={{ top: props.scrollLevel * 250 + 'px' }}>
           <div className={styles.container}>
             <div className={styles.singleMovie}>
               <div className={styles.imageBox}>

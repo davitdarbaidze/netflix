@@ -44,13 +44,14 @@ const NormalCarousel = (props) => {
   const preAssignMovieNumber = (e) => {
     props.filteredMovie(e.target.id);
     props.movieThumbnail(e.target.src);
+    props.scrollLevel(props.id)
   };
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
   return (
-    <div className={styles.movies_carousel}>
+    <div className={styles.movies_carousel} id={props.id}>
       <div className={styles.movies_carousel__container}>
         {display ? (
           props.movies[0].data

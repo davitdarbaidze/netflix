@@ -25,6 +25,7 @@ export default function Media(props) {
   const [showOverlay, setShowOverlay] = useState(false);
   const [showOverlayMob, setShowOverlayMob] = useState(false);
   const [filteredMovie, setFilteredMovie] = useState(0);
+  const [scrollLevel, setScrollLevel] = useState(0);
   const [movieThumbnail, setMovieThumbnail] = useState('');
   const [categories, setCategories] = useState(getRandomItemsFromArray(CATEGORIES, 28))
   
@@ -44,15 +45,17 @@ export default function Media(props) {
         <MovieDetails movieDetailsToggle={setShowOverlayMob}/>
       )}
 
-      {categories.map((category) => {
+      {categories.map((category,index) => {
         return (
         <div className={styles.container} key={category.id}>
           <div className={styles.heading}>{category.title}</div>
           <MoviesCarousel
+            id={index}
             movieDetailsToggle={setShowOverlay}
             movieDetailsToggleMob={setShowOverlayMob}
             movieThumbnail={setMovieThumbnail}
             filteredMovie={setFilteredMovie}
+            scrollLevel={setScrollLevel}
             movies={allData.filter((item) => item.queryName == category.title)}
           />
         </div>)
@@ -63,6 +66,7 @@ export default function Media(props) {
           data={data}
           allData={allData}
           filteredMovie={filteredMovie}
+          scrollLevel={scrollLevel}
           movieDetailsToggle={handlePictureClick}
           movieThumbnail={movieThumbnail}
         />

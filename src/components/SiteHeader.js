@@ -38,7 +38,6 @@ export default function SiteHeader(props) {
     router.push('/register')
   }
 
-
   const getStarted = () => {
     return (
       <div className={styles.getStartedContainer}>
@@ -58,8 +57,6 @@ export default function SiteHeader(props) {
   const handleProfileClick = () => {
     setToggleProfile(!toggleProfile);
   };
-
-  // const {user, loading} = useUser();
 
   return (
     <>

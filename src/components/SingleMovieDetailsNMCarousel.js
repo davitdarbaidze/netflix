@@ -45,6 +45,7 @@ const SingleMovieDetailsNormalCarousel = (props) => {
       setMovie(retrievedData);
     }
   }, []);
+
   useEffect(() => {
     const handleScroll = () => {
       // Update the scroll position in the state
@@ -77,8 +78,6 @@ const SingleMovieDetailsNormalCarousel = (props) => {
     router.push("/play");
   };
 
-
-  console.log(props.scrollLevel)
   return (
     <div>
       {display ? (

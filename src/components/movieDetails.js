@@ -8,13 +8,13 @@ import MoreSimilarMovies from "./moreSimilarMovies";
 import { MONTHS } from "@/lib/dataContext";
 
 export default function MovieDetails(props) {
+
   const [display, setDisplay] = useState(false);
   const [movie, setMovie] = useState(null);
   const [randomWordFromUrl, setRandomWordFromUrl] = useState("");
   const [randomWord, setRandomWord] = useState("");
   const [similarContent, setSimilarContent] = useState([]);
   const router = useRouter();
-
   const randomIndex = Math.floor(Math.random() * MONTHS.length);
   const randomDay = Math.floor(Math.random() * 30);
 

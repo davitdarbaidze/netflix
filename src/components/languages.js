@@ -2,7 +2,9 @@ import React from "react";
 import Image from "next/image";
 
 export default function Languages(props) {
+
   const languages = ["English", "Spanish", "French", "German"];
+
   return (
     <div className={props.className}>
       <Image

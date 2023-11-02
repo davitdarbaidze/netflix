@@ -4,10 +4,7 @@ import styles from "@/styles/carousel.module.scss";
 
 export default function MovieCard(props) {
 
-
   return (
-
-
       <div className={styles.item}>
         <div
           className={styles.cardImage}

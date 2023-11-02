@@ -20,7 +20,6 @@ export default function HeadingVideo() {
     }
 };
 
-
   return (
     <div>
       {display ? (

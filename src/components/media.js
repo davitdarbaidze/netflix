@@ -37,8 +37,6 @@ export default function Media(props) {
     setShowOverlay(!showOverlay);
   };
 
-
-
   return (
     <div style={{ position: "relative" }}>
       {showOverlayMob && (        

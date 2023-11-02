@@ -3,6 +3,7 @@ import Loading from "./loading";
 import styles from "../styles/moreSimilarMovies.module.scss";
 
 export default function MoreSimilarMovies(props) {
+
   const [display, setDisplay] = useState(false);
 
   useEffect(() => {

@@ -6,6 +6,7 @@ import VideoThumbnail from "./videoThumbnail";
 
 
 const NormalCarousel = (props) => {
+
   const [display, setDisplay] = useState(false);
   const { width } = useWindowDimensions();
   const [currentPage, setCurrentPage] = useState(1);

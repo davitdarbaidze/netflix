@@ -4,8 +4,6 @@ import styles from "../styles/videoThumbnail.module.scss"
 
 const VideoThumbnailMob = ({ thumbnailUrl, id }) => {
 
-
-
   return (
     <div
       style={{
@@ -19,7 +17,6 @@ const VideoThumbnailMob = ({ thumbnailUrl, id }) => {
         alt="Thumbnail"
         className={styles.thumbnail}
       />
-      
     </div>
   );
 };

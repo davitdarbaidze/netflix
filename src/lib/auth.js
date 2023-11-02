@@ -6,15 +6,12 @@ export const setToken = (data,reCheck, time) =>{
 
     if(typeof window === "undefined") return;
 
-
     Cookies.set("id", data.user.id)
     Cookies.set("email", data.user.email)
     Cookies.set("username", data.user.username)
     Cookies.set("jwt", data.jwt)
     const now = new Date(); // Current date and time
     Cookies.set('time_now', now.toUTCString())
-    
-
 
     if(Cookies.get('username')){
         if(reCheck){
@@ -36,8 +33,6 @@ export const unsetToken = () =>{
     Cookies.remove('time_now')
     Cookies.remove('now')
 
-    
-    // Router.push('/')
     Router.reload('/')
     
 }

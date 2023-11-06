@@ -23,7 +23,7 @@ export default function ReEnterUserPass(props) {
     e.preventDefault();
         
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}api/auth/local`,
+      `${process.env.NEXT_PUBLIC_API_URL}${process.env.NEXT_PUBLIC_API_PORT}/api/auth/local`,
       {
         method: "POST",
         headers: {

@@ -9,7 +9,7 @@ export const updateUserAttributes = async (idValue ,attributeKey, attributeValue
       },
     });
   
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}graphql`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${process.env.NEXT_PUBLIC_API_PORT}/graphql`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

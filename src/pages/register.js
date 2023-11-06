@@ -48,7 +48,7 @@ export default function Register() {
     //pay attention that email 
     //doesn't come from same Object 'userData' it's separate state
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}api/auth/local/register`,
+      `${process.env.NEXT_PUBLIC_API_URL}${process.env.NEXT_PUBLIC_API_PORT}/api/auth/local/register`,
       {
         headers: {
           "Content-Type": "application/json",

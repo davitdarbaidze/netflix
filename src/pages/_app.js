@@ -6,7 +6,7 @@ import { DataProvider } from "@/lib/dataContext";
 
 export default function App({ user, userLoading = false, Component, pageProps }) {
   const client = new ApolloClient({
-    uri: `${process.env.NEXT_PUBLIC_API_URL}graphql`,
+    uri: `${process.env.NEXT_PUBLIC_API_URL}${process.env.NEXT_PUBLIC_API_PORT}/graphql`,
     cache: new InMemoryCache(),
   });
 

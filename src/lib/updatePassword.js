@@ -3,7 +3,7 @@ import { setToken } from "./auth";
 
 const updateUserPassword = async (current, newPassword, repeatNewPassword) => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}api/auth/change-password`,
+    `${process.env.NEXT_PUBLIC_API_URL}${process.env.NEXT_PUBLIC_API_PORT}/api/auth/change-password`,
     {
       method: "POST",
       headers: {

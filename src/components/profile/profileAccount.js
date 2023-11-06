@@ -33,7 +33,7 @@ export default function ProfileAccount() {
 
   useEffect(() => {
     async function outerFetchData() {
-      const url = `${process.env.NEXT_PUBLIC_API_URL}api/users/me`;
+      const url = `${process.env.NEXT_PUBLIC_API_URL}${process.env.NEXT_PUBLIC_API_PORT}/api/users/me`;
       const token = getTokenFromLocalCookie();
       const responseData = await fetchData(url, token);
       setData(responseData);

@@ -21,15 +21,6 @@ export default function ProfileAccount() {
   const timeSinceLogin = useGetTimeSinceLogin()
   const [data, setData] = useState(null);
   const [showOverlay, setShowOverlay] = useState(true);
-  const [showPopup, setShowPopup] = useState(false);
-
-  const handleButtonClick = () => {
-    setShowPopup(true);
-  };
-
-  const handleClose = () => {
-    setShowPopup(false);
-  };
 
   useEffect(() => {
     async function outerFetchData() {
